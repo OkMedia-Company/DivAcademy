@@ -1,0 +1,31 @@
+.searchForm {
+  display: flex;
+
+}
+.searchForm input{
+    flex-grow: 1;
+    border-color: transparent;
+    padding: 14px 18px;
+    color: #737373;
+    font-weight: 200;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    background-clip: unset;
+    border-width: 2px;
+
+
+}
+
+.searchForm input:focus{
+box-shadow: none;
+}
+
+.searchForm .searchBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #fff;
+    padding: 0 18px;
+
+}

@@ -1,0 +1,165 @@
+.sidebar {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  background-color: #363636;
+  padding: 24px 20px;
+  position: sticky;
+  top: 0;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  overflow-x: hidden;
+}
+
+.sidebar .sidebar-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sidebar .side-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar .side-top .profile {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .profile img {
+  width: 34px;
+  height: 34px;
+  object-fit: cover;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  margin-right: 16px;
+}
+
+.sidebar .side-top .profile .profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sidebar .side-top .profile .profile-info span {
+  color: #fff;
+}
+
+.side-item .active {
+  padding-left: 15px;
+  color: #666;
+  transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+}
+
+.side-item .nav-links {
+  transition: all 0.4s ease-in-out;
+  color: rgb(255, 255, 255);
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+}
+
+.sidebar .side-top .close-btn {
+  display: flex;
+  align-items: center;
+  padding: 0 7px;
+  cursor: pointer;
+}
+
+.sidebar .side-body {
+  margin: 50px 0;
+  overflow: auto;
+  min-width: 210px;
+}
+
+.sidebar .side-body .title {
+  font-size: 16px;
+  color: #fff;
+}
+
+.sidebar .side-body .side-menu {
+  padding-left: 32px;
+  margin-bottom: 16px;
+}
+
+.sidebar .side-body .side-menu .side-link {
+  color: #bcbcbc;
+  font-size: 14px;
+  display: block;
+  height: 100%;
+  padding: 8px 0;
+}
+
+.sidebar .side-footer {
+  margin-top: auto;
+}
+
+.sidebar .side-footer .logOut {
+  background-color: hsla(0, 0%, 100%, 0.03);
+  display: block;
+  color: #fff;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .side-footer .logOut .logOut-icon {
+  font-family: icomoon !important;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-right: 9px;
+  font-size: 21px;
+}
+
+.sidebar .side-footer .logOut .logOut-icon::before {
+  content: "";
+}
+
+.sidebar.closing {
+  width: 65px;
+  min-width: 65px;
+  padding: 24px 0;
+}
+
+.sidebar.closing .sidebar-wrap {
+  display: none;
+}
+
+.sidebar.closing .profile img {
+  margin-right: 0;
+}
+
+.sidebar .closing-sidebar {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.sidebar.closing .closing-sidebar {
+  display: flex;
+}
+
+.sidebar .closing-sidebar .burger-wrap {
+  height: 100%;
+  display: flex;
+  cursor: pointer;
+}

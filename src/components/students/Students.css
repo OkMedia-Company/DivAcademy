@@ -1,0 +1,16 @@
+.students-page .filter{
+    display: flex;
+    margin: 30px 0;
+}
+
+.students-page .filter li{
+    margin-right: 10px;
+}
+.students-page .filter li a{
+    color:#919191 ;
+    font-size: 14px;
+    padding: 5px 0;
+}
+.students-page .filter li a.active{
+    border-bottom: 1px solid #919191;
+}
