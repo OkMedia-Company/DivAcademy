@@ -1,0 +1,79 @@
+ .birthday-card-img {
+    width: 90px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+ }
+.birthday-cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  margin: 20px;
+  background: #245a3e;
+  border-radius: 30px;
+  height: 250px;
+  width: 450px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+  overflow: hidden;
+  color: #dce35b;
+}
+
+@media only screen and (min-width: 1000px) {
+  .card {
+    flex-direction: row-reverse;
+  }
+  .card img.birthday {
+    width: 60%;
+    max-width: 50vw;
+    max-height: unset;
+    border-radius: 30px;
+  }
+}
+
+@media only screen and (max-height: 640px) {
+  .card {
+    flex-direction: row-reverse;
+  }
+  .card img.birthday {
+    width: 100%;
+    max-width: 50vw;
+    max-height: unset;
+  }
+}
+
+img.birthday {
+  height: 150px;
+  object-fit: cover;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.text {
+  padding: 3em;
+}
+.text h1 {
+  font-family: cursive;
+  font-size: 1rem;
+  padding: 30px 0;
+  white-space: nowrap;
+}
+.space {
+  height: 100px;
+}
+
+.credit a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.credit {
+  margin-top: 10px;
+  text-align: center;
+}

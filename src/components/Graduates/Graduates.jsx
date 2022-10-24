@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import SearchForm from "../tools/SearchForm";
 import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,55 +10,24 @@ import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import Image from "../../imgs/profile-photo.jpeg";
-import { student } from "./studentdata";
-import "./Students.css";
-const Students = () => {
+import { student } from "./graduatesdata";
+import SearchForm from "../tools/SearchForm";
+import "./Graduates.css";
+const Graduates = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
- 
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
- 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
   return (
-    <div className="students-page">
-      <h2 className="section-title">Tələbələr</h2>
-      <SearchForm />
-      <ul className="filter">
-        <li>
-          <a href="" className="filter-link active">
-            Cari tələbələr
-          </a>
-        </li>
-        <li>
-          <a href="" className="filter-link">
-            Müvəqqəti dayandıranlar
-          </a>
-        </li>
-        <li>
-          <a href="" className="filter-link">
-            Birdəfəlik dayandıranlar
-          </a>
-        </li>
-        <li>
-          <a href="" className="filter-link">
-            Məzunlar
-          </a>
-        </li>
-        <li>
-          <a href="" className="filter-link">
-            Hamısı
-          </a>
-        </li>
-      </ul>
-      <div className="students-content">
+    <div>
+    <h2>Məzunlar</h2>
+    <SearchForm/>
+      <div className="students-content pt-5" >
         <Paper sx={{ width: "100%", overflow: "auto" }}>
           <TableContainer sx={{ maxHeight: 500 }}>
             <Table stickyHeader aria-label="sticky table">
@@ -117,27 +85,18 @@ const Students = () => {
                     Diplom seriyası
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                   Növbəti ödəniş
+                    Növbəti ödəniş
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                    Məzun günü 
+                    Məzun günü
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
-                 
-                  </TableCell>
-                  <TableCell align="center" colSpan={3}>
-                  
-                  </TableCell>
-                  <TableCell align="center" colSpan={3}>
-                   
-                  </TableCell>
+                  <TableCell align="center" colSpan={3}></TableCell>
+                  <TableCell align="center" colSpan={3}></TableCell>
+                  <TableCell align="center" colSpan={3}></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-               
-           
-                {   
-                  student
+                {student
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((student) => (
                     <TableRow key={student.id} hover>
@@ -199,13 +158,9 @@ const Students = () => {
                         {student.odenisTarixi}
                       </TableCell>
                       <TableCell align="center" colSpan={3}>
-                         <Button variant="outlined" color="success">Davamiyyət Tarixçəsi</Button>
-                      </TableCell>
-                      <TableCell align="center" colSpan={3}>
-                         <Button variant="contained" color="error">Ödəniş Tarixçəsi</Button>
-                      </TableCell>
-                      <TableCell align="center" colSpan={3}>
-                         <Button variant="contained">Edit</Button>
+                        <Button variant="outlined" color="success">
+                          Edit
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -213,13 +168,13 @@ const Students = () => {
             </Table>
           </TableContainer>
           <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={student.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+            rowsPerPageOptions={[10, 30, 100]}
+            component="div"
+            count={student.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
       </div>
@@ -227,4 +182,4 @@ const Students = () => {
   );
 };
 
-export default Students;
+export default Graduates;

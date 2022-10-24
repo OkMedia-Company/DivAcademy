@@ -14,3 +14,12 @@
 .students-page .filter li a.active{
     border-bottom: 1px solid #919191;
 }
+.css-y8ay40-MuiTableCell-root,
+.css-1ex1afd-MuiTableCell-root {
+    font-family: "Futura" !important;
+}
+.css-sxix9q-MuiButtonBase-root-MuiButton-root,
+.css-1sszw6i-MuiButtonBase-root-MuiButton-root,
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+    font-size: 12px !important;
+}

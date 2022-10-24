@@ -25,3 +25,6 @@ a{
 .section-title{
   margin-bottom: 35px;
 }
+.main {
+  overflow: hidden;
+}

@@ -29,6 +29,7 @@ nav .active {
     border-bottom: 4px solid #1d9f3a;
     border-radius: 2px;
     transition: all 0.2s;
+    padding-bottom: 18px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;

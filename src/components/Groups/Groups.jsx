@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { teachers } from "./teachersdata";
+import { groups } from "./groupsdata";
 import SearchForm from "../tools/SearchForm";
 import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
@@ -12,7 +12,8 @@ import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import Image from "../../imgs/profile-photo.jpeg";
-function Teachers() {
+
+function Groups() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const handleChangeRowsPerPage = (event) => {
@@ -24,7 +25,7 @@ function Teachers() {
   };
   return (
     <div>
-    <h2>Müəllimlər</h2>
+    <h2>Qruplar</h2>
     <SearchForm/>
       <div className="teachers-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto" }}>
@@ -33,60 +34,60 @@ function Teachers() {
               <TableHead>
                 <TableRow>
                   <TableCell align="center" colSpan={3}>
-                    Şəkil
+                    Qrup Kodu
+                 </TableCell>
+                  <TableCell align="center" colSpan={3}>
+                   Kurs Kodu
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                    Ad Soyad
+                     Ödəniş günü
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                     Telefonu
+                     Dərs günü
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                     Emaili
+                  Dərs  saatı
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                     Qeydiyyat tarixi
+                    Başlana tarixi
                   </TableCell>
                   <TableCell align="center" colSpan={3}>
-                     Cari qruplari
+                    Bitmə tarixi
                   </TableCell>
+                
                   <TableCell align="center" colSpan={3}>
-              
+                 
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
-              
-                  </TableCell>
+                
  
                 </TableRow>
               </TableHead>
               <TableBody>
-                {teachers
+                {groups
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage )
-                  .map((student) => (
-                    <TableRow key={student.id} hover>
-                      <TableCell>
-                        <Avatar src={Image} alt={student.nameSur} />
+                  .map((item) => (
+                    <TableRow key={item.id} hover>  
+                      <TableCell align="center" colSpan={3}>
+                        {item.qrupKodu}
                       </TableCell>
                       <TableCell align="center" colSpan={3}>
-                        {student.nameSur}
+                        {item.course}
                       </TableCell>
                       <TableCell align="center" colSpan={3}>
-                        {student.phone}
+                        {item.payDate}
                       </TableCell>
                       <TableCell align="center" colSpan={3}>
-                        {student.email}
+                        {item.lectureDate}
                       </TableCell>
                       <TableCell align="center" colSpan={3}>
-                        {student.qeydiyyatTarixi}
-                      </TableCell>
-                      <TableCell align="center" colSpan={3}>
-                        {student.cariGroups}
+                        {item.lectureHour}
                       </TableCell>
                       
                       <TableCell align="center" colSpan={3}>
-                        <Button variant="outlined" color="success">
-                          Maaş Tarixçəsi
-                        </Button>
+                        {item.startDate}
+                      </TableCell>
+                      <TableCell align="center" colSpan={3}>
+                        {item.endDate}
                       </TableCell>
                       <TableCell align="center" colSpan={3}>
                         <Button variant="contained" color="error">
@@ -102,7 +103,7 @@ function Teachers() {
           <TablePagination
             rowsPerPageOptions={[10, 30, 100]}
             component="div"
-            count={teachers.length}
+            count={groups.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -114,4 +115,4 @@ function Teachers() {
   );
 }
 
-export default Teachers;
+export default Groups;

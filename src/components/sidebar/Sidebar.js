@@ -20,7 +20,7 @@ const Sidebar = () => {
           <div className="profile">
             <img src={ProfilePhoto} alt="" />
             <div className="profile-info">
-              <span className="name">Suleyman</span>
+              <span className="name">User </span>
               <span className="status">Admin</span>
             </div>
           </div>
@@ -44,6 +44,16 @@ const Sidebar = () => {
             </li>
             <li className="side-item">
               <NavLink
+                to="teachers"
+                className={({ isActive }) =>
+                  isActive ? "active" : "nav-links"
+                }
+              >
+                Müəllimlər
+              </NavLink>
+            </li>
+            <li className="side-item">
+              <NavLink
                 to="graduates"
                 className={({ isActive }) =>
                   isActive ? "active" : "nav-links"
@@ -54,7 +64,7 @@ const Sidebar = () => {
             </li>
             <li className="side-item">
               <NavLink
-                to="birthdays"
+                to="birthday"
                 className={({ isActive }) =>
                   isActive ? "active" : "nav-links"
                 }
@@ -171,6 +181,19 @@ const Sidebar = () => {
                 Hesabatlar
               </NavLink>
             </li>
+          </ul>
+          <h4 className="title">Leadlər</h4>
+          <ul className="side-menu">
+              <li className="side-item">
+              <NavLink
+                to="siterequest"
+                className={({ isActive }) =>
+                  isActive ? "active" : "nav-links"
+                }
+              >
+              Saytdan müraciətlər
+              </NavLink>
+              </li>
           </ul>
         </div>
         <div className="side-footer">
