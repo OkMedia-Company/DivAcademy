@@ -8,6 +8,8 @@ import Graduates from "../Graduates/Graduates";
 import Birthday from "../Birthday/Birthday";
 import Groups from "../Groups/Groups";
 import Courses from "../Courses/Courses";
+import Login from "../Login/Login";
+import Signup from "../Login/Signup";
 
 const Pages = () => {
   return (
@@ -20,7 +22,8 @@ const Pages = () => {
         <Route path="/birthday" element={<Birthday />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/groups" element={<Groups />} />
-
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );

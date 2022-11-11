@@ -33,29 +33,29 @@ function Groups() {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                     Qrup Kodu
                  </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                    Kurs Kodu
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                      Ödəniş günü
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                      Dərs günü
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                   Dərs  saatı
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                     Başlana tarixi
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                     Bitmə tarixi
                   </TableCell>
                 
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}>
                  
                   </TableCell>
                 
@@ -67,29 +67,29 @@ function Groups() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage )
                   .map((item) => (
                     <TableRow key={item.id} hover>  
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.qrupKodu}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.course}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.payDate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.lectureDate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.lectureHour}
                       </TableCell>
                       
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.startDate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         {item.endDate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}>
                         <Button variant="contained" color="error">
                          Edit
                         </Button>

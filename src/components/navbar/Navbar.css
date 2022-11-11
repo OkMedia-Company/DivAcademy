@@ -1,7 +1,7 @@
 nav {
     display: flex;
     justify-content: space-between;
-    padding: 0 35px;
+    padding: 8px 45px;
     align-items: center;
     background-color: #fff;
     position: sticky;
@@ -29,7 +29,7 @@ nav .active {
     border-bottom: 4px solid #1d9f3a;
     border-radius: 2px;
     transition: all 0.2s;
-    padding-bottom: 18px;
+    padding-bottom: 26px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
@@ -47,6 +47,7 @@ nav .nav-links {
     padding: 20px 0;
 }
 
+    
 nav .nav-right {
     display: flex;
     align-items: center;
@@ -63,14 +64,14 @@ nav .nav-right .notify {
 nav .nav-right .notify .notify-icon {
     font-family: icomoon !important;
     font-style: normal;
+    font-size: 22px;
+    line-height: 10px;
     font-weight: 400;
     font-variant: normal;
     text-transform: none;
-    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #919191;
-    font-size: 18px;
 }
 
 nav .nav-right .notify .notify-icon::before {

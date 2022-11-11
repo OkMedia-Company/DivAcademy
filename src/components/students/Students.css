@@ -4,7 +4,7 @@
 }
 
 .students-page .filter li{
-    margin-right: 10px;
+    margin-right: 28px;
 }
 .students-page .filter li a{
     color:#919191 ;
@@ -12,7 +12,7 @@
     padding: 5px 0;
 }
 .students-page .filter li a.active{
-    border-bottom: 1px solid #919191;
+    border-bottom:   2px solid  #d5d5d5 
 }
 .css-y8ay40-MuiTableCell-root,
 .css-1ex1afd-MuiTableCell-root {
@@ -22,4 +22,37 @@
 .css-1sszw6i-MuiButtonBase-root-MuiButton-root,
 .css-sghohy-MuiButtonBase-root-MuiButton-root {
     font-size: 12px !important;
+}
+.table-course {
+    border: 1px solid 
+    #c5d98d;
+    padding: 2px 6px;
+    background-color: #c5d98d;
+    border-radius: 3px;
+}
+.table-btn button {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+.table-btn-edit button {
+    background-color: #2e7d3221 ;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.table-btn button:hover {
+    background-color: #d1d1d1;
+}
+.table-btn-edit button:hover {
+    background-color: #2e7d3290;
+}
+
+p {
+    margin: 0;
+    padding: 0;
 }

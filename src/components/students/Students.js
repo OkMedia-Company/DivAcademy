@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import Image from "../../imgs/profile-photo.jpeg";
 import { student } from "./studentdata";
+import { CiEdit } from "react-icons/ci";
 import "./Students.css";
 const Students = () => {
   const [page, setPage] = useState(0);
@@ -30,7 +31,10 @@ const Students = () => {
  
   return (
     <div className="students-page">
-      <h2 className="section-title">Tələbələr</h2>
+    <div className="section-title">
+    
+    <h2 >Tələbələr</h2>
+    </div>
       <SearchForm />
       <ul className="filter">
         <li>
@@ -60,75 +64,75 @@ const Students = () => {
         </li>
       </ul>
       <div className="students-content">
-        <Paper sx={{ width: "100%", overflow: "auto" }}>
-          <TableContainer sx={{ maxHeight: 500 }}>
+        <Paper sx={{ width: "100%", overflow: "auto" ,boxShadow:"none"}}>
+          <TableContainer sx={{ maxHeight: 500 ,whiteSpace:"nowrap"}}>
             <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center" colSpan={3}>
+              <TableHead  > 
+                <TableRow >
+                  <TableCell    align="left" colSpan={3}  sx={{py:1,px:2 }} >
                     Şəkil
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3}  sx={{py:1,px:2 }} >
                     Ad Soyad Ata adi
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Doğum tarixi
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Cinsi
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Universiteti
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Qəbul balı
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Telefonu
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Email
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Qeydiyyat günü
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Referans
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Kurs
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Qrup
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Dərs qrafiki
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Status
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Harada işləyir
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Diplom vıziyyəti
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Diplom seriyası
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                    Növbəti ödəniş
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Məzun günü 
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                  
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                   
                   </TableCell>
-                  <TableCell align="center" colSpan={3}>
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                    
                   </TableCell>
                 </TableRow>
@@ -140,72 +144,80 @@ const Students = () => {
                   student
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((student) => (
-                    <TableRow key={student.id} hover>
-                      <TableCell>
-                        <Avatar src={Image} alt={student.nameSur} />
+                    <TableRow key={student.id} hover sx={{whiteSpace:"nowrap"} }> 
+                      <TableCell stickyHeader aria-label="sticky table"  sx={{py:1,px:2 }} >
+                        <Avatar src={Image} alt={student.nameSur} sx={{ width: 30, height: 30 }}/>
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.nameSur}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3}  sx={{py:1,px:2 }}>
                         {student.birthdate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.sex}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.university}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.qebulBal}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.phone}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.email}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.startdate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.referans}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
+                      <div className="table-course">
                         {student.kurs}
+                      </div>
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.group}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.dersGrafiki}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.status}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.workingPlace}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.diplomVeziyyeti}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.diplomSeries}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.enddate}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.odenisTarixi}
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
-                         <Button variant="outlined" color="success">Davamiyyət Tarixçəsi</Button>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
+                      <div className="table-btn">
+                      <button>Davamiyyət tarixçəsi</button>
+                    </div>
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
-                         <Button variant="contained" color="error">Ödəniş Tarixçəsi</Button>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
+                      <div className="table-btn">
+                        <button>Ödəniş tarixçəsi</button>
+                      </div>
                       </TableCell>
-                      <TableCell align="center" colSpan={3}>
-                         <Button variant="contained">Edit</Button>
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
+                      <div className="table-btn-edit">
+                      <button> <CiEdit/> Edit</button>
+                    </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -217,10 +229,14 @@ const Students = () => {
           component="div"
           count={student.length}
           rowsPerPage={rowsPerPage}
+          labelRowsPerPage={<span >Səhifə üzrə sıra sayı:</span>}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
+          sx={{padding:0,margin:0}}
           />
+
+          
         </Paper>
       </div>
     </div>

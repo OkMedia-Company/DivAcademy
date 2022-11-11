@@ -5,7 +5,7 @@
 .searchForm input{
     flex-grow: 1;
     border-color: transparent;
-    padding: 14px 18px;
+    padding: 14px 24px;
     color: #737373;
     font-weight: 200;
     border-bottom-right-radius: 0;
@@ -15,7 +15,17 @@
 
 
 }
+input::placeholder {  
+  opacity: 0.6;  
+}
 
+input:-ms-input-placeholder {  
+  opacity: 0.6; 
+}
+
+input::-ms-input-placeholder {  
+  opacity: 0.6; 
+}
 .searchForm input:focus{
 box-shadow: none;
 }
