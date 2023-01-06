@@ -9,7 +9,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
-import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import Image from "../../imgs/profile-photo.jpeg";
 import { CiEdit } from "react-icons/ci";
@@ -31,7 +30,7 @@ function Teachers() {
     <SearchForm/>
       <div className="teachers-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto" ,boxShadow:"none"}} >
-          <TableContainer sx={{ maxHeight: 500 ,padding:'0 13px'}}>
+          <TableContainer sx={{ maxHeight: 500 ,padding:"0 13px"}}>
             <Table stickyHeader aria-label="sticky table" >
               <TableHead>
                 <TableRow>
@@ -85,7 +84,6 @@ function Teachers() {
                       <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         {student.cariGroups}
                       </TableCell>
-                      
                       <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                         <div className="table-btn">
                         <button> Maaş tarixçəsi</button>  

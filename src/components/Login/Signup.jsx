@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import "./Signup.css";
 const MyTextInput = ({ label, ...props }) => {
   const [field, meta] = useField(props);
 
@@ -88,7 +88,7 @@ const Signup = () => {
           }, 400);
         }}
       >
-        <Form>
+        <Form className="signup-form">
           <MyTextInput
             label="ad  "
             name="firstName"

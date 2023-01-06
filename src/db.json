@@ -1,45 +1,20 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
-    }
-  ],
-  "profile": {
-    "name": "typicode"
+  "users": {
+    "students": {},
+    "teachers": {},
+    "admins": {}
   },
-  "students": [
-    {
-      "{\n  \"firstName\": \"Kanan\",\n  \"lastName\": \"Abaszada\",\n  \"email\": \"kenanabbasov12345@gmail.com\",\n  \"acceptedTerms\": true,\n  \"jobType\": \"development\"\n}": "",
-      "id": 1
+  "classes": {
+    "class1": {
+      "students": {},
+      "teachers": {},
+      "admins": {}
     },
-    {
-      "{\n  \"firstName\": \"Kanan\",\n  \"lastName\": \"Abaszada\",\n  \"email\": \"kenanabbasov12345@gmail.com\",\n  \"acceptedTerms\": true,\n  \"jobType\": \"development\"\n}": "",
-      "id": 2
-    },
-    {
-      "{\n  \"firstName\": \"Kanan\",\n  \"lastName\": \"Abaszada\",\n  \"email\": \"kenanabbasov12345@gmail.com\",\n  \"acceptedTerms\": true,\n  \"jobType\": \"development\"\n}": "",
-      "id": 3
-    },
-    {
-      "{\n  \"firstName\": \"Kanan\",\n  \"lastName\": \"Abaszada\",\n  \"email\": \"kenanabbasov12345@gmail.com\",\n  \"acceptedTerms\": true,\n  \"jobType\": \"development\"\n}": "",
-      "id": 4
-    },
-    {
-      "{\n  \"firstName\": \"Kanan\",\n  \"lastName\": \"Abaszada\",\n  \"email\": \"kenanabbasov12345@gmail.com\",\n  \"acceptedTerms\": true,\n  \"jobType\": \"development\"\n}": "",
-      "id": 5
-    },
-    {
-      "{\n  \"firstName\": \"Kanan\",\n  \"lastName\": \"Abaszada\",\n  \"email\": \"kenanabbasov12345@gmail.com\",\n  \"acceptedTerms\": true,\n  \"jobType\": \"designer\"\n}": "",
-      "id": 6
+    "class2": {
+      "students": {},
+      "teachers": {},
+      "admins": {}
     }
-  ]
+  }
 }
+

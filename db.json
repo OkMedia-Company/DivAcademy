@@ -1,0 +1,74 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "name": "Kenan Abaszade",
+      "surname": "Findex",
+      "fatherName": "23",
+      "dob": "2022-11-29",
+      "gender": "male",
+      "phone": "5428256990",
+      "email": "kenanabbasov12345@gmail.com",
+      "address": "FX614846, 2 Çeşme Sok. No:14-16 A-B Blok, Kenan Abaszade",
+      "id": 2
+    },
+    {
+      "name": "Kenan Abaszade",
+      "surname": "Findex",
+      "fatherName": "23",
+      "dob": "2022-11-29",
+      "gender": "male",
+      "phone": "5428256990",
+      "email": "kenanabbasov12345@gmail.com",
+      "address": "FX614846, 2 Çeşme Sok. No:14-16 A-B Blok, Kenan Abaszade",
+      "id": 3
+    },
+    {
+      "name": "Kenan Abaszade",
+      "surname": "Findex",
+      "fatherName": "23",
+      "dob": "2022-11-29",
+      "gender": "male",
+      "phone": "5428256990",
+      "email": "kenanabbasov12345@gmail.com",
+      "address": "FX614846, 2 Çeşme Sok. No:14-16 A-B Blok, Kenan Abaszade",
+      "id": 4
+    },
+    {
+      "name": "Kenan Abaszade",
+      "surname": "Findex",
+      "fatherName": "23",
+      "dob": "2022-12-14",
+      "gender": "male",
+      "phone": "5428256990",
+      "email": "kenanabbasov12345@gmail.com",
+      "address": "FX614846, 2 Çeşme Sok. No:14-16 A-B Blok, Kenan Abaszade",
+      "id": 5
+    },
+    {
+      "name": "Kenan Abaszade",
+      "surname": "Findex",
+      "fatherName": "salk",
+      "dob": "2022-12-26",
+      "gender": "male",
+      "phone": "5428256990",
+      "email": "kenanabbasov12345@gmail.com",
+      "address": "FX614846, 2 Çeşme Sok. No:14-16 A-B Blok, Kenan Abaszade",
+      "id": 6
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

@@ -1,3 +1,9 @@
 .main{
     flex-grow: 1;
 }
+.all-components {
+    padding: 30px 45px;
+}
+.css-h8g9t7-MuiLinearProgress-bar1 {
+    background-color: #1d9f3a !important;
+}

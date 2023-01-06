@@ -30,7 +30,7 @@ input::-ms-input-placeholder {
 box-shadow: none;
 }
 
-.searchForm .searchBtn{
+.searchForm button{
     display: flex;
     align-items: center;
     justify-content: center;
