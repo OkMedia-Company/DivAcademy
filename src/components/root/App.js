@@ -24,6 +24,8 @@ function App() {
       <AuthContext.Provider value={{ user, setUser }}>
         <div className="RoutePages">
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/" element={<HomeLayout />}>
               <Route index={true} element={<Dashboard />} />
               <Route path="students" element={<Students />} />
@@ -35,8 +37,6 @@ function App() {
               <Route path="adding" element={<Adding />} />
               <Route path="*" element={<NotFound />} />
             </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>
       </AuthContext.Provider>

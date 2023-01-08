@@ -1,32 +1,45 @@
 import React from "react";
 import "./Main.css";
 import Navbar from "../navbar/Navbar";
-import Box from '@mui/material/Box';
-import LinearProgress from '@mui/material/LinearProgress';
-
+import Box from "@mui/material/Box";
+import LinearProgress from "@mui/material/LinearProgress";
 import { Outlet } from "react-router-dom";
+import axios from "axios";
 const Main = () => {
   const [progress, setProgress] = React.useState(0);
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 100);
-      });
-    }, 200);
+  const [loading, setLoading] = React.useState(true);
 
-    return () => {
-      clearInterval(timer);
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://api.quotable.io/random");
+        setProgress(100);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
+    fetchData();
   }, []);
+
   return (
     <div className="main">
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress variant="determinate" value={progress} sx={{background:"transparent",boxShadow:"rgba(0, 0, 0, 0.35) 0px 5px 15px;",height:"3px"}} color="success"/>
-      </Box>
+      {loading && (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress
+            variant="determinate"
+            value={progress}
+            color="success"
+            sx={{
+              background: "transparent",
+              boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+              height: "3px",
+            }}
+          />
+        </Box>
+      )}
+
       <Navbar />
       <div className="all-components">
         <Outlet />

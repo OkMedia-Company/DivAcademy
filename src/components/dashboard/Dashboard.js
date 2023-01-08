@@ -2,9 +2,7 @@ import React from 'react'
 import './Dashboard.css'
 
 const Dashboard = () => {
-    fetch('http://localhost:3000/users')
-  .then(response => response.json())
-  .then(data => console.log(data))
+ 
   return (
     <div className='dashboard'>
               <h2 className="section-title">Dashboard</h2>
