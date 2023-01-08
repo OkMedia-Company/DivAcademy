@@ -8,7 +8,7 @@ import axios from "axios";
 const Main = () => {
   const [progress, setProgress] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
-
+ 
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,9 +20,11 @@ const Main = () => {
         setLoading(false);
       }
     };
-    fetchData();
+     setTimeout(() => {
+      fetchData();
+    }, 2000);
   }, []);
-
+ 
   return (
     <div className="main">
       {loading && (
@@ -32,8 +34,8 @@ const Main = () => {
             value={progress}
             color="success"
             sx={{
-              background: "transparent",
-              boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px;",
+              width: "100%",
+              backgroundColor: "#1d9f3a",
               height: "3px",
             }}
           />
