@@ -58,7 +58,6 @@ function Login() {
               <div className="form">
                 <form noValidate onSubmit={handleSubmit}>
                   <h1 className="login-title">Login</h1>
-
                   <div className="input">
                     <label>Email</label>
                     <input
@@ -100,7 +99,10 @@ function Login() {
             </div>
           )}
         </Formik>
-        <NavLink to="/signup">Hesabınız yoxdur ?</NavLink>
+        <div className="register-link">
+            <span>Hesabınız yoxdur ?</span>
+              <NavLink to="/signup">Qeydiyyatdan Keçin</NavLink>
+        </div>
       </div>
     </div>
   );

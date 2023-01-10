@@ -1,70 +1,95 @@
-import React from "react";
-import "./Courses.css";
-import reactImg from "../../imgs/php (2).png"
-import phpImg from "../../imgs/php (1).png"
-import marketingImg from "../../imgs/php (1).jpg"
+import React, { useState } from "react";
+import { courses } from "./coursesdata";
+import SearchForm from "../tools/SearchForm";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import { CiEdit } from "react-icons/ci";
+
 function Courses() {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <div>
-      <div className="container courses">
-        <div className="row">
-          <div className="col-lg-6">
-            <a
-              href="https://div.edu.az/courses/5-front-end-proqramlasdirma.html"
-              title="Frontend proqramlaşdırma kursu"
-            >
-              <div className="future-box d-flex align-items-center">
-                <img src={reactImg} alt="proqramci kurslari" />
-                <div className="future-text">
-                  <h3>Frontend proqramlaşdırma kursu</h3>
-                  <p>
-                   Aylıq ödəniş 390 AZN Tam ödəniş 1950 AZN 
-                  </p>
-                  <p>
-                  Müddəti 6 ay</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div className="col-lg-6">
-            <a
-              href="https://div.edu.az/courses/6-back-end-proqramlasdirma.html"
-              title="Backend proqramlaşdırma kursu"
-            >
-              <div className="future-box d-flex align-items-center">
-                <img src={phpImg} alt="proqramci kurslari" />
-                <div className="future-text">
-                  <h3>Backend proqramlaşdırma kursu</h3>
-                  <p>
-                  Aylıq ödəniş 390 AZN Tam ödəniş 1950 AZN 
-                 </p>
-                 <p>
-                 Müddəti 6 ay</p>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div className="col-lg-6">
-            <a
-              href="https://div.edu.az/courses/7-digital-marketing-kursu.html"
-              title="SMM kursu"
-            >
-              <div className="future-box d-flex align-items-center">
-                <img src={marketingImg} alt="proqramci kurslari" />
-                <div className="future-text">
-                  <h3>SMM kursu</h3>
-                  <p>
-                  Aylıq ödəniş 390 AZN Tam ödəniş 1950 AZN 
-                 </p>
-                 <p>
-                 Müddəti 6 ay</p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+      <div className="section-title">
+        <h2>Kurslar</h2>
+      </div>
+      <SearchForm />
+      <div className="courses-content pt-5">
+        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
+          <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Kurs adı
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Kurs ödənişi (aylıq)
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Kurs ödənişi (tam)
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Müddəti
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Əməliyyatlar
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {courses
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((course) => (
+                    <TableRow key={course.id} hover>
+                      <TableCell sx={{ py: 1, px: 2 }}>
+                        {course.kursAdi}
+                      </TableCell>
+                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                        {course.kursOdenisiAyliq}
+                      </TableCell>
+                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                        {course.kursTamOdenis}
+                      </TableCell>
+                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                        {course.muddeti}
+                      </TableCell>
+                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                        <div className="table-btn-edit">
+                          <button>
+                            <CiEdit /> Edit
+                          </button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={courses.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        </Paper>
       </div>
     </div>
   );

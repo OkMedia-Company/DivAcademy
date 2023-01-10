@@ -32,7 +32,6 @@
   border-radius: 14px;
 }
 .input label {
-  
   font-weight: 600;
   font-size: 14px;
   line-height: 150%;
@@ -64,7 +63,7 @@
   margin: 0 auto;
   margin-top: -20px;
 }
- .login-main button[type=submit] {
+.login-main button[type="submit"] {
   background: #222;
   font-weight: 800;
   font-size: 16px;
@@ -75,12 +74,41 @@
   text-align: center;
   box-shadow: none;
   width: 100%;
-  color:white;
+  color: white;
+}
+.register-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+.register-link span {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  color: #bababa;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 16px;
+  margin-left: 13px;
+}
+.register-link a {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 150%;
+  color: #222;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 16px;
+  margin-left: 13px;
 }
 
-
 .login-button {
-      /* width: 100%; */
-      padding-right: 10px;
-      padding-left: 10px;
+  /* width: 100%; */
+  padding-right: 10px;
+  padding-left: 10px;
 }

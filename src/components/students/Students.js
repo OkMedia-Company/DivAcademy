@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import SearchForm from "../tools/SearchForm";
 import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
@@ -10,18 +10,28 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Image from "../../imgs/profile-photo.jpeg";
-import { student } from "./studentdata";
 import { CiEdit } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import "./Students.css";
+import axios from "axios";
 const Students = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [students, setStudents] = useState(student);
+  const [students, setStudents] = useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  useEffect(() => {
+    axios
+      .get("https://div.globalsoft.az/api/students")
+      .then((res) => {
+        setStudents(res.data.students);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -34,7 +44,7 @@ const Students = () => {
     );
     setStudents(filteredStudents);
   };
-
+  console.log(students);
   return (
     <div className="students-page">
       <div className="section-title">
@@ -69,12 +79,12 @@ const Students = () => {
         </li>
 
         <li>
-          <NavLink to="/adding" className="filter-add">
+          <NavLink to="/addstudentform" className="filter-add">
             Add student
           </NavLink>
         </li>
       </ul>
-      
+
       <div className="students-content">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>
@@ -90,9 +100,7 @@ const Students = () => {
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Doğum tarixi
                   </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Cinsi
-                  </TableCell>
+              
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Universiteti
                   </TableCell>
@@ -143,11 +151,9 @@ const Students = () => {
                     colSpan={3}
                     sx={{ py: 1, px: 2 }}
                   ></TableCell>
-                  <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={{ py: 1, px: 2 }}
-                  ></TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Əməliyyatlar
+                  </TableCell>
                   <TableCell
                     align="left"
                     colSpan={3}
@@ -170,65 +176,63 @@ const Students = () => {
                         sx={{ py: 1, px: 2 }}
                       >
                         <Avatar
-                          src={Image}
-                          alt={student.nameSur}
+                          src={`https://div.globalsoft.az/${student.image}`}
+                          alt={student.name}
                           sx={{ width: 30, height: 30 }}
                         />
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.nameSur}
+                        {student.name} {student.last_name} {student.father_name}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.birthdate}
-                      </TableCell>
-                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.sex}
+                        {student.birthday}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         {student.university}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.qebulBal}
+                        {student.university_add_score}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         {student.phone}
                       </TableCell>
+                       
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         {student.email}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.startdate}
+                        {student.registration_day}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.referans}
+                        <div className="table-course">{student.reference}</div>
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        <div className="table-course">{student.kurs}</div>
+                        {student.course}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         {student.group}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.dersGrafiki}
+                        {student.lesson_table}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         {student.status}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.workingPlace}
+                        {student.workplace}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.diplomVeziyyeti}
+                      {student.is_diploma}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.diplomSeries}
+                      {student.diploma_sn}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.enddate}
+                        {student.next_payment_date}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                        {student.odenisTarixi}
-                      </TableCell>
+                      {student.graduation_day}
+                    </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         <div className="table-btn">
                           <button>Davamiyyət tarixçəsi</button>
@@ -242,7 +246,6 @@ const Students = () => {
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         <div className="table-btn-edit">
                           <button>
-                      
                             <CiEdit /> Edit
                           </button>
                         </div>
@@ -255,7 +258,7 @@ const Students = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={student.length}
+            count={students.length}
             rowsPerPage={rowsPerPage}
             labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
             page={page}

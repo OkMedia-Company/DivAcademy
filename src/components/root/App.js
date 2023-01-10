@@ -13,7 +13,7 @@ import Login from "../Login/Login";
 import Signup from "../Login/Signup";
 import HomeLayout from "./HomeLayout";
 import NotFound from "./NotFound";
-import Adding from "../Adding/Adding";
+import AddStudentForm from "../students/AddStudentForm";
 import { AuthContext } from "../context/Contexts";
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
               <Route path="birthday" element={<Birthday />} />
               <Route path="courses" element={<Courses />} />
               <Route path="groups" element={<Groups />} />
-              <Route path="adding" element={<Adding />} />
+              <Route path="addstudentform" element={<AddStudentForm />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

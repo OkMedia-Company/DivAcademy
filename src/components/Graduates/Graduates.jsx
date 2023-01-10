@@ -94,8 +94,10 @@ const Graduates = () => {
                   <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
                     Məzun günü
                   </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}></TableCell>
-            
+                  <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
+                    Əmaliyyatlar
+                  </TableCell>
+
                 </TableRow>
               </TableHead>
               <TableBody>

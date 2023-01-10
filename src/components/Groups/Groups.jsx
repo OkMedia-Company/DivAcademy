@@ -11,7 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
-import Image from "../../imgs/profile-photo.jpeg";
+import { CiEdit } from "react-icons/ci";
 
 function Groups() {
   const [page, setPage] = useState(0);
@@ -56,7 +56,7 @@ function Groups() {
                   </TableCell>
                 
                   <TableCell align="left" colSpan={3}>
-                 
+                      Əməliyyatlar
                   </TableCell>
                 
  
@@ -89,12 +89,12 @@ function Groups() {
                       <TableCell align="left" colSpan={3}>
                         {item.endDate}
                       </TableCell>
-                      <TableCell align="left" colSpan={3}>
-                        <Button variant="contained" color="error">
-                         Edit
-                        </Button>
-                      </TableCell>
-                   
+                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
+                      <div className="table-btn-edit">
+                 
+                        <button>      <CiEdit/> Edit</button>
+                      </div>
+                    </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
