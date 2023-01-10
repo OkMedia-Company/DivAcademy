@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./App.css";
 import Dashboard from "../dashboard/Dashboard";
 import { Routes, Route } from "react-router-dom";
@@ -18,14 +18,20 @@ import { AuthContext } from "../context/Contexts";
 
 function App() {
   const [token, setToken] = useState(null);
-  const [user, setUser] = useState({type : null});
+  const [user, setUser] = useState(null);
+ 
   return (
     <>
       <AuthContext.Provider value={{ token, setToken, user, setUser }}>
         <div className="RoutePages">
+        
           <Routes>
+
+          
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+      
+
             <Route path="/" element={<HomeLayout />}>
               <Route index={true} element={<Dashboard />} />
               <Route path="students" element={<Students />} />
