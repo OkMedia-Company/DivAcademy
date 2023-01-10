@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../context/Contexts";
 import Logo from "../../imgs/div-logo.png";
-
+import axios from "axios";
 const schema = Yup.object().shape({
   email: Yup.string()
     .required("Email daxil edilməlidir")
@@ -21,17 +21,29 @@ function Login() {
   const navigate = useNavigate();
 
   const login = async (data) => {
-    // Set the user data in the AuthContext
-    currentUser.setUser(data);
-
-    // Update the isLoggedIn state in the AuthContext
-    currentUser.setUser({type : "student"});
-   
-    // Push a new history entry to redirect to the /students page
-    if(currentUser.user.type === "student"){
-    navigate("/students");
+    const config = {
+      method: 'post',
+      url: 'https://div.globalsoft.az/api/login',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': process.env.REACT_APP_AUTH_TOKEN
+      },
+      data : {
+        email: data.email,
+        password: data.password
+      }
+    };
+    try {
+      const res = await axios(config);
+      const token = res.data.token;
+      currentUser.setToken(token);
+      currentUser.setUser({email:data.email, password: data.password, ...data});
+      navigate("/students");
+    } catch (error) {
+      console.log(error);
     }
   };
+  
 
   return (
     <div className="login-main">

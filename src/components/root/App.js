@@ -17,11 +17,11 @@ import AddStudentForm from "../students/AddStudentForm";
 import { AuthContext } from "../context/Contexts";
 
 function App() {
-  const [user, setUser] = useState({ type: "null" });
-
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState({type : null});
   return (
     <>
-      <AuthContext.Provider value={{ user, setUser }}>
+      <AuthContext.Provider value={{ token, setToken, user, setUser }}>
         <div className="RoutePages">
           <Routes>
             <Route path="/login" element={<Login />} />
