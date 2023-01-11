@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
@@ -22,28 +22,28 @@ function Login() {
 
   const login = async (data) => {
     const config = {
-      method: 'post',
-      url: 'https://div.globalsoft.az/api/login',
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': process.env.REACT_APP_AUTH_TOKEN
+      method: "post",
+      url: "https://div.globalsoft.az/api/login",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: process.env.REACT_APP_AUTH_TOKEN,
       },
-      data : {
+      data: {
         email: data.email,
-        password: data.password
-      }
+        password: data.password,
+      },
     };
     try {
       const res = await axios(config);
-      const token = res.data.token;
-      currentUser.setToken(token);
-      currentUser.setUser({email:data.email, password: data.password, ...data});
+      localStorage.setItem("status", res.data.status);
+      localStorage.setItem("token", res.data.token);
+      console.log(res.data.token);
       navigate("/students");
     } catch (error) {
       console.log(error);
     }
   };
-  
+ 
 
   return (
     <div className="login-main">
@@ -111,10 +111,7 @@ function Login() {
             </div>
           )}
         </Formik>
-        <div className="register-link">
-            <span>Hesabınız yoxdur ?</span>
-              <NavLink to="/signup">Qeydiyyatdan Keçin</NavLink>
-        </div>
+        
       </div>
     </div>
   );

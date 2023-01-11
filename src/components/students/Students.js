@@ -11,14 +11,17 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Skeleton from "@mui/material/Skeleton";
 import { CiEdit } from "react-icons/ci";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import "./Students.css";
+
 import axios from "axios";
 const Students = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
+  let { userId } = useParams();
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -45,7 +48,6 @@ const Students = () => {
     );
     setStudents(filteredStudents);
   };
-  console.log(students);
   return (
     <div className="students-page">
       <div className="section-title">
@@ -167,7 +169,7 @@ const Students = () => {
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
                       <TableRow key={i}>
                         <TableCell>
-                          <Skeleton variant="circle" width={40} height={40} />
+                          <Skeleton variant="rounded" width={40} height={40} />
                         </TableCell>
                         <TableCell>
                           <Skeleton variant="text" width={150} />
@@ -177,16 +179,16 @@ const Students = () => {
                         </TableCell>
                         <TableCell>
                           <Skeleton variant="text" width={150} />
-                        </TableCell> 
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
                         </TableCell>
                         <TableCell>
                           <Skeleton variant="text" width={150} />
                         </TableCell>
                         <TableCell>
                           <Skeleton variant="text" width={150} />
-                        </TableCell> 
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
                         <TableCell>
                           <Skeleton variant="text" width={150} />
                         </TableCell>
@@ -363,7 +365,9 @@ const Students = () => {
                           >
                             <div className="table-btn-edit">
                               <button>
-                                <CiEdit /> Edit
+                                <Link to={`/students/${student.id}`}>
+                                  <CiEdit /> Edit
+                                </Link>
                               </button>
                             </div>
                           </TableCell>

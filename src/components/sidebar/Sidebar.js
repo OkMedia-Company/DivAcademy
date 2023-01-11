@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Sidebar.css";
 import ProfilePhoto from "../../imgs/profile-photo.jpeg";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
@@ -8,7 +8,11 @@ import Accordion from "react-bootstrap/Accordion";
 import { CiWallet } from "react-icons/ci";
 import { BiCommentDetail } from "react-icons/bi";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import axios from "axios";
 const Sidebar = () => {
+  const userStatus = localStorage.getItem("status");
+  const userToken = localStorage.getItem("token");
+  const [user, setUser] = useState([]);
   const [close, setClose] = useState(false);
   const closeSide = () => {
     setClose(true);
@@ -16,21 +20,61 @@ const Sidebar = () => {
   const openSide = () => {
     setClose(false);
   };
+  const logOut = () => {
+    localStorage.removeItem("status");
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+  useEffect(() => {
+    axios
+      .get("https://div.globalsoft.az/api/authUser", {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data.user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+  function userType() {
+    if (user.user_type === 1) {
+      return "Student";
+    } else if (user.user_type === 2) {
+      return "Teacher";
+    } else if (user.user_type === 3) {
+      return "Employee";
+    } else {
+      return "Admin";
+    }
+  }
+
   return (
     <div className={close ? "sidebar closing" : "sidebar"}>
       <div className="sidebar-wrap">
         <div className="side-top">
           <div className="profile">
-            <img src={ProfilePhoto} alt="" />
+            <div className="profile-img">
+              <img
+                src={`https://div.globalsoft.az/${user.image}`}
+                sx={{ width: "50px", height: "50px" }}
+              />
+            </div>
             <div className="profile-info">
-              <span className="name">Kenan Abaszade </span>
-              <span className="status">Admin</span>
+              <span className="name">
+                {user.name} {user.last_name} {user.father_name}
+              </span>
+              <span className="status">{userType()}</span>
             </div>
           </div>
           <div className="side-footer">
-            <a href="#" className="logOut">
-              <i className="logOut-icon"></i>
-            </a>
+            <button onClick={logOut} className="logout-btn">
+              <span className="logOut">
+                <i className="logOut-icon"></i>
+              </span>
+            </button>
           </div>
         </div>
         <div className="side-body">
@@ -275,16 +319,15 @@ const Sidebar = () => {
         <div className="profile">
           <img src={ProfilePhoto} alt="" />
         </div>
-          <div className="message-icon">
-            <BiCommentDetail/>
-          </div>
-
+        <div className="message-icon">
+          <BiCommentDetail />
+        </div>
 
         <div onClick={openSide} className="burger-wrap">
           <img src={burger} alt="" className="burger-icon" />
         </div>
         <div className="message-icon-bottom">
-          <AiFillQuestionCircle/>
+          <AiFillQuestionCircle />
         </div>
       </div>
     </div>
