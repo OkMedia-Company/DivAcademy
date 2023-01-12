@@ -23,8 +23,23 @@ const Sidebar = () => {
   const logOut = () => {
     localStorage.removeItem("status");
     localStorage.removeItem("token");
+
+    axios
+      .get("https://div.globalsoft.az/api/logout", {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     window.location.reload();
   };
+
   useEffect(() => {
     axios
       .get("https://div.globalsoft.az/api/authUser", {
@@ -116,6 +131,16 @@ const Sidebar = () => {
                       }
                     >
                       Məzunlar
+                    </NavLink>
+                  </li>
+                  <li className="side-item">
+                    <NavLink
+                      to="employee"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "nav-links"
+                      }
+                    >
+                      İşçilər
                     </NavLink>
                   </li>
                   <li className="side-item">

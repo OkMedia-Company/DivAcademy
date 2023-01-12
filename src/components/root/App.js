@@ -17,6 +17,7 @@ import AddStudentForm from "../students/AddStudentForm";
 import PrivateRoutes from "../utilities/PrivateRoutes";
 import { AuthContext } from "../context/Contexts";
 import StudentInnerPage from "../students/StudentInnerPage";
+import Employees from "../Employee/Employee";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -36,6 +37,7 @@ function App() {
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="graduates" element={<Graduates />} />
                 <Route path="birthday" element={<Birthday />} />
+                <Route path="employee" element={<Employees />} />
                 <Route path="courses" element={<Courses />} />
                 <Route path="groups" element={<Groups />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />

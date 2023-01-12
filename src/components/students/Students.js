@@ -20,7 +20,6 @@ const Students = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
-  let { userId } = useParams();
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

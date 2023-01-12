@@ -37,7 +37,6 @@ function Login() {
       const res = await axios(config);
       localStorage.setItem("status", res.data.status);
       localStorage.setItem("token", res.data.token);
-      console.log(res.data.token);
       navigate("/students");
     } catch (error) {
       console.log(error);
