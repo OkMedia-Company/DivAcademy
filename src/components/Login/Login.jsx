@@ -19,7 +19,7 @@ const schema = Yup.object().shape({
 function Login() {
   const currentUser = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const [error,setError] = React.useState("")
   const login = async (data) => {
     const config = {
       method: "post",
@@ -39,6 +39,7 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       navigate("/students");
     } catch (error) {
+      setError(error.response.data.message)
       console.log(error);
     }
   };
@@ -102,6 +103,7 @@ function Login() {
                       {errors.password && touched.password && errors.password}
                     </p>
                   </div>
+                   <p className="error"  dangerouslySetInnerHTML={{ __html: error }}> </p>
                   <div className="login-button">
                     <button type="submit">Giriş</button>
                   </div>

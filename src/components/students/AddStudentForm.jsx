@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 const Form = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
+  const [error, setError] = useState("");
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -21,6 +22,7 @@ const Form = () => {
 
   const handleFileChange = (event) => {
     setImageFile(event.target.files[0]);
+    
   };
   const [formData, setFormData] = useState({
     image: "",
@@ -69,12 +71,14 @@ const Form = () => {
         })
         .catch((error) => {
           console.error(error);
+          setError(error.response.data.message);
         });
     };
   };
 
   return (
     <>
+   
       <h2>Tələbə əlavə etmək </h2>
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
@@ -336,6 +340,7 @@ const Form = () => {
               </Button>
               <br />
             </div>
+            <span>{error}</span>
             <button type="submit">Əlavə et</button>
           </div>
         </form>

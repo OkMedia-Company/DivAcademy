@@ -16,7 +16,7 @@ import NotFound from "./NotFound";
 import AddStudentForm from "../students/AddStudentForm";
 import PrivateRoutes from "../utilities/PrivateRoutes";
 import { AuthContext } from "../context/Contexts";
-import StudentInnerPage from "../students/StudentInnerPage";
+import StudentInnerPage from "../students/EditStudentForm";
 import Employees from "../Employee/Employee";
 
 function App() {
