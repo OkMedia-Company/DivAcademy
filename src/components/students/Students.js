@@ -11,7 +11,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Skeleton from "@mui/material/Skeleton";
 import { CiEdit } from "react-icons/ci";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Students.css";
 
 import axios from "axios";
@@ -54,37 +54,41 @@ const Students = () => {
       </div>
       <SearchForm onSearch={handleSearch} />
       <ul className="filter">
-        <li>
-          <NavLink to="/" className="filter-link active">
-            Cari tələbələr
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/temporary" className="filter-link">
-            Müvəqqəti dayandıranlar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/one-time" className="filter-link">
-            Birdəfəlik dayandıranlar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/graduated" className="filter-link">
-            Məzunlar
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/all" className="filter-link">
-            Hamısı
-          </NavLink>
-        </li>
+   
+          <li>
+            <NavLink to="/" className="filter-link active">
+              Cari tələbələr
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/temporary" className="filter-link">
+              Müvəqqəti dayandıranlar
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/one-time" className="filter-link">
+              Birdəfəlik dayandıranlar
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/graduated" className="filter-link">
+              Məzunlar
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/all" className="filter-link">
+              Hamısı
+            </NavLink>
+          </li>
+    
 
-        <li>
-          <NavLink to="/addstudentform" className="filter-add">
-            Add student
-          </NavLink>
-        </li>
+        
+          <li className="student-add-link">
+            <NavLink to="/addstudentform" className="filter-add">
+             Tələbə əlavə et
+            </NavLink>
+          </li>
+       
       </ul>
 
       <div className="students-content">

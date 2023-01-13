@@ -51,7 +51,12 @@ const Sidebar = () => {
         setUser(res.data.user);
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.status === 401) {
+          logOut();
+          navigate("/login");
+        } else {
+          console.log(err);
+        }
       });
   }, []);
   function userType() {
