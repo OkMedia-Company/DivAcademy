@@ -13,6 +13,7 @@ import TableRow from "@mui/material/TableRow";
 import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import "./teachers.css";
 function Teachers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -60,11 +61,11 @@ function Teachers() {
         <h2>Müəllimlər</h2>
       </div>
       <SearchForm />
-      <li className="teacher-add-link">
-        <NavLink to="/addteacherform" className="filter-add">
-          Tələbə əlavə et
-        </NavLink>
-      </li>
+
+      <NavLink to="/addteacherform" className="filter-add teacher-add-link">
+        Müəllim əlavə et
+      </NavLink>
+
       <div className="teachers-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
           <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
@@ -197,7 +198,9 @@ function Teachers() {
                           >
                             <div className="table-btn-edit">
                               <button>
-                                <CiEdit /> Edit
+                                <NavLink to={`/teachers/${teacher.id}`}>
+                                  <CiEdit /> Edit
+                                </NavLink>
                               </button>
                             </div>
                           </TableCell>

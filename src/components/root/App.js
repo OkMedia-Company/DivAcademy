@@ -19,6 +19,9 @@ import { AuthContext } from "../context/Contexts";
 import StudentInnerPage from "../students/EditStudentForm";
 import Employees from "../Employee/Employee";
 import AddTeacherForm from "../teachers/AddTeacherForm";
+import TeacherEditPage from "../teachers/TeacherEditPage";
+import AddEmployee from "../Employee/AddEmployee";
+import EditEmployee from "../Employee/EditEmployee";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -35,6 +38,8 @@ function App() {
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="students" element={<Students />} />
                 <Route path="students/:userId" element={<StudentInnerPage />} />
+                <Route path="teachers/:userId" element={<TeacherEditPage />} />
+                <Route path="employee/:userId" element={<EditEmployee />} />
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="graduates" element={<Graduates />} />
                 <Route path="birthday" element={<Birthday />} />
@@ -42,7 +47,8 @@ function App() {
                 <Route path="courses" element={<Courses />} />
                 <Route path="groups" element={<Groups />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />
-                <Route path="addteacherform" element={<AddTeacherForm/>} />
+                <Route path="addteacherform" element={<AddTeacherForm />} />
+                <Route path="addemployee" element={<AddEmployee />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Route>

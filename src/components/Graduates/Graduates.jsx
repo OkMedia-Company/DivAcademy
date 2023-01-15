@@ -7,15 +7,13 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
-import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
-import Image from "../../imgs/profile-photo.jpeg";
-import { student } from "./graduatesdata";
 import SearchForm from "../tools/SearchForm";
 import { CiEdit } from "react-icons/ci";
 import { Skeleton } from "@mui/material";
 import "./Graduates.css";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 const Graduates = () => {
   const [students, setStudents] = useState([]);
   const [page, setPage] = useState(0);
@@ -279,7 +277,9 @@ const Graduates = () => {
                           >
                             <div className="table-btn-edit">
                               <button>
-                                <CiEdit /> Edit
+                                <NavLink to={`/students/${student.user_id}`}>
+                                  <CiEdit /> Edit
+                                </NavLink>
                               </button>
                             </div>
                           </TableCell>

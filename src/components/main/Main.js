@@ -8,11 +8,19 @@ import axios from "axios";
 const Main = () => {
   const [progress, setProgress] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
- 
+  let userToken = localStorage.getItem("token");
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://api.quotable.io/random");
+        const response = await axios.get(
+          "https://div.globalsoft.az/api/authUser",
+
+          {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
         setProgress(100);
       } catch (error) {
         console.error(error);
@@ -20,11 +28,11 @@ const Main = () => {
         setLoading(false);
       }
     };
-     setTimeout(() => {
+    setTimeout(() => {
       fetchData();
     }, 1000);
   }, []);
- 
+
   return (
     <div className="main">
       {loading && (
@@ -43,7 +51,7 @@ const Main = () => {
       )}
 
       <Navbar />
-      
+
       <div className="all-components">
         <Outlet />
       </div>

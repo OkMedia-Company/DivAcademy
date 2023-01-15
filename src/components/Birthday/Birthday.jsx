@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { birthdays } from "./birthdaydata";
 import SearchForm from "../tools/SearchForm";
 import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
@@ -71,9 +70,7 @@ function Birthdays() {
                     <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                       Email
                     </TableCell>
-                    <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                      Əməliyyatlar
-                    </TableCell>
+                  
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -153,17 +150,7 @@ function Birthdays() {
                             >
                               {birthday.email}
                             </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              <div className="table-btn-edit">
-                                <button>
-                                  <CiEdit /> Edit
-                                </button>
-                              </div>
-                            </TableCell>
+                         
                           </TableRow>
                         ))}
                 </TableBody>
@@ -210,9 +197,7 @@ function Birthdays() {
                     <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                       Email
                     </TableCell>
-                    <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                      Əməliyyatlar
-                    </TableCell>
+                 
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -292,17 +277,7 @@ function Birthdays() {
                             >
                               {birthday.email}
                             </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              <div className="table-btn-edit">
-                                <button>
-                                  <CiEdit /> Edit
-                                </button>
-                              </div>
-                            </TableCell>
+                        
                           </TableRow>
                         ))}
                 </TableBody>
