@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { teachers } from "./teachersdata";
 import SearchForm from "../tools/SearchForm";
 import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
@@ -11,9 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import { Skeleton } from "@mui/material";
 import TableRow from "@mui/material/TableRow";
-import Image from "../../imgs/profile-photo.jpeg";
 import { CiEdit } from "react-icons/ci";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 function Teachers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -61,6 +60,11 @@ function Teachers() {
         <h2>Müəllimlər</h2>
       </div>
       <SearchForm />
+      <li className="teacher-add-link">
+        <NavLink to="/addteacherform" className="filter-add">
+          Tələbə əlavə et
+        </NavLink>
+      </li>
       <div className="teachers-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
           <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>

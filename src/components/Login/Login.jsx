@@ -103,7 +103,7 @@ function Login() {
                       {errors.password && touched.password && errors.password}
                     </p>
                   </div>
-                   <p className="error"  dangerouslySetInnerHTML={{ __html: error }}> </p>
+                  <p className="error">{error}</p>
                   <div className="login-button">
                     <button type="submit">Giriş</button>
                   </div>

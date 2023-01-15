@@ -71,7 +71,7 @@ const Students = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/graduated" className="filter-link">
+            <NavLink to="/graduates" className="filter-link">
               Məzunlar
             </NavLink>
           </li>

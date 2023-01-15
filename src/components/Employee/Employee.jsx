@@ -270,7 +270,7 @@ const Employee = () => {
                   </TableCell>
 
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Status
+                    Vəzifəsi
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Maaş

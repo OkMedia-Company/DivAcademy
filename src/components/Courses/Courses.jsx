@@ -47,6 +47,9 @@ function Courses() {
                     Müddəti
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Aktif qrup sayı
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Əməliyyatlar
                   </TableCell>
                 </TableRow>
@@ -67,6 +70,9 @@ function Courses() {
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         {course.muddeti}
+                      </TableCell>
+                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                        {course.aktifQrupSayi}
                       </TableCell>
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         <div className="table-btn-edit">

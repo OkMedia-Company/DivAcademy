@@ -16,8 +16,11 @@ function HomeLayout() {
   return (
     <div>
       <div className="flexMain">
+      
         <ThemeProvider theme={theme}>
+
             <Sidebar />
+            
             <Main />
         </ThemeProvider>
       </div>

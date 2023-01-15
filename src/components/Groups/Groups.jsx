@@ -25,8 +25,8 @@ function Groups() {
   };
   return (
     <div>
-    <h2>Qruplar</h2>
-    <SearchForm/>
+      <h2>Qruplar</h2>
+      <SearchForm />
       <div className="teachers-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto" }}>
           <TableContainer sx={{ maxHeight: 500 }}>
@@ -35,18 +35,18 @@ function Groups() {
                 <TableRow>
                   <TableCell align="left" colSpan={3}>
                     Qrup Kodu
-                 </TableCell>
-                  <TableCell align="left" colSpan={3}>
-                   Kurs Kodu
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
-                     Ödəniş günü
+                    Kurs
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
-                     Dərs günü
+                    Ödəniş günü
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
-                  Dərs  saatı
+                    Dərs günü
+                  </TableCell>
+                  <TableCell align="left" colSpan={3}>
+                    Dərs saatı
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
                     Başlana tarixi
@@ -54,19 +54,17 @@ function Groups() {
                   <TableCell align="left" colSpan={3}>
                     Bitmə tarixi
                   </TableCell>
-                
+
                   <TableCell align="left" colSpan={3}>
-                      Əməliyyatlar
+                    Əməliyyatlar
                   </TableCell>
-                
- 
                 </TableRow>
               </TableHead>
               <TableBody>
                 {groups
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage )
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item) => (
-                    <TableRow key={item.id} hover>  
+                    <TableRow key={item.id} hover>
                       <TableCell align="left" colSpan={3}>
                         {item.qrupKodu}
                       </TableCell>
@@ -82,19 +80,21 @@ function Groups() {
                       <TableCell align="left" colSpan={3}>
                         {item.lectureHour}
                       </TableCell>
-                      
+
                       <TableCell align="left" colSpan={3}>
                         {item.startDate}
                       </TableCell>
                       <TableCell align="left" colSpan={3}>
                         {item.endDate}
                       </TableCell>
-                      <TableCell align="left" colSpan={3} sx={{py:1,px:2 }}>
-                      <div className="table-btn-edit">
-                 
-                        <button>      <CiEdit/> Edit</button>
-                      </div>
-                    </TableCell>
+                      <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                        <div className="table-btn-edit">
+                          <button>
+                            {" "}
+                            <CiEdit /> Edit
+                          </button>
+                        </div>
+                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>

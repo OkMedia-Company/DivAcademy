@@ -1,15 +1,15 @@
-import { Button } from "@mui/material";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Button } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 function EditForm() {
   const { userId } = useParams();
-  const [formData, setFormData] = useState({});
-  const [imageFile, setImageFile] = useState(null);
+  const [formData, setFormData] = useState("");
+  const [imageFile, setImageFile] = useState("");
   const [imageBase64, setImageBase64] = useState("");
-  const [error, setError] = useState(null);
-  const [status, setStatus] = useState();
-  const [statusMessage, setStatusMessage] = useState("");
+  const [error, setError] = useState("");
+  const [status, setStatus] = useState("");
+  let navigate = useNavigate();
   useEffect(() => {
     axios
       .get(`https://div.globalsoft.az/api/students`, {
@@ -18,7 +18,6 @@ function EditForm() {
           "Content-Type": "application/json",
         },
       })
-
       .then((response) => {
         const student = response.data.students.filter((item) => {
           return item.id == userId;
@@ -65,8 +64,36 @@ function EditForm() {
         },
       })
       .then((response) => {
+        console.log(response);
         setStatus(response.status);
-        setStatusMessage(response.data.message);
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.response.data.message);
+      });
+  };
+  useEffect(() => {
+    if (status === 200) {
+      window.location.reload();
+    }
+  }, [status]);
+
+  if (!formData?.id) {
+    return <h2>Loading...</h2>;
+  }
+  const handleDelete = (event) => {
+    event.preventDefault();
+    axios
+      .delete(`https://div.globalsoft.az/api/students/${userId}`, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setStatus(response.status);
+        navigate("/students");
       })
       .catch((error) => {
         console.error(error);
@@ -74,15 +101,6 @@ function EditForm() {
       });
   };
 
-  if (!formData?.id) {
-    return <h2>Loading...</h2>;
-  }
-  useEffect(() => {
-    if (status === 200) {
-      window.location.reload();
-    }
-  }, [status]);
-console.log(statusMessage);
   return (
     <>
       <h2>Edit Student</h2>
@@ -236,9 +254,15 @@ console.log(statusMessage);
               </Button>
               <br />
             </div>
-            <p>{statusMessage}</p>
             <p>{error}</p>
             <button type="submit">Submit</button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
           </div>
         </form>
       </div>

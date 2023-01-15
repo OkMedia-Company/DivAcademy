@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Dashboard from "../dashboard/Dashboard";
-import { Routes, Route,useParams } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./Pages.css";
 import Students from "../students/Students";
 import Teachers from "../teachers/Teachers";
@@ -18,6 +18,7 @@ import PrivateRoutes from "../utilities/PrivateRoutes";
 import { AuthContext } from "../context/Contexts";
 import StudentInnerPage from "../students/EditStudentForm";
 import Employees from "../Employee/Employee";
+import AddTeacherForm from "../teachers/AddTeacherForm";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -41,6 +42,7 @@ function App() {
                 <Route path="courses" element={<Courses />} />
                 <Route path="groups" element={<Groups />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />
+                <Route path="addteacherform" element={<AddTeacherForm/>} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Route>

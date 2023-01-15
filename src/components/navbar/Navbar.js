@@ -7,18 +7,10 @@ const Navbar = () => {
   return (
     <nav>
       <div className="nav-left">
-        <a href="/" className="logo">
+        <a href="/dashboard" className="logo">
           <img src={Logo} alt="" />
         </a>
         <ul className="nav-menu">
-          <li className="nav-item">
-            {/*     <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active " : "nav-links")}
-            >
-              Main
-  </NavLink>  */}
-          </li>
           <li className="nav-item">
             <NavLink
               to="students"

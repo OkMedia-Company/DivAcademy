@@ -43,6 +43,7 @@ const Main = () => {
       )}
 
       <Navbar />
+      
       <div className="all-components">
         <Outlet />
       </div>

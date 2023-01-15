@@ -6,6 +6,7 @@ export const courses = [
     kursOdenisiAyliq: "390",
     kursTamOdenis:"2340",
     muddeti: "6 ay",
+    aktifQrupSayi: "2",
      
   },
   {
@@ -14,6 +15,7 @@ export const courses = [
     kursOdenisiAyliq: "390",
     kursTamOdenis:"2340",
     muddeti: "6 ay",
+    aktifQrupSayi: "2",
  
   },
   {
@@ -22,6 +24,7 @@ export const courses = [
     kursOdenisiAyliq: "390",
     kursTamOdenis:"2340",
     muddeti: "6 ay",
+    aktifQrupSayi: "2",
  
   },
    

@@ -187,7 +187,7 @@ const Sidebar = () => {
                         isActive ? "active" : "nav-links"
                       }
                     >
-                      Gruplar
+                      Qruplar
                     </NavLink>
                   </li>
                   <li className="side-item">
