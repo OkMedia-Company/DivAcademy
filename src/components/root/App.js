@@ -22,6 +22,7 @@ import AddTeacherForm from "../teachers/AddTeacherForm";
 import TeacherEditPage from "../teachers/TeacherEditPage";
 import AddEmployee from "../Employee/AddEmployee";
 import EditEmployee from "../Employee/EditEmployee";
+import Absence from "../Absences/Absence.jsx";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -49,6 +50,7 @@ function App() {
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />
                 <Route path="addemployee" element={<AddEmployee />} />
+                <Route path="absence" element={<Absence/>} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Route>
