@@ -66,7 +66,7 @@ const Absence = () => {
       <div className="absence-select">
       <label htmlFor="absence-select">Qrupu seçin</label>
         <select name="absence-select" id="">
-          <option value="" selected disabled>--Seçin--</option>
+          <option value=""   disabled defaultValue>--Seçin--</option>
           <option value="">FD-32231</option>
           <option value="">FD-32231</option>
           <option value="">FD-32231</option>

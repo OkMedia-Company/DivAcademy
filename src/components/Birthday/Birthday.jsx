@@ -19,14 +19,17 @@ function Birthdays() {
   const [birthdayToday, setBirthdayToday] = useState([]);
   const [birthdayMonth, setBirthdayMonth] = useState([]);
   const [loading, setLoading] = useState(true);
+ 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleSearchForm = (event) => {
+    console.log(event.target.value);
+  };
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
   useEffect(() => {
     async function fetchData() {
       const res1 = await axios.get(
@@ -48,7 +51,7 @@ function Birthdays() {
         <div className="section-title">
           <h2>Bu Gün Ad günü Olanlar</h2>
         </div>
-        <SearchForm />
+        <SearchForm  onSearch={handleSearchForm}/>
         <div className="birthdays-content pt-3">
           <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
             <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
@@ -157,13 +160,15 @@ function Birthdays() {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={birthdayToday.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={birthdayMonth.length}
+            rowsPerPage={rowsPerPage}
+            labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            sx={{ padding: 0, margin: 0 }}
             />
           </Paper>
         </div>
@@ -175,7 +180,7 @@ function Birthdays() {
         <div className="section-title">
           <h2>Bu Ay Ad günü Olanlar</h2>
         </div>
-        <SearchForm />
+        <SearchForm   onSearch={handleSearchForm}/>
         <div className="birthdays-content pt-3">
           <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
             <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
@@ -284,13 +289,15 @@ function Birthdays() {
               </Table>
             </TableContainer>
             <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={birthdayMonth.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onChangePage={handleChangePage}
-              onChangeRowsPerPage={handleChangeRowsPerPage}
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={birthdayMonth.length}
+            rowsPerPage={rowsPerPage}
+            labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            sx={{ padding: 0, margin: 0 }}
             />
           </Paper>
         </div>

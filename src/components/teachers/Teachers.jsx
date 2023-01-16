@@ -60,7 +60,7 @@ function Teachers() {
       <div className="section-title">
         <h2>Müəllimlər</h2>
       </div>
-      <SearchForm />
+      <SearchForm onSearch={handleChange} />
 
       <NavLink to="/addteacherform" className="filter-add teacher-add-link">
         Müəllim əlavə et

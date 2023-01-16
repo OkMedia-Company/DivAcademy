@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRef } from "react";
 function EditForm() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
+  const imageRef = useRef(null);
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
   useEffect(() => {
@@ -29,6 +31,7 @@ function EditForm() {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+ 
   useEffect(() => {
     if (!imageFile) return;
 
@@ -48,14 +51,13 @@ function EditForm() {
     };
     fileReader.readAsDataURL(file);
   }
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    formData.image = imageBase64;
-    if (!formData.image) {
-      formData.image = formData.image;
-    }
+    // if (!formData.image) {
+    //   formData.image = formData.image;
+    // }
+    console.log(formData);
     axios
       .put(`https://div.globalsoft.az/api/students/${userId}`, formData, {
         headers: {
@@ -164,7 +166,7 @@ function EditForm() {
               />
               <label htmlFor="birthday">Birthday:</label>
               <input
-                type="text"
+                type="date"
                 name="birthday"
                 id="birthday"
                 value={formData.birthday}
@@ -198,51 +200,95 @@ function EditForm() {
                 onChange={handleChange}
               />
               <br />
-              <label htmlFor="start_date">Start Date:</label>
+              <label htmlFor="start_date">Registiration Day:</label>
               <input
-                type="text"
+                type="date"
                 name="start_date"
                 id="start_date"
-                value={formData.start_date}
+                value={formData.registration_day}
                 onChange={handleChange}
               />
               <br />
-              <label htmlFor="end_date">End Date:</label>
+              <label htmlFor="end_date">Reference:</label>
               <input
                 type="text"
                 name="end_date"
                 id="end_date"
-                value={formData.end_date}
+                value={formData.reference}
                 onChange={handleChange}
               />
               <br />
-              <label htmlFor="payment">Payment:</label>
+              <label htmlFor="end_date">Diplom series number:</label>
               <input
                 type="text"
-                name="payment"
-                id="payment"
-                value={formData.payment}
+                name="end_date"
+                id="end_date"
+                value={formData.diploma_sn}
                 onChange={handleChange}
               />
               <br />
-              <label htmlFor="payment_date">Payment Date:</label>
+        
+              <label htmlFor="university">University:</label>
+              <input
+                type="text"
+                name="university"
+                id="university"
+                value={formData.university}
+                onChange={handleChange}
+              />
+              <br />
+              <label htmlFor="Workplace">Workplace:</label>
+              <input
+                type="text"
+                name="Workplace"
+                id="Workplace"
+                value={formData.workplace}
+                onChange={handleChange}
+              />
+              <br />
+              <label htmlFor="payment">University add score:</label>
+              <input
+                type="number"
+                name="payment"
+                id="payment"
+                value={formData.university_add_score}
+                onChange={handleChange}
+              />
+              <br />
+              <label htmlFor="payment_date">Next Payment date:</label>
+              <input
+                type="date"
+                name="payment_date"
+                id="payment_date"
+                value={formData.next_payment_date}
+                onChange={handleChange}
+              />
+              <br />
+              <label htmlFor="payment_date">Lesson table:</label>
               <input
                 type="text"
                 name="payment_date"
                 id="payment_date"
-                value={formData.payment_date}
+                value={formData.lesson_table}
+                onChange={handleChange}
+              />
+              <br />
+              <label htmlFor="payment_date">Is diploma:</label>
+              <input
+                type="text"
+                name="payment_date"
+                id="payment_date"
+                value={formData.is_diploma}
                 onChange={handleChange}
               />
               <br />
             </div>
             <div className="image-upload row col-4">
-              <img src={imageFile} className="image-preview" />
+              <img  ref={imageRef} src={!imageFile && `https://div.globalsoft.az/${formData.image}`} className="image-preview" />
               <Button variant="outlined" component="label">
                 Upload photo
                 <input
                   hidden
-                  accept="image/*"
-                  multiple
                   type="file"
                   name="image"
                   size="medium"

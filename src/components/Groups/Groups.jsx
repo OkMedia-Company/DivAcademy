@@ -23,10 +23,13 @@ function Groups() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const searchForm = (searchTerm) => {
+    console.log(searchTerm);
+  };
   return (
     <div>
       <h2>Qruplar</h2>
-      <SearchForm />
+      <SearchForm onSearch={searchForm} />
       <div className="teachers-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto" }}>
           <TableContainer sx={{ maxHeight: 500 }}>
