@@ -347,7 +347,7 @@ const Sidebar = () => {
 
       <div className="closing-sidebar">
         <div className="profile">
-          <img src={ProfilePhoto} alt="" />
+          <img src={`https://div.globalsoft.az/${user.image}`} alt="" />
         </div>
         <div className="message-icon">
           <BiCommentDetail />

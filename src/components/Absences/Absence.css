@@ -13,7 +13,7 @@
 
 .absence-select {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 .absence-select label {
     font-weight: 600;
@@ -36,4 +36,26 @@
   font-size: 17px;
   color: white;
   padding: 8px;
+}
+
+
+.custom-select .indicator-separator{
+  transform: rotate(90deg);
+  transition: transform 0.5s ease-in-out;
+}
+.custom-select .indicator-separator:active,
+.custom-select .indicator-separator:focus {
+  transform: rotate(180deg);
+}
+.custom-select {
+  width: 250px;
+  transition: width 0.5s ease-in-out;
+}
+.custom-select select {
+  width: 250px;
+  transition: width 0.5s ease-in-out;
+}
+.custom-select option {
+  width: 250px;
+  transition: width 0.5s ease-in-out;
 }

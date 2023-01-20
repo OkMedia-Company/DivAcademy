@@ -10,6 +10,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import SearchForm from "../tools/SearchForm";
 import { CiEdit } from "react-icons/ci";
+import Select from "react-select";
 import { Skeleton } from "@mui/material";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
@@ -55,81 +56,212 @@ const Absence = () => {
     );
     setStudents(filteredStudents);
   };
+  const options = [
+    { value: "1", label: "FD3F2321" },
+    { value: "2", label: "FE23A232" },
+    { value: "3", label: "BE032223" },
+  ];
 
   return (
     <div>
       <div className="section-title">
         <h2>Dəvamiyyət</h2>
       </div>
-
-      <SearchForm onSearch={handleSearch} />
       <div className="absence-select">
-      <label htmlFor="absence-select">Qrupu seçin</label>
-        <select name="absence-select" id="">
-          <option value=""   disabled defaultValue>--Seçin--</option>
-          <option value="">FD-32231</option>
-          <option value="">FD-32231</option>
-          <option value="">FD-32231</option>
-        </select>
+        <SearchForm onSearch={handleSearch} />
+      </div>
+      <div className="absence-select">
+        <label htmlFor="absence-select">Qrupu seçin</label>
+        <Select
+       
+          options={options}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              width: "250px",
+              borderColor: state.isFocused ? "grey" : "grey",
+            }),
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              width: "250px",
+              background: state.isSelected ? "grey" : "white",
+              backgeound: state.isFocused ? "grey" : "white",
+            }),
+            menu: (baseStyles, state) => ({
+              ...baseStyles,
+              width: "250px",
+              borderColor: state.isFocused ? "grey" : "grey",
+            }),
+          }}
+        />
       </div>
       <div className="section-title pt-3">
         <h2>Cari ay</h2>
       </div>
       <div className="students-content pt-3">
-        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
+        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none",background:"transparent" }}>
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>
-            <Table
-              stickyHeader
-              aria-label="sticky table"
-              sx={{ padding: "20px 20px 20px 0" }}
-            >
+            <Table stickyHeader aria-label="sticky table" sx={{ padding: "0" }}>
               <TableHead>
                 <TableRow>
                   <TableCell
                     align="left"
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 1 },
+                      { width: "10px" },
+                      { height: "30px" },
+                    ]}
                   >
                     Ad Soyad Ata adi
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
@@ -174,87 +306,194 @@ const Absence = () => {
                         <TableRow key={employee.id} hover>
                           <TableCell
                             align="left"
-                            colSpan={1}
-                            sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                            sx={[{ py: 1, px: 1 }, { border: "1px solid" }]}
                           >
                             {employee.name} {employee.last_name}{" "}
                             {employee.father_name}
                           </TableCell>
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 25%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, green 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, green 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, green 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
                         </TableRow>
@@ -279,60 +518,169 @@ const Absence = () => {
         <h2>Ötən ay</h2>
       </div>
       <div className="students-content pt-3">
-        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
+        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" ,background:"transparent" }}>
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>
-            <Table
-              stickyHeader
-              aria-label="sticky table"
-              sx={{ padding: "20px 20px 20px 0" }}
-            >
+            <Table stickyHeader aria-label="sticky table" sx={{ padding: "0" }}>
               <TableHead>
                 <TableRow>
                   <TableCell
                     align="left"
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 1 },
+                      { width: "10px" },
+                      { height: "30px" },
+                    ]}
                   >
                     Ad Soyad Ata adi
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
                   <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
+                  >
+                    14.05.2021
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={[
+                      { border: "1px solid" },
+                      { py: 0, px: 0 },
+                      { width: "10px" },
+                    ]}
                   >
                     14.05.2021
                   </TableCell>
@@ -377,87 +725,194 @@ const Absence = () => {
                         <TableRow key={employee.id} hover>
                           <TableCell
                             align="left"
-                            colSpan={1}
-                            sx={[{ py: 1, px: 2 }, { border: "1px solid" }]}
+                            sx={[{ py: 1, px: 1 }, { border: "1px solid" }]}
                           >
                             {employee.name} {employee.last_name}{" "}
                             {employee.father_name}
                           </TableCell>
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 25%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, green 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, green 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, green 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
 
                           <TableCell
-                            align="left"
-                            colSpan={3}
+                            align="center"
                             sx={[
-                              { py: 1, px: 2 },
                               { border: "1px solid" },
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
                               },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
+                            ]}
+                          ></TableCell>
+                          <TableCell
+                            align="center"
+                            sx={[
+                              { border: "1px solid" },
+                              {
+                                background:
+                                  "linear-gradient(to bottom right, transparent 70%, red 50%)",
+                              },
+                              { py: 0, px: 0 },
+                              { width: "10px" },
                             ]}
                           ></TableCell>
                         </TableRow>

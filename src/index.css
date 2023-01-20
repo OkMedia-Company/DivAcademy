@@ -4,7 +4,15 @@
   box-sizing: border-box;
   font-family: "Futura";
 }
+p {
+  margin: 0;
+  padding: 0;
+}
 
+tr,td,th,table {
+  margin: 0;
+  padding: 0;
+}
 ul,
 ol ,li{
   list-style-type: none;
