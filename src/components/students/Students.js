@@ -25,8 +25,15 @@ const Students = () => {
     setPage(newPage);
   };
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
-      .get("https://div.globalsoft.az/api/students")
+      .get("https://div.globalsoft.az/api/students", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         setStudents(res.data.students);
         setLoading(false);
@@ -54,41 +61,37 @@ const Students = () => {
       </div>
       <SearchForm onSearch={handleSearch} />
       <ul className="filter">
-   
-          <li>
-            <NavLink to="/" className="filter-link active">
-              Cari tələbələr
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/temporary" className="filter-link">
-              Müvəqqəti dayandıranlar
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/one-time" className="filter-link">
-              Birdəfəlik dayandıranlar
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/graduates" className="filter-link">
-              Məzunlar
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/all" className="filter-link">
-              Hamısı
-            </NavLink>
-          </li>
-    
+        <li>
+          <NavLink to="/" className="filter-link active">
+            Cari tələbələr
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/temporary" className="filter-link">
+            Müvəqqəti dayandıranlar
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/one-time" className="filter-link">
+            Birdəfəlik dayandıranlar
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/graduates" className="filter-link">
+            Məzunlar
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/all" className="filter-link">
+            Hamısı
+          </NavLink>
+        </li>
 
-        
-          <li className="student-add-link">
-            <NavLink to="/addstudentform" className="filter-add">
-             Tələbə əlavə et
-            </NavLink>
-          </li>
-       
+        <li className="student-add-link">
+          <NavLink to="/addstudentform" className="filter-add">
+            Tələbə əlavə et
+          </NavLink>
+        </li>
       </ul>
 
       <div className="students-content">

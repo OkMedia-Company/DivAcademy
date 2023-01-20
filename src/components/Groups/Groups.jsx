@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { groups } from "./groupsdata";
 import SearchForm from "../tools/SearchForm";
-import Avatar from "@mui/material/Avatar";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -12,6 +11,7 @@ import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import { CiEdit } from "react-icons/ci";
+import axios from "axios";
 
 function Groups() {
   const [page, setPage] = useState(0);
@@ -26,6 +26,17 @@ function Groups() {
   const searchForm = (searchTerm) => {
     console.log(searchTerm);
   };
+
+  useEffect(() => {
+    axios
+      .get(`https://div.globalsoft.az/api/groups`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   return (
     <div>
       <h2>Qruplar</h2>
@@ -57,7 +68,6 @@ function Groups() {
                   <TableCell align="left" colSpan={3}>
                     Bitmə tarixi
                   </TableCell>
-
                   <TableCell align="left" colSpan={3}>
                     Əməliyyatlar
                   </TableCell>
@@ -83,7 +93,6 @@ function Groups() {
                       <TableCell align="left" colSpan={3}>
                         {item.lectureHour}
                       </TableCell>
-
                       <TableCell align="left" colSpan={3}>
                         {item.startDate}
                       </TableCell>
@@ -93,7 +102,6 @@ function Groups() {
                       <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                         <div className="table-btn-edit">
                           <button>
-                            {" "}
                             <CiEdit /> Edit
                           </button>
                         </div>

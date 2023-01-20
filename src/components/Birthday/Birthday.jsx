@@ -30,13 +30,28 @@ function Birthdays() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const token = localStorage.getItem("token");
   useEffect(() => {
     async function fetchData() {
       const res1 = await axios.get(
-        "https://div.globalsoft.az/api/birthdaytoday"
+        "https://div.globalsoft.az/api/birthdaytoday",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       );
       const res2 = await axios.get(
-        "https://div.globalsoft.az/api/birthdaymonth"
+        "https://div.globalsoft.az/api/birthdaymonth",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       );
       setBirthdayToday(res1.data.birthdaytoday);
       setBirthdayMonth(res2.data.birthdaymonth);

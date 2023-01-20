@@ -50,7 +50,7 @@ const Form = () => {
     graduation_day: "2020-12-06",
     next_payment_date: "2020-12-06",
   });
-
+  const token = localStorage.getItem("token");
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -63,6 +63,7 @@ const Form = () => {
       axios
         .post("https://div.globalsoft.az/api/students", formData, {
           headers: {
+            Authorization: `Bearer ${token}`,
             Accept: "application/json",
             "Content-Type": "application/json",
           },

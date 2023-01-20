@@ -27,13 +27,14 @@ const Employee = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
     let data = "";
     let config = {
       method: "get",
       url: "https://div.globalsoft.az/api/employees",
       headers: {
+        Authorization: `Bearer ${token}`,
         Accept: "application/json",
       },
       data: data,

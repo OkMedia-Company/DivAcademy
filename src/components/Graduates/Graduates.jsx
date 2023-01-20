@@ -26,13 +26,14 @@ const Graduates = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const token = localStorage.getItem("token");
   useEffect(() => {
     let data = "";
     let config = {
       method: "get",
       url: "https://div.globalsoft.az/api/graduates",
       headers: {
+        Authorization: `Bearer ${token}`,
         Accept: "application/json",
       },
       data: data,

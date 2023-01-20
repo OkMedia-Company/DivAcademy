@@ -13,9 +13,12 @@ function EditForm() {
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
   useEffect(() => {
+    const token = localStorage.getItem("token");
     axios
       .get(`https://div.globalsoft.az/api/students`, {
+
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -57,10 +60,10 @@ function EditForm() {
     // if (!formData.image) {
     //   formData.image = formData.image;
     // }
-    console.log(formData);
     axios
       .put(`https://div.globalsoft.az/api/students/${userId}`, formData, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },

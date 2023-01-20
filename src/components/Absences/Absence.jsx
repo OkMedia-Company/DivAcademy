@@ -29,7 +29,7 @@ const Absence = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
+const token = localStorage.getItem("token");
   useEffect(() => {
     let data = "";
     let config = {
@@ -37,6 +37,7 @@ const Absence = () => {
       url: "https://div.globalsoft.az/api/employees",
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
       },
       data: data,
     };

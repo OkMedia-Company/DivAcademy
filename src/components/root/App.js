@@ -23,6 +23,8 @@ import TeacherEditPage from "../teachers/TeacherEditPage";
 import AddEmployee from "../Employee/AddEmployee";
 import EditEmployee from "../Employee/EditEmployee";
 import Absence from "../Absences/Absence.jsx";
+import AddCourse from "../Courses/AddCourse";
+import EditCourse from "../Courses/EditCourse";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -41,11 +43,13 @@ function App() {
                 <Route path="students/:userId" element={<StudentInnerPage />} />
                 <Route path="teachers/:userId" element={<TeacherEditPage />} />
                 <Route path="employee/:userId" element={<EditEmployee />} />
+                <Route path="courses/:userId" element={<EditCourse />} />
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="graduates" element={<Graduates />} />
                 <Route path="birthday" element={<Birthday />} />
                 <Route path="employee" element={<Employees />} />
                 <Route path="courses" element={<Courses />} />
+                <Route path="addcourse" element={<AddCourse />} />
                 <Route path="groups" element={<Groups />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />

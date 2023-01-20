@@ -28,10 +28,12 @@ function Teachers() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+  const token = localStorage.getItem("token");
   useEffect(() => {
     axios
       .get(`https://div.globalsoft.az/api/teachers`, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
