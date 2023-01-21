@@ -12,11 +12,10 @@ function EditForm() {
   const imageRef = useRef(null);
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    const token = localStorage.getItem("token");
     axios
       .get(`https://div.globalsoft.az/api/students`, {
-
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
@@ -34,32 +33,42 @@ function EditForm() {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
- 
-  useEffect(() => {
-    if (!imageFile) return;
-
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(imageFile);
-    fileReader.onload = () => {
-      setImageBase64(fileReader.result);
-    };
-  }, [imageFile]);
 
   function handleFileChange(event) {
-    setImageFile(event.target.files[0]);
     const file = event.target.files[0];
     const fileReader = new FileReader();
+    setImageFile(event.target.files[0]);
+
     fileReader.onload = (e) => {
       setImageBase64(e.target.result);
     };
+
     fileReader.readAsDataURL(file);
   }
-  
+
+  axios
+    .get("https://div.globalsoft.az/uploads/user_images/63cbd18893e38.jpeg", {
+      responseType: "blob",
+      Accept: "image/jpeg",
+      "Content-Type": "image/jpeg",
+      Authorization: `Bearer ${token}`,
+      "Access-Control-Allow-Origin": "*",
+    })
+    .then((response) => response.blob())
+    .then((blob) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64data = reader.result;
+        console.log(base64data);
+        // do something with base64data
+      };
+      reader.readAsDataURL(blob);
+    });
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (!formData.image) {
-    //   formData.image = formData.image;
-    // }
+
+    formData.image = imageBase64;
     axios
       .put(`https://div.globalsoft.az/api/students/${userId}`, formData, {
         headers: {
@@ -71,17 +80,13 @@ function EditForm() {
       .then((response) => {
         console.log(response);
         setStatus(response.status);
+        navigate("/students");
       })
       .catch((error) => {
         console.error(error);
         setError(error.response.data.message);
       });
   };
-  useEffect(() => {
-    if (status === 200) {
-      window.location.reload();
-    }
-  }, [status]);
 
   if (!formData?.id) {
     return <h2>Loading...</h2>;
@@ -230,7 +235,7 @@ function EditForm() {
                 onChange={handleChange}
               />
               <br />
-        
+
               <label htmlFor="university">University:</label>
               <input
                 type="text"
@@ -287,7 +292,7 @@ function EditForm() {
               <br />
             </div>
             <div className="image-upload row col-4">
-              <img  ref={imageRef} src={!imageFile && `https://div.globalsoft.az/${formData.image}`} className="image-preview" />
+              <img ref={imageRef} src={imageBase64} className="image-preview" />
               <Button variant="outlined" component="label">
                 Upload photo
                 <input
