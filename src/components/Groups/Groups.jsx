@@ -51,9 +51,15 @@ function Groups() {
       <h2>Qruplar</h2>
       <SearchForm onSearch={searchForm} />
       <div className="d-flex justify-content-start pt-3">
-        <Link to="/addgroup">
+        <Link to="/addgroup" className="pe-3">
           <Button variant="contained" color="success">
             Yeni qrup əlavə et
+          </Button>
+        </Link>
+
+        <Link to="/addstudentstogroup">
+          <Button variant="contained" color="success">
+            Qrupa tələbə əlavə et
           </Button>
         </Link>
       </div>
@@ -147,13 +153,13 @@ function Groups() {
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                          <div className="table-btn-edit">
-                          <button>
-                            <Link to={`/groups/${item.id}`}>
-                              <CiEdit /> Edit
-                            </Link>
-                          </button>
-                        </div>
+                            <div className="table-btn-edit">
+                              <button>
+                                <Link to={`/groups/${item.id}`}>
+                                  <CiEdit /> Edit
+                                </Link>
+                              </button>
+                            </div>
                           </TableCell>
                         </TableRow>
                       ))}

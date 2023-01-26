@@ -28,7 +28,7 @@ function Login() {
         "Content-Type": "application/json",
         Authorization: process.env.REACT_APP_AUTH_TOKEN,
       },
-      data: {
+      data: { 
         email: data.email,
         password: data.password,
       },
@@ -96,6 +96,7 @@ function Login() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.password}
+                      suggested="current-password"
                       placeholder="Parolunuz"
                       className="form-control"
                     />

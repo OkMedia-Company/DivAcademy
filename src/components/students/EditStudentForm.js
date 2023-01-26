@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRef } from "react";
 function EditForm() {
@@ -89,13 +89,26 @@ function EditForm() {
   };
 
   if (!formData?.id) {
-    return <h2>Loading...</h2>;
+    return  <div className="pt-5">
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }}  animation="wave" />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
+   
+    </div>
   }
   const handleDelete = (event) => {
     event.preventDefault();
     axios
       .delete(`https://div.globalsoft.az/api/students/${userId}`, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },

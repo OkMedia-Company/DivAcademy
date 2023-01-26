@@ -11,10 +11,12 @@ function EditEmployee() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
+  const token = localStorage.getItem("token");
   useEffect(() => {
     axios
       .get("https://div.globalsoft.az/api/employees", {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -58,6 +60,7 @@ function EditEmployee() {
     axios
       .put(`https://div.globalsoft.az/api/employees/${userId}`, formData, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -85,6 +88,7 @@ function EditEmployee() {
     axios
       .delete(`https://div.globalsoft.az/api/employees/${userId}`, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },

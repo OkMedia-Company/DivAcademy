@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Groups.css";
 function AddGroup() {
   const [courses, setCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
@@ -127,7 +128,6 @@ function AddGroup() {
               </option>
             ))}
           </select>
-          <div>
             <label>Teacher ID:</label>
             <select
               value={selectedTeacherId}
@@ -139,7 +139,6 @@ function AddGroup() {
                 </option>
               ))}
             </select>
-          </div>
           <div>
             <label>Group Code:</label>
             <input

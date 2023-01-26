@@ -25,19 +25,27 @@
     padding-left: 6px;
 }
 .absence-select select {
-  padding: 7px 50px;
-  background-color: #62c98b;
   border: none;
-  color: white;
+  background: #ececec;
+  color: black;
+  outline: none;
+  width: 500px;
+  height: 40px;
+  padding: 10px; 
   border-radius: 5px;
 }
 
-.absence-select option {
+.absence-select   option {
   font-size: 17px;
-  color: white;
+  color: #737373;
+  background-color: #ececec;
   padding: 8px;
 }
 
+.absence-select    option:hover {
+  background: #ececec !important;
+  color: #646464 !important ;
+}
 
 .custom-select .indicator-separator{
   transform: rotate(90deg);

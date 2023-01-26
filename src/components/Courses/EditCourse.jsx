@@ -10,6 +10,7 @@ function EditCourse() {
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
   const token = localStorage.getItem("token");
+  console.log(token);
   useEffect(() => {
     axios
       .get(`https://div.globalsoft.az/api/courses`, {

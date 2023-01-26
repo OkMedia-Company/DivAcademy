@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./AddStudentForm.css";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const Form = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
-  
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+  let navigate = useNavigate();
 
   useEffect(() => {
     if (!imageFile) return;
@@ -23,7 +25,6 @@ const Form = () => {
 
   const handleFileChange = (event) => {
     setImageFile(event.target.files[0]);
-    
   };
   const [formData, setFormData] = useState({
     image: "",
@@ -53,7 +54,9 @@ const Form = () => {
   const token = localStorage.getItem("token");
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    if (imageFile === null) {
+      setError("Xahiş edirik şəkil seçin");
+    }
     const fileReader = new FileReader();
     fileReader.readAsDataURL(imageFile);
     fileReader.onload = () => {
@@ -70,6 +73,8 @@ const Form = () => {
         })
         .then((response) => {
           console.log(response);
+          setError("");
+          navigate("/students");
         })
         .catch((error) => {
           console.error(error);
@@ -80,7 +85,6 @@ const Form = () => {
 
   return (
     <>
-   
       <h2>Tələbə əlavə etmək </h2>
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>

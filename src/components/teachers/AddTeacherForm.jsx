@@ -45,10 +45,11 @@ function AddTeacherForm() {
     fileReader.onload = () => {
       setImageBase64(fileReader.result);
       formData.image = imageBase64;
-        
+
       axios
         .post("https://div.globalsoft.az/api/teachers", formData, {
           headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             Accept: "application/json",
             "Content-Type": "application/json",
           },
@@ -68,8 +69,8 @@ function AddTeacherForm() {
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
-            <div className="main-add-form_input row col-8">
-              <div className="main-add-form-input-names col-6">
+            <div className="main-add-form_input row">
+              <div className="main-add-form-input-names col me-5">
                 <label htmlFor="name">Ad:</label>
                 <input
                   type="text"
@@ -169,20 +170,30 @@ function AddTeacherForm() {
                   onChange={handleChange}
                 />
                 <br />
-                <div className="file-upload">
+              </div>
+              <div className="file-upload image-upload row col">
+                <img src={imageFile} alt="" className="image-preview" />
+                <Button variant="outlined" component="label">
+                  Upload photo
                   <input
+                    hidden
+                    accept="image/*"
+                    multiple
                     type="file"
                     name="image"
                     id="image"
                     onChange={handleFileChange}
+                    size="medium"
+                    className="image-upload-input"
+                    sx={{ borderRadius: "1px solid #000" }}
                   />
-                </div>
-                <br />
-                <div className="form-error">{error}</div>
-                <Button type="submit" variant="contained" color="primary">
-                  Əlavə et
                 </Button>
               </div>
+              <br />
+              <div className="form-error">{error}</div>
+              <Button type="submit" variant="contained" color="primary">
+                Əlavə et
+              </Button>
             </div>
           </div>
         </form>

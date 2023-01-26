@@ -73,34 +73,18 @@ const token = localStorage.getItem("token");
       </div>
       <div className="absence-select">
         <label htmlFor="absence-select">Qrupu seçin</label>
-        <Select
-       
-          options={options}
-          styles={{
-            control: (baseStyles, state) => ({
-              ...baseStyles,
-              width: "250px",
-              borderColor: state.isFocused ? "grey" : "grey",
-            }),
-            option: (baseStyles, state) => ({
-              ...baseStyles,
-              width: "250px",
-              background: state.isSelected ? "grey" : "white",
-              backgeound: state.isFocused ? "grey" : "white",
-            }),
-            menu: (baseStyles, state) => ({
-              ...baseStyles,
-              width: "250px",
-              borderColor: state.isFocused ? "grey" : "grey",
-            }),
-          }}
-        />
+       <select name="" id="">
+          <option value="">FE1232</option>
+          <option value="">FE1232</option>
+          <option value="">FE1232</option>
+          <option value="">FE1232</option>
+       </select>
       </div>
       <div className="section-title pt-3">
         <h2>Cari ay</h2>
       </div>
       <div className="students-content pt-3">
-        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none",background:"transparent" }}>
+        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none",background:"white",padding:1 }}>
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>
             <Table stickyHeader aria-label="sticky table" sx={{ padding: "0" }}>
               <TableHead>
@@ -108,7 +92,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="left"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 1 },
                       { width: "10px" },
                       { height: "30px" },
@@ -119,7 +103,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -129,7 +113,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -139,7 +123,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -149,7 +133,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -159,7 +143,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -169,7 +153,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -179,7 +163,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -189,7 +173,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -199,7 +183,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -209,7 +193,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -219,7 +203,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -229,7 +213,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -239,7 +223,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -249,7 +233,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -259,7 +243,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -307,7 +291,7 @@ const token = localStorage.getItem("token");
                         <TableRow key={employee.id} hover>
                           <TableCell
                             align="left"
-                            sx={[{ py: 1, px: 1 }, { border: "1px solid" }]}
+                            sx={[{ py: 1, px: 1 }, {borderBottom : "1px solid rgba(224, 224, 224, 1)"}]}
                           >
                             {employee.name} {employee.last_name}{" "}
                             {employee.father_name}
@@ -315,7 +299,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 25%)",
@@ -328,7 +312,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -341,7 +325,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
@@ -354,7 +338,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
@@ -367,7 +351,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -379,7 +363,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -391,7 +375,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -403,7 +387,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -416,7 +400,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -428,7 +412,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -440,7 +424,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -452,7 +436,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -464,7 +448,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -476,7 +460,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -488,7 +472,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -519,15 +503,15 @@ const token = localStorage.getItem("token");
         <h2>Ötən ay</h2>
       </div>
       <div className="students-content pt-3">
-        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" ,background:"transparent" }}>
+        <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" ,background:"white" ,padding:1}}>
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>
-            <Table stickyHeader aria-label="sticky table" sx={{ padding: "0" }}>
+            <Table stickyHeader aria-label="sticky table" sx={{ padding: 0 }}>
               <TableHead>
                 <TableRow>
                   <TableCell
                     align="left"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 1 },
                       { width: "10px" },
                       { height: "30px" },
@@ -538,7 +522,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -548,7 +532,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -558,7 +542,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -568,7 +552,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -578,7 +562,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -588,7 +572,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -598,7 +582,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -608,7 +592,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -618,7 +602,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -628,7 +612,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -638,7 +622,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -648,7 +632,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -658,7 +642,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -668,7 +652,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -678,7 +662,7 @@ const token = localStorage.getItem("token");
                   <TableCell
                     align="center"
                     sx={[
-                      { border: "1px solid" },
+                      {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                       { py: 0, px: 0 },
                       { width: "10px" },
                     ]}
@@ -726,7 +710,7 @@ const token = localStorage.getItem("token");
                         <TableRow key={employee.id} hover>
                           <TableCell
                             align="left"
-                            sx={[{ py: 1, px: 1 }, { border: "1px solid" }]}
+                            sx={[{ py: 1, px: 1 }, {borderBottom : "1px solid rgba(224, 224, 224, 1)"}]}
                           >
                             {employee.name} {employee.last_name}{" "}
                             {employee.father_name}
@@ -734,7 +718,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 25%)",
@@ -747,7 +731,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -760,7 +744,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
@@ -773,7 +757,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, yellow 50%)",
@@ -786,7 +770,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -798,7 +782,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -810,7 +794,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -822,7 +806,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, green 50%)",
@@ -835,7 +819,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -847,7 +831,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -859,7 +843,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -871,7 +855,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -883,7 +867,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -895,7 +879,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",
@@ -907,7 +891,7 @@ const token = localStorage.getItem("token");
                           <TableCell
                             align="center"
                             sx={[
-                              { border: "1px solid" },
+                              {borderBottom : "1px solid rgba(224, 224, 224, 1)"},
                               {
                                 background:
                                   "linear-gradient(to bottom right, transparent 70%, red 50%)",

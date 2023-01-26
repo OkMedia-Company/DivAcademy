@@ -25,7 +25,7 @@ const Sidebar = () => {
     localStorage.removeItem("token");
 
     axios
-      .get("https://div.globalsoft.az/api/logout", {
+      .post("https://div.globalsoft.az/api/logout", {
         headers: {
           Authorization: `Bearer ${userToken}`,
         },
