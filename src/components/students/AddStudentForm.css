@@ -13,7 +13,6 @@
   padding: 32px;
   display: flex;
   flex-direction: unset;
-  align-items: flex-start;
   min-width: 500px;
   margin: 0 auto;
   margin-top: -20px;
@@ -43,22 +42,24 @@
 }
 
 .main-add-form button {
-  background: #222;
-  font-weight: 800;
+  background: #16b75c;
+  font-weight: 500;
   font-size: 16px;
   line-height: 130%;
   border-radius: 16px;
   border: none;
   padding: 16px 32px;
   color: #fff;
+  width: 100%;
   margin-top: 32px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-
 .main-add-form button:hover {
-  background: rgb(125, 119, 119);
+  background: #16b75c;
+  opacity: 0.8;
 }
+ 
 .image-upload-input {
   display: none;
 }
@@ -113,7 +114,6 @@
   padding: 40px 0;
   background-color: #1d9f3a;
   display: flex;
-  height: 1168px;
   flex-direction: column;
   align-items: center;
 }

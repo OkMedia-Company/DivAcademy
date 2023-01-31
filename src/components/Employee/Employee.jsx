@@ -59,12 +59,12 @@ const Employee = () => {
   return (
     <div>
       <div className="section-title">
-        <h2>İşçilər</h2>
+        <h2>Əmakdaşlar</h2>
       </div>
       <SearchForm onSearch={handleSearch} />
 
       <NavLink to="/addemployee" className="filter-add teacher-add-link">
-        İşçi əlavə et
+        Əmakdaş əlavə et
       </NavLink>
       <div className="students-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>

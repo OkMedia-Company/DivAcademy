@@ -61,6 +61,7 @@ function AddGroup() {
             headers: {
               Authorization: `Bearer ${token}`,
               accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
             },
           }
         );
@@ -128,17 +129,17 @@ function AddGroup() {
               </option>
             ))}
           </select>
-            <label>Teacher ID:</label>
-            <select
-              value={selectedTeacherId}
-              onChange={(e) => setSelectedTeacherId(e.target.value)}
-            >
-              {teachers.map((teacher) => (
-                <option key={teacher.id} value={teacher.id}>
-                  {teacher.name} {teacher.last_name}
-                </option>
-              ))}
-            </select>
+          <label>Teacher ID:</label>
+          <select
+            value={selectedTeacherId}
+            onChange={(e) => setSelectedTeacherId(e.target.value)}
+          >
+            {teachers.map((teacher) => (
+              <option key={teacher.id} value={teacher.id}>
+                {teacher.name} {teacher.last_name}
+              </option>
+            ))}
+          </select>
           <div>
             <label>Group Code:</label>
             <input
@@ -174,7 +175,11 @@ function AddGroup() {
                 value={lesson.time}
                 onChange={(event) => handleLessonChange(event, index)}
               />
-              <button type="button" onClick={() => handleLessonRemove(index)}>
+              <button
+                type="button"
+                className="delete-button"
+                onClick={() => handleLessonRemove(index)}
+              >
                 Remove Lesson
               </button>
             </div>

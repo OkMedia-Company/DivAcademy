@@ -66,3 +66,20 @@
 input[type="date"] {
   width: 100%;
 }
+
+
+.delete-button {
+  background-color: #ff2c2e !important;
+  box-shadow: none !important;
+}
+.delete-button:hover {
+  background-color: #ff2c30d3 !important;
+}
+
+.submit-button {
+  background-color: #16b75c !important;
+  box-shadow: none !important;
+}
+.submit-button:hover {
+  background-color: #16b75c9e !important;
+}

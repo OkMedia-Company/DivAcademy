@@ -11,10 +11,12 @@ function TeacherEditPage() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
+  const token = localStorage.getItem("token");
   useEffect(() => {
     axios
       .get(`https://div.globalsoft.az/api/teachers`, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -59,6 +61,7 @@ function TeacherEditPage() {
     axios
       .put(`https://div.globalsoft.az/api/teachers/${userId}`, formData, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -66,6 +69,7 @@ function TeacherEditPage() {
       .then((response) => {
         console.log(response);
         setStatus(response.status);
+        navigate("/teachers");
       })
       .catch((error) => {
         console.error(error);
@@ -77,6 +81,7 @@ function TeacherEditPage() {
     axios
       .delete(`https://div.globalsoft.az/api/teachers/${userId}`, {
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },
@@ -84,12 +89,12 @@ function TeacherEditPage() {
       .then((response) => {
         console.log(response);
         setStatus(response.status);
+        navigate("/teachers");
       })
       .catch((error) => {
         console.error(error);
         setError(error.response.data.message);
       });
-    navigate("/teachers");
   };
   if (!formData) {
     return <h2>Loading...</h2>;
@@ -101,78 +106,103 @@ function TeacherEditPage() {
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
             <div className="main-add-form_input row col-8">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="last_name">Last Name:</label>
-              <input
-                type="text"
-                name="last_name"
-                id="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="father_name">Father Name:</label>
-              <input
-                type="text"
-                name="father_name"
-                id="father_name"
-                value={formData.father_name}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="birthday">Birthday:</label>
-              <input
-                type="date"
-                name="birthday"
-                id="birthday"
-                value={formData.birthday}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="phone">Phone:</label>
-              <input
-                type="text"
-                name="phone"
-                id="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="email">Email:</label>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="password">Password:</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <br />
-              <label htmlFor="registration_day">Registration Day:</label>
-              <input
-                type="date"
-                name="registration_day"
-                id="registration_day"
-                value={formData.registration_day}
-                onChange={handleChange}
-              />
-              <br />
+              <div className="row">
+                <div className="col-6">
+                  <label htmlFor="name">Name:</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="last_name">Last Name:</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    id="last_name"
+                    value={formData.last_name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <label htmlFor="father_name">Father Name:</label>
+                  <input
+                    type="text"
+                    name="father_name"
+                    id="father_name"
+                    value={formData.father_name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="birthday">Birthday:</label>
+                  <input
+                    type="date"
+                    name="birthday"
+                    id="birthday"
+                    value={formData.birthday}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <label htmlFor="phone">Phone:</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="email">Email:</label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <label htmlFor="password">Password:</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="registration_day">Registration Day:</label>
+                  <input
+                    type="date"
+                    name="registration_day"
+                    id="registration_day"
+                    value={formData.registration_day}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+
               <label htmlFor="current_groups">Current Groups:</label>
               <input
                 type="text"
@@ -183,27 +213,40 @@ function TeacherEditPage() {
               />
               <br />
             </div>
-            <div className="main-add-form_input row col-8">
-              <label htmlFor="image">Choose Image:</label>
-              <input
-                type="file"
-                name="image"
-                id="image"
-                onChange={handleFileChange}
-              />
+
+            <div className="main-add-form_input row image-upload row col-4">
+              <img src={imageFile} className="image-preview " />
+              <Button variant="outlined" component="label">
+                Upload photo
+                <input
+                  hidden
+                  type="file"
+                  name="image"
+                  size="medium"
+                  id="image"
+                  className="image-upload-input"
+                  sx={{ borderRadius: "1px solid #000" }}
+                  onChange={handleFileChange}
+                />
+              </Button>
               <br />
             </div>
-            <div className="main-add-form_input row col-8">
-              <Button variant="contained" color="primary" type="submit">
-                Edit
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleDelete}
-              >
-                Delete
-              </Button>
+            <div className="row">
+              <div className="col">
+                <Button variant="contained" color="primary" type="submit">
+                  Edit
+                </Button>
+              </div>
+              <div className="col">
+                <Button
+                  className="delete-button"
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </Button>
+              </div>
             </div>
           </div>
         </form>

@@ -71,96 +71,126 @@ function AddTeacherForm() {
           <div className="main-add-form-inner row">
             <div className="main-add-form_input row">
               <div className="main-add-form-input-names col me-5">
-                <label htmlFor="name">Ad:</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="last_name">Soyad:</label>
-                <input
-                  type="text"
-                  name="last_name"
-                  id="last_name"
-                  value={formData.last_name}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="father_name">Ata adı:</label>
-                <input
-                  type="text"
-                  name="father_name"
-                  id="father_name"
-                  value={formData.father_name}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="birthday">Doğum tarixi:</label>
-                <input
-                  type="date"
-                  name="birthday"
-                  id="birthday"
-                  value={formData.birthday}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="phone">Telefon:</label>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="password">Password:</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="user_type">User type:</label>
-                <input
-                  type="number"
-                  name="user_type"
-                  id="user_type"
-                  value={formData.user_type}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="status">Status:</label>
-                <input
-                  type="text"
-                  name="status"
-                  id="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="registration_day">Registration day:</label>
-                <input
-                  type="date"
-                  name="registration_day"
-                  id="registration_day"
-                  value={formData.registration_day}
-                  onChange={handleChange}
-                />
-                <br />
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="name">Ad:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="last_name">Soyad:</label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      id="last_name"
+                      value={formData.last_name}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="father_name">Ata adı:</label>
+                    <input
+                      type="text"
+                      name="father_name"
+                      id="father_name"
+                      value={formData.father_name}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="birthday">Doğum tarixi:</label>
+                    <input
+                      type="date"
+                      name="birthday"
+                      id="birthday"
+                      value={formData.birthday}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="phone">Telefon:</label>
+                    <input
+                      type="text"
+                      name="phone"
+                      id="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="email">Email:</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="user_type">User type:</label>
+                    <input
+                      type="number"
+                      name="user_type"
+                      id="user_type"
+                      value={formData.user_type}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="status">Status:</label>
+                    <input
+                      type="text"
+                      name="status"
+                      id="status"
+                      value={formData.status}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="registration_day">Registration day:</label>
+                    <input
+                      type="date"
+                      name="registration_day"
+                      id="registration_day"
+                      value={formData.registration_day}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                </div>
                 <label htmlFor="current_groups">Current groups:</label>
                 <input
                   type="text"

@@ -145,7 +145,7 @@ const Sidebar = () => {
                         isActive ? "active" : "nav-links"
                       }
                     >
-                      İşçilər
+                      Əmakdaşlar
                     </NavLink>
                   </li>
                   <li className="side-item">
