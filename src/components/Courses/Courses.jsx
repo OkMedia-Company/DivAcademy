@@ -58,10 +58,10 @@ function Courses() {
       </div>
       <SearchForm />
       <div className="courses-content pt-4">
-        <Link to="/addcourse">
-          <Button variant="contained" color="success">
+        <Link to="/addcourse" >
+          <a className="teacher-add-link">
             Kurs əlavə et
-          </Button>
+          </a>
         </Link>
       </div>
       <div className="courses-content pt-5">

@@ -5,3 +5,9 @@
 input:focus {
     outline: none;
   }
+  .nav-links {
+    transition: all 0.2s ease-in-out;
+  }
+  .nav-links:hover {
+    opacity: 0.6;
+  }

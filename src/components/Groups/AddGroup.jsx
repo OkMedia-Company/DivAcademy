@@ -118,28 +118,32 @@ function AddGroup() {
     <div className="main-add-form">
       <form onSubmit={handleSubmit}>
         <div className="main-add-form-inner row">
-          <label>Course ID:</label>
-          <select
-            value={selectedCourseId}
-            onChange={(e) => setSelectedCourseId(e.target.value)}
-          >
-            {courses.map((course) => (
-              <option key={course.id} value={course.id}>
-                {course.name}
-              </option>
-            ))}
-          </select>
-          <label>Teacher ID:</label>
-          <select
-            value={selectedTeacherId}
-            onChange={(e) => setSelectedTeacherId(e.target.value)}
-          >
-            {teachers.map((teacher) => (
-              <option key={teacher.id} value={teacher.id}>
-                {teacher.name} {teacher.last_name}
-              </option>
-            ))}
-          </select>
+          <div className="col-md-6">
+            <label>Course ID:</label>
+            <select
+              value={selectedCourseId}
+              onChange={(e) => setSelectedCourseId(e.target.value)}
+            >
+              {courses.map((course) => (
+                <option key={course.id} value={course.id}>
+                  {course.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label>Teacher ID:</label>
+            <select
+              value={selectedTeacherId}
+              onChange={(e) => setSelectedTeacherId(e.target.value)}
+            >
+              {teachers.map((teacher) => (
+                <option key={teacher.id} value={teacher.id}>
+                  {teacher.name} {teacher.last_name}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             <label>Group Code:</label>
             <input

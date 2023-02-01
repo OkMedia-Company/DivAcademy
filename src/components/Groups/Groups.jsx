@@ -51,17 +51,11 @@ function Groups() {
       <h2>Qruplar</h2>
       <SearchForm onSearch={searchForm} />
       <div className="d-flex justify-content-start pt-3">
-        <Link to="/addgroup" className="pe-3">
-          <Button variant="contained" color="success">
-            Yeni qrup əlavə et
-          </Button>
+        <Link to="/addgroup" className="me-3 teacher-add-link">
+          Yeni qrup əlavə et
         </Link>
 
-        <Link to="/addstudentstogroup">
-          <Button variant="contained" color="success">
-            Qrupa tələbə əlavə et
-          </Button>
-        </Link>
+        <Link to="/addstudentstogroup" className="teacher-add-link">Qrupa tələbə əlavə et</Link>
       </div>
       <div className="teachers-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto" }}>

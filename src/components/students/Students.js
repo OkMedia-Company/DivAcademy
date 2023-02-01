@@ -88,8 +88,8 @@ const Students = () => {
           </NavLink>
         </li>
 
-        <li className="student-add-link">
-          <NavLink to="/addstudentform" className="filter-add">
+        <li className="student-add-link teacher-add-link">
+          <NavLink to="/addstudentform" className="filter-add ">
             Tələbə əlavə et
           </NavLink>
         </li>

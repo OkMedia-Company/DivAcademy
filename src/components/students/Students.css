@@ -1,6 +1,7 @@
 .students-page .filter {
   display: flex;
   margin: 30px 0;
+  align-items: center;
 }
 
 .students-page .filter li {
@@ -82,4 +83,7 @@ input[type="date"] {
 }
 .submit-button:hover {
   background-color: #16b75c9e !important;
+}
+.teacher-add-link:hover {
+  color: #fff;
 }
