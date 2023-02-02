@@ -63,11 +63,11 @@ function Teachers() {
         <h2>Müəllimlər</h2>
       </div>
       <SearchForm onSearch={handleChange} />
-
-      <NavLink to="/addteacherform" className="filter-add teacher-add-link">
-        Müəllim əlavə et
-      </NavLink>
-
+      <div className="filter-add-main">
+        <NavLink to="/addteacherform" className="filter-add teacher-add-link">
+          Müəllim əlavə et
+        </NavLink>
+      </div>
       <div className="teachers-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
           <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>

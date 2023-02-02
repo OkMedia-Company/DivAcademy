@@ -50,12 +50,10 @@ function Groups() {
     <div>
       <h2>Qruplar</h2>
       <SearchForm onSearch={searchForm} />
-      <div className="d-flex justify-content-start pt-3">
-        <Link to="/addgroup" className="me-3 teacher-add-link">
-          Yeni qrup əlavə et
+      <div className="d-flex justify-content-end ">
+        <Link to="/addstudentstogroup" className="teacher-add-link">
+          Qrupa tələbə əlavə et
         </Link>
-
-        <Link to="/addstudentstogroup" className="teacher-add-link">Qrupa tələbə əlavə et</Link>
       </div>
       <div className="teachers-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto" }}>
@@ -81,6 +79,7 @@ function Groups() {
                   <TableCell align="left" colSpan={3}>
                     Bitmə tarixi
                   </TableCell>
+                  <TableCell align="left" colSpan={3}></TableCell>
                   <TableCell align="left" colSpan={3}>
                     Əməliyyatlar
                   </TableCell>
@@ -141,16 +140,28 @@ function Groups() {
                           <TableCell align="left" colSpan={3}>
                             {item.end_date}
                           </TableCell>
-
                           <TableCell
                             align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
+                            colSpan={4}
+                            sx={{ py: 1, px: 0 }}
                           >
                             <div className="table-btn-edit">
                               <button>
                                 <Link to={`/groups/${item.id}`}>
                                   <CiEdit /> Edit
+                                </Link>
+                              </button>
+                            </div>
+                          </TableCell>
+                          <TableCell
+                            align="left"
+                            colSpan={4}
+                            sx={{ py: 1, px: 0 }}
+                          >
+                            <div className="table-btn-edit">
+                              <button>
+                                <Link to={`/groups/${item.id}/addstudent`}>
+                                  Qrupa tələbə əlavə et
                                 </Link>
                               </button>
                             </div>

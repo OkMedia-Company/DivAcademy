@@ -127,14 +127,14 @@ function EditForm() {
 
   return (
     <>
-      <h2>Edit Student</h2>
+      <h2>Tələbə düzəlişi</h2>
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
             <div className=" main-add-form_input col-8">
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="name">Name:</label>
+                  <label htmlFor="name">Ad:</label>
                   <input
                     type="text"
                     name="name"
@@ -145,7 +145,7 @@ function EditForm() {
                   <br />
                 </div>
                 <div className="col-6">
-                  <label htmlFor="last_name">Last Name:</label>
+                  <label htmlFor="last_name">Soyad:</label>
                   <input
                     type="text"
                     name="last_name"
@@ -158,7 +158,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="father_name">Father Name:</label>
+                  <label htmlFor="father_name">Ata adı:</label>
                   <input
                     type="text"
                     name="father_name"
@@ -169,7 +169,7 @@ function EditForm() {
                   <br />
                 </div>
                 <div className="col-6">
-                  <label htmlFor="phone">Phone:</label>
+                  <label htmlFor="phone">Telefon:</label>
                   <input
                     type="text"
                     name="phone"
@@ -182,7 +182,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="email">Email:</label>
+                  <label htmlFor="email">E-mail:</label>
                   <input
                     type="text"
                     name="email"
@@ -194,7 +194,7 @@ function EditForm() {
                   <br />
                 </div>
                 <div className="col-6">
-                  <label htmlFor="password">Password </label>
+                  <label htmlFor="password">Parol </label>
                   <input
                     type="text"
                     name="password"
@@ -207,7 +207,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="birthday">Birthday:</label>
+                  <label htmlFor="birthday">Doğum tarixi:</label>
                   <input
                     type="date"
                     name="birthday"
@@ -218,7 +218,7 @@ function EditForm() {
                   <br />
                 </div>
                 <div className="col-6">
-                  <label htmlFor="group">Group:</label>
+                  <label htmlFor="group">Qrup:</label>
                   <input
                     type="text"
                     name="group"
@@ -231,7 +231,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="course">Course:</label>
+                  <label htmlFor="course">Kurs:</label>
                   <input
                     type="text"
                     name="course"
@@ -255,7 +255,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="start_date">Registiration Day:</label>
+                  <label htmlFor="start_date">Qeydiyyat tarixi:</label>
                   <input
                     type="date"
                     name="start_date"
@@ -266,7 +266,7 @@ function EditForm() {
                   <br />
                 </div>
                 <div className="col-6">
-                  <label htmlFor="end_date">Reference:</label>
+                  <label htmlFor="end_date">Referans:</label>
                   <input
                     type="text"
                     name="end_date"
@@ -279,7 +279,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="end_date">Diplom series number:</label>
+                  <label htmlFor="end_date">Diplom seriya nömrəsi:</label>
                   <input
                     type="text"
                     name="end_date"
@@ -290,7 +290,7 @@ function EditForm() {
                   <br />
                 </div>
                 <div className="col-6">
-                  <label htmlFor="university">University:</label>
+                  <label htmlFor="university">Universiteti:</label>
                   <input
                     type="text"
                     name="university"
@@ -303,7 +303,7 @@ function EditForm() {
               </div>
               <div className="row">
                 <div className="col-6">
-                  <label htmlFor="Workplace">Workplace:</label>
+                  <label htmlFor="Workplace">İş yeri:</label>
                   <input
                     type="text"
                     name="Workplace"
@@ -315,7 +315,7 @@ function EditForm() {
                 </div>
 
                 <div className="col-6">
-                  <label htmlFor="payment">University add score:</label>
+                  <label htmlFor="payment">Universitet giriş balı:</label>
                   <input
                     type="number"
                     name="payment"
@@ -325,31 +325,32 @@ function EditForm() {
                   />
                   <br />
                 </div>
-                <div className="row">
-                  <div className="col-6">
-                    <label htmlFor="payment_date">Next Payment date:</label>
-                    <input
-                      type="date"
-                      name="payment_date"
-                      id="payment_date"
-                      value={formData.next_payment_date}
-                      onChange={handleChange}
-                    />
-                    <br />
-                  </div>
-                  <div className="col-6">
-                    <label htmlFor="payment_date">Lesson table:</label>
-                    <input
-                      type="text"
-                      name="payment_date"
-                      id="payment_date"
-                      value={formData.lesson_table}
-                      onChange={handleChange}
-                    />
-                    <br />
-                  </div>
+              </div>
+              <div className="row">
+                <div className="col-6">
+                  <label htmlFor="payment_date">Növbəti ödəniş tarixi:</label>
+                  <input
+                    type="date"
+                    name="payment_date"
+                    id="payment_date"
+                    value={formData.next_payment_date}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="payment_date">Dərs cədvəli:</label>
+                  <input
+                    type="text"
+                    name="payment_date"
+                    id="payment_date"
+                    value={formData.lesson_table}
+                    onChange={handleChange}
+                  />
+                  <br />
                 </div>
               </div>
+
               <label htmlFor="payment_date">Is diploma:</label>
               <input
                 type="text"
@@ -363,7 +364,7 @@ function EditForm() {
             <div className="image-upload row col">
               <img ref={imageRef} src={imageBase64} className="image-preview" />
               <Button variant="outlined" component="label">
-                Upload photo
+               Şəkil yüklə
                 <input
                   hidden
                   type="file"
@@ -381,7 +382,7 @@ function EditForm() {
             <div className="row">
               <div className="col-6">
                 <button type="submit" className="submit-button">
-                  Submit
+                  Təsdiq et
                 </button>
               </div>
               <div className="col-6">
@@ -391,7 +392,7 @@ function EditForm() {
                   color="secondary"
                   onClick={handleDelete}
                 >
-                  Delete
+                  Sil
                 </Button>
               </div>
             </div>

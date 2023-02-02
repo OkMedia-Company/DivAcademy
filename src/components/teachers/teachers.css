@@ -16,3 +16,7 @@
     display: inline-block;
     border-radius: 3px;
 }
+.filter-add-main {
+    display: flex;
+    justify-content: flex-end;
+}

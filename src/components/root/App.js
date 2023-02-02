@@ -27,7 +27,7 @@ import AddCourse from "../Courses/AddCourse";
 import EditCourse from "../Courses/EditCourse";
 import AddGroup from "../Groups/AddGroup";
 import EditGroup from "../Groups/EditGroup";
-import AddToStudentGroup from "../AddStudentToGroup/AddToStudentGroup";
+import AddToStudentGroup from "../Groups/AddToStudentGroup";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -48,6 +48,10 @@ function App() {
                 <Route path="employee/:userId" element={<EditEmployee />} />
                 <Route path="courses/:userId" element={<EditCourse />} />
                 <Route path="groups/:groupId" element={<EditGroup />} />
+                <Route
+                path="groups/:groupId/addstudent"
+                element={<AddToStudentGroup />}
+              />
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="graduates" element={<Graduates />} />
                 <Route path="birthday" element={<Birthday />} />
@@ -59,10 +63,7 @@ function App() {
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />
                 <Route path="addemployee" element={<AddEmployee />} />
-                <Route
-                  path="addstudentstogroup"
-                  element={<AddToStudentGroup />}
-                />
+              
                 <Route path="absence" element={<Absence />} />
                 <Route path="*" element={<NotFound />} />
               </Route>

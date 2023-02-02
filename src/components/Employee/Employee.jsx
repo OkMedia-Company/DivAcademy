@@ -62,10 +62,11 @@ const Employee = () => {
         <h2>Əmakdaşlar</h2>
       </div>
       <SearchForm onSearch={handleSearch} />
-
-      <NavLink to="/addemployee" className="filter-add teacher-add-link">
-        Əmakdaş əlavə et
-      </NavLink>
+      <div className="filter-add-main">
+        <NavLink to="/addemployee" className="filter-add teacher-add-link">
+          Əmakdaş əlavə et
+        </NavLink>
+      </div>
       <div className="students-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>

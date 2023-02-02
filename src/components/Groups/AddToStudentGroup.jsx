@@ -78,20 +78,21 @@ function AddStudentsToGroup() {
     setError("");
   }
 
- if (students == "" || groups == "") {
-    return  <div className="pt-5">
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }}  animation="wave" />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-      <Skeleton variant="text" sx={{ fontSize: '1rem' }} animation="wave"  />
-   
-    </div>
+  if (students == "" || groups == "") {
+    return (
+      <div className="pt-5">
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+        <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
+      </div>
+    );
   }
   return (
     <div className="main-add-form ">

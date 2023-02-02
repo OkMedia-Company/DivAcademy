@@ -212,25 +212,31 @@ const Students = () => {
                           hover
                           sx={{ whiteSpace: "nowrap" }}
                         >
-                          <TableCell
-                            stickyHeader
-                            aria-label="sticky table"
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <Avatar
-                              src={`https://div.globalsoft.az/${student.image}`}
-                              alt={student.name}
-                              sx={{ width: 30, height: 30 }}
-                            />
-                          </TableCell>
+                          <Link to={`/students/${student.id}`}>
+                            <TableCell
+                              stickyHeader
+                              aria-label="sticky table"
+                              sx={{ py: 1, px: 2 }}
+                            >
+                              <Avatar
+                                src={`https://div.globalsoft.az/${student.image}`}
+                                alt={student.name}
+                                sx={{ width: 30, height: 30 }}
+                              />
+                            </TableCell>
+                          </Link>
+
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {student.name} {student.last_name}{" "}
-                            {student.father_name}
+                            <Link to={`/students/${student.id}`}>
+                              {student.name} {student.last_name}{" "}
+                              {student.father_name}
+                            </Link>
                           </TableCell>
+
                           <TableCell
                             align="left"
                             colSpan={3}

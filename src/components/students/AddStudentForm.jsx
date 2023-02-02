@@ -90,221 +90,252 @@ const Form = () => {
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
             <div className="main-add-form_input row col-8">
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="name">Name:</label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="last_name">Last Name:</label>
-                <input
-                  type="text"
-                  name="last_name"
-                  id="last_name"
-                  value={formData.last_name}
-                  onChange={handleChange}
-                />
-                <br />
+              <div className="row">
+                <div className=" col-6">
+                  <label htmlFor="name">Ad:</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className="col-6">
+                  <label htmlFor="last_name">Soyad:</label>
+                  <input
+                    type="text"
+                    name="last_name"
+                    id="last_name"
+                    value={formData.last_name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
               </div>
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="father_name">Father Name:</label>
-                <input
-                  type="text"
-                  name="father_name"
-                  id="father_name"
-                  value={formData.father_name}
-                  onChange={handleChange}
-                />
-                <br />
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="father_name">Ata adı:</label>
+                  <input
+                    type="text"
+                    name="father_name"
+                    id="father_name"
+                    value={formData.father_name}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="phone">Mobil nömrə:</label>
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="email">E-mail:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="password">Parol: </label>
+                  <input
+                    type="text"
+                    name="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="user_type">İstifadəçi tipi:</label>
+                  <input
+                    type="number"
+                    name="user_type"
+                    id="user_type"
+                    value={formData.user_type}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="status">Status:</label>
+                  <input
+                    type="text"
+                    name="status"
+                    id="status"
+                    value={formData.status}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="birthday"> Doğum tarixi </label>
+                  <input
+                    type="date"
+                    name="birthday"
+                    id="birthday"
+                    value={formData.birthday}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="university">Universiteti:</label>
+                  <input
+                    type="text"
+                    name="university"
+                    id="university"
+                    value={formData.university}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="university_add_score">
+                    Universitet giriş balı:
+                  </label>
+                  <input
+                    type="text"
+                    name="university_add_score"
+                    id="university_add_score"
+                    value={formData.university_add_score}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="registration_day">Qeydiyyat tarixi:</label>
+                  <input
+                    type="date"
+                    name="registration_day"
+                    id="registration_day"
+                    value={formData.registration_day}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="reference">Referans:</label>
+                  <input
+                    type="text"
+                    name="reference"
+                    id="reference"
+                    value={formData.reference}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="course">Kurs:</label>
+                  <input
+                    type="text"
+                    name="course"
+                    id="course"
+                    value={formData.course}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="group">Qrup:</label>
+                  <input
+                    type="text"
+                    name="group"
+                    id="group"
+                    value={formData.group}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="lesson_table">Dərs cədvəli:</label>
+                  <input
+                    type="text"
+                    name="lesson_table"
+                    id="lesson_table"
+                    value={formData.lesson_table}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="student_status">Tələbə statusu:</label>
+                  <input
+                    type="text"
+                    name="student_status"
+                    id="student_status"
+                    value={formData.student_status}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="workplace">İş yeri:</label>
+                  <input
+                    type="text"
+                    name="workplace"
+                    id="workplace"
+                    value={formData.workplace}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="is_diploma">Is Diploma:</label>
+                  <input
+                    type="text"
+                    name="is_diploma"
+                    id="is_diploma"
+                    value={formData.is_diploma}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="diploma_sn">Diplom seriya nömrəsi:</label>
 
-                <label htmlFor="phone">Phone:</label>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-                <br />
+                  <input
+                    type="text"
+                    name="diploma_sn"
+                    id="diploma_sn"
+                    value={formData.diploma_sn}
+                    onChange={handleChange}
+                  />
+                  <br />
+                </div>
               </div>
 
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="password">Password: </label>
-                <input
-                  type="text"
-                  name="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="user_type">User Type:</label>
-                <input
-                  type="number"
-                  name="user_type"
-                  id="user_type"
-                  value={formData.user_type}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="status">Status:</label>
-                <input
-                  type="text"
-                  name="status"
-                  id="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="birthday"> Birthday </label>
-                <input
-                  type="date"
-                  name="birthday"
-                  id="birthday"
-                  value={formData.birthday}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="university">University:</label>
-                <input
-                  type="text"
-                  name="university"
-                  id="university"
-                  value={formData.university}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="university_add_score">
-                  University Add Score:
-                </label>
-                <input
-                  type="text"
-                  name="university_add_score"
-                  id="university_add_score"
-                  value={formData.university_add_score}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="registration_day">Registration Day:</label>
-                <input
-                  type="date"
-                  name="registration_day"
-                  id="registration_day"
-                  value={formData.registration_day}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="reference">Reference:</label>
-                <input
-                  type="text"
-                  name="reference"
-                  id="reference"
-                  value={formData.reference}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="course">Course:</label>
-                <input
-                  type="text"
-                  name="course"
-                  id="course"
-                  value={formData.course}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="group">Group:</label>
-                <input
-                  type="text"
-                  name="group"
-                  id="group"
-                  value={formData.group}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="lesson_table">Lesson Table:</label>
-                <input
-                  type="text"
-                  name="lesson_table"
-                  id="lesson_table"
-                  value={formData.lesson_table}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="student_status">Student Status:</label>
-                <input
-                  type="text"
-                  name="student_status"
-                  id="student_status"
-                  value={formData.student_status}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="workplace">Workplace:</label>
-                <input
-                  type="text"
-                  name="workplace"
-                  id="workplace"
-                  value={formData.workplace}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names col-6">
-                <label htmlFor="is_diploma">Is Diploma:</label>
-                <input
-                  type="text"
-                  name="is_diploma"
-                  id="is_diploma"
-                  value={formData.is_diploma}
-                  onChange={handleChange}
-                />
-                <br />
-                <label htmlFor="diploma_sn">Diploma Sn:</label>
-
-                <input
-                  type="text"
-                  name="diploma_sn"
-                  id="diploma_sn"
-                  value={formData.diploma_sn}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-
-              <div className="main-add-form-input-names row">
-                <div className="main-add-form-input-names col-6">
-                  <label htmlFor="diploma_number">Graduation day:</label>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="diploma_number">Məzun günü:</label>
                   <input
                     type="date"
                     name="graduation_day"
@@ -314,8 +345,11 @@ const Form = () => {
                   />
                   <br />
                 </div>
-                <div className="main-add-form-input-names col-6">
-                  <label htmlFor="next_payment_date"> Next payment date</label>
+                <div className=" col-6">
+                  <label htmlFor="next_payment_date">
+                    {" "}
+                    Növbəti ödəniş tarixi
+                  </label>
                   <input
                     type="date"
                     name="next_payment_date"
@@ -330,7 +364,7 @@ const Form = () => {
             <div className="image-upload col-4 ">
               <img src={imageBase64} className="image-preview" />
               <Button variant="outlined" component="label">
-                Upload photo
+                Şəkil yüklə
                 <input
                   hidden
                   accept="image/*"

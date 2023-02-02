@@ -8,12 +8,17 @@
   margin-right: 28px;
 }
 .students-page .filter li a {
-  color: #919191;
+  color: #b4b4b4;
   font-size: 14px;
   padding: 5px 0;
+  transition: all 0.3s ease-in-out;
 }
 .students-page .filter li a.active {
-  border-bottom: 2px solid #d5d5d5;
+  border-bottom: 2px solid #454545;
+  color: #454545;
+}
+.students-page .filter li a:hover {
+  color: #454545;
 }
 .css-y8ay40-MuiTableCell-root,
 .css-1ex1afd-MuiTableCell-root {

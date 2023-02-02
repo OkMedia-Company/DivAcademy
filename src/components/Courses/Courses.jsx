@@ -58,11 +58,11 @@ function Courses() {
       </div>
       <SearchForm />
       <div className="courses-content pt-4">
-        <Link to="/addcourse" >
-          <a className="teacher-add-link">
-            Kurs əlavə et
-          </a>
-        </Link>
+        <div className="filter-add-main">
+          <Link to="/addcourse">
+            <a className="teacher-add-link">Kurs əlavə et</a>
+          </Link>
+        </div>
       </div>
       <div className="courses-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
