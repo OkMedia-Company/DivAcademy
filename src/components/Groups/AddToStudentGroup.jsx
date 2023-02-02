@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
+import { useParams } from "react-router-dom";
 function AddStudentsToGroup() {
   const [students, setStudents] = useState([]);
   const [selectedStudentIds, setSelectedStudentIds] = useState("");
@@ -10,7 +11,7 @@ function AddStudentsToGroup() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   const token = localStorage.getItem("token");
-
+  const groupId = useParams();
   useEffect(() => {
     async function fetchStudents() {
       try {
@@ -40,14 +41,18 @@ function AddStudentsToGroup() {
             },
           }
         );
-        setGroups(response.data.groups);
+      
+        const groups = response?.data.groups.filter(
+          (group) => group.id == groupId.groupId
+        );
+        setGroups(groups);
       } catch (error) {
         console.error(error);
       }
     }
     fetchGroups();
   }, []);
-
+ 
   const handleStudentChange = (event) => {
     setSelectedStudentIds(event.target.value);
   };
@@ -77,6 +82,7 @@ function AddStudentsToGroup() {
   if (status == "200") {
     setError("");
   }
+ 
 
   if (students == "" || groups == "") {
     return (
@@ -102,8 +108,8 @@ function AddStudentsToGroup() {
           value={selectedGroupId}
           onChange={(e) => setSelectedGroupId(e.target.value)}
         >
-          {groups.map((group) => (
-            <option key={group.id} value={group.id}>
+          {groups?.map((group) => (
+            <option key={group.id} value={group.id} disabled={true}>
               {group.group_code}
             </option>
           ))}
@@ -111,7 +117,7 @@ function AddStudentsToGroup() {
         <br />
         <label>Select Students:</label>
         <select onChange={handleStudentChange}>
-          {students.map((student) => (
+          {students?.map((student) => (
             <option key={student.id} value={student.id}>
               {student.name} {student.last_name}
             </option>
