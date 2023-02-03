@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Skeleton } from "@mui/material";
+import { Alert, Button, Skeleton } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRef } from "react";
 function EditForm() {
@@ -9,7 +9,9 @@ function EditForm() {
   const [imageFile, setImageFile] = useState("");
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
+  const [errorStatus, setErrorStatus] = useState("");
   const imageRef = useRef(null);
+
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -46,25 +48,7 @@ function EditForm() {
     fileReader.readAsDataURL(file);
   }
 
-  axios
-    .get("https://div.globalsoft.az/uploads/user_images/63cbd18893e38.jpeg", {
-      responseType: "blob",
-      Accept: "image/jpeg",
-      "Content-Type": "image/jpeg",
-      Authorization: `Bearer ${token}`,
-      "Access-Control-Allow-Origin": "*",
-    })
-    .then((response) => response.blob())
-    .then((blob) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64data = reader.result;
-        console.log(base64data);
-        // do something with base64data
-      };
-      reader.readAsDataURL(blob);
-    });
-
+  
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -78,16 +62,35 @@ function EditForm() {
         },
       })
       .then((response) => {
-        console.log(response);
         setStatus(response.status);
         navigate("/students");
       })
       .catch((error) => {
         console.error(error);
         setError(error.response.data.message);
+        setErrorStatus(error.response.status);
       });
   };
-
+  const handleDelete = (event) => {
+    event.preventDefault();
+    axios
+      .delete(`https://div.globalsoft.az/api/students/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setStatus(response.status);
+        navigate("/students");
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.response.data.message);
+        setErrorStatus(error.response.status);
+      });
+  };
   if (!formData?.id) {
     return (
       <div className="pt-5">
@@ -104,27 +107,6 @@ function EditForm() {
       </div>
     );
   }
-  const handleDelete = (event) => {
-    event.preventDefault();
-    axios
-      .delete(`https://div.globalsoft.az/api/students/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setStatus(response.status);
-        navigate("/students");
-      })
-      .catch((error) => {
-        console.error(error);
-        setError(error.response.data.message);
-      });
-  };
-
   return (
     <>
       <h2>Tələbə düzəlişi</h2>
@@ -364,7 +346,7 @@ function EditForm() {
             <div className="image-upload row col">
               <img ref={imageRef} src={imageBase64} className="image-preview" />
               <Button variant="outlined" component="label">
-               Şəkil yüklə
+                Şəkil yüklə
                 <input
                   hidden
                   type="file"
@@ -378,7 +360,10 @@ function EditForm() {
               </Button>
               <br />
             </div>
-            <p>{error}</p>
+            <Alert severity="error" className="mt-2">
+              {" "}
+              {error} {errorStatus}
+            </Alert>
             <div className="row">
               <div className="col-6">
                 <button type="submit" className="submit-button">
