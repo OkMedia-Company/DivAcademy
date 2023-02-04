@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Alert, Button, Skeleton } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import { useRef } from "react";
 function EditForm() {
   const { userId } = useParams();
@@ -11,7 +16,14 @@ function EditForm() {
   const [error, setError] = useState("");
   const [errorStatus, setErrorStatus] = useState("");
   const imageRef = useRef(null);
+  const [open, setOpen] = useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const [status, setStatus] = useState("");
   let navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -48,7 +60,6 @@ function EditForm() {
     fileReader.readAsDataURL(file);
   }
 
-  
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -73,6 +84,8 @@ function EditForm() {
   };
   const handleDelete = (event) => {
     event.preventDefault();
+    setOpen(false);
+
     axios
       .delete(`https://div.globalsoft.az/api/students/${userId}`, {
         headers: {
@@ -361,7 +374,7 @@ function EditForm() {
               <br />
             </div>
             <Alert severity="error" className="mt-2">
-              {" "}
+          
               {error} {errorStatus}
             </Alert>
             <div className="row">
@@ -375,10 +388,31 @@ function EditForm() {
                   className="delete-button"
                   variant="contained"
                   color="secondary"
-                  onClick={handleDelete}
+                  onClick={handleClickOpen}
                 >
                   Sil
                 </Button>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"Tələbə məlumatları silinsin ?"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      Əminsiz ?
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose}>Ləğv et</Button>
+                    <Button onClick={handleDelete} autoFocus>
+                      Razı
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </div>
             </div>
           </div>

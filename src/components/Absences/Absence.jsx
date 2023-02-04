@@ -83,7 +83,7 @@ const Absence = () => {
               outline: "none",
               boxShadow: "none",
               color: "black",
-              
+          
               "&:hover": {
                 borderColor: "none",
                 outline: "none",

@@ -72,9 +72,6 @@ function EditEmployee() {
         setError(error.response.data.message);
       });
   };
-  if (!formData?.id) {
-    return <h2>Loading...</h2>;
-  }
   const handleDelete = (event) => {
     event.preventDefault();
     axios
@@ -95,6 +92,10 @@ function EditEmployee() {
         setError(error.response.data.message);
       });
   };
+  if (!formData?.id) {
+    return <h2>Loading...</h2>;
+  }
+ 
   return (
     <>
       <h2>Əmakdaş düzəlişi</h2>

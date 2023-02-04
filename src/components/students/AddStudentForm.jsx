@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddStudentForm.css";
 import axios from "axios";
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const Form = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -380,7 +380,7 @@ const Form = () => {
               </Button>
               <br />
             </div>
-            <span>{error}</span>
+            <Alert severity="error" className="mt-2">{error}</Alert>
             <button type="submit">Əlavə et</button>
           </div>
         </form>
