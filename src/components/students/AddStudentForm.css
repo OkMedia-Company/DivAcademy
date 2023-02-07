@@ -6,6 +6,17 @@
   margin: 40px 0;
 }
 
+.salam {
+  background-color: red;
+  width:20px;
+  height: 20px;
+}
+.sagol {
+  background-color: green;
+  width:20px;
+  height: 20px;
+}
+
 .main-add-form-inner {
   background: #fff;
   border-radius: 3px;
@@ -82,6 +93,15 @@
   margin-bottom: 8px;
   padding-left: 6px;
 }
+ 
+ .delete-image-button label {
+    border-color: red !important;
+ }
+ .delete-image-button label:hover {
+    background-color: red !important;
+    color: #fff !important;
+    border-color: red !important;
+ }
 .image-preview {
   width: 170px;
   height: 170px;
@@ -101,7 +121,7 @@
 }
 .image-upload label:hover {
   color: #fff !important;
-  border: 1px solid #fff !important;
+  border: 1px solid #fff ;
 }
 
 .main-add-form-inner {

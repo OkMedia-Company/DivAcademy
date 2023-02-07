@@ -58,7 +58,15 @@ function EditForm() {
     };
 
     fileReader.readAsDataURL(file);
+    console.log(imageBase64);
   }
+  const handleFileDelete = (event) => {
+    event.preventDefault();
+    console.log(imageBase64);
+    setImageFile("");
+    setImageBase64("");
+    imageRef.current.value = "";
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -82,6 +90,7 @@ function EditForm() {
         setErrorStatus(error.response.status);
       });
   };
+
   const handleDelete = (event) => {
     event.preventDefault();
     setOpen(false);
@@ -358,23 +367,37 @@ function EditForm() {
             </div>
             <div className="image-upload row col">
               <img ref={imageRef} src={imageBase64} className="image-preview" />
-              <Button variant="outlined" component="label">
-                Şəkil yüklə
-                <input
-                  hidden
-                  type="file"
-                  name="image"
-                  size="medium"
-                  id="image"
-                  className="image-upload-input"
-                  sx={{ borderRadius: "1px solid #000" }}
-                  onChange={handleFileChange}
-                />
-              </Button>
+              <div className="row ms-4">
+                <div className="col-5">
+                  <Button variant="outlined" component="label">
+                    Şəkil yüklə
+                    <input
+                      hidden
+                      type="file"
+                      name="image"
+                      size="medium"
+                      id="image"
+                      className="image-upload-input"
+                      sx={{ borderRadius: "1px solid #000" }}
+                      onChange={handleFileChange}
+                    />
+                  </Button>
+                
+                </div>
+                <div className="col-5 delete-image-button">
+                  <Button
+                    variant="outlined"
+                    component="label"
+                    color="error"
+                    onClick={handleFileDelete}
+                  >
+                    Şəkli sil
+                  </Button>
+                </div>
+              </div>
               <br />
             </div>
             <Alert severity="error" className="mt-2">
-          
               {error} {errorStatus}
             </Alert>
             <div className="row">
