@@ -12,6 +12,7 @@ import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import { Button, Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function Courses() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -50,7 +51,7 @@ function Courses() {
     return course.monthly_price * months;
   }
 
-  console.log(courses);
+  useDocumentTitle("Kurslar");
   return (
     <div>
       <div className="section-title">

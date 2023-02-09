@@ -14,6 +14,7 @@ import axios from "axios";
 
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function Groups() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -46,6 +47,7 @@ function Groups() {
         console.error(error);
       });
   }, []);
+  useDocumentTitle("Qruplar")
   return (
     <div>
       <h2>Qruplar</h2>

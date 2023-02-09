@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Alert, Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function EditEmployee() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -92,10 +93,10 @@ function EditEmployee() {
         setError(error.response.data.message);
       });
   };
+  useDocumentTitle(`Əməkdaş düzəlişi - ${formData.name} ${formData.last_name}`)
   if (!formData?.id) {
     return <h2>Loading...</h2>;
   }
- 
   return (
     <>
       <h2>Əmakdaş düzəlişi</h2>

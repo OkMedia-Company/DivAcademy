@@ -12,6 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
+import useDocumentTitle from "../tools/useDocumentTitle";
 
 function Birthdays() {
   const [page, setPage] = useState(0);
@@ -59,7 +60,7 @@ function Birthdays() {
     }
     fetchData();
   }, []);
-
+  useDocumentTitle("Ad günləri");
   return (
     <>
       <div>

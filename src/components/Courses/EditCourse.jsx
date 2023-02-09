@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 
 function EditCourse() {
   const { userId } = useParams();
@@ -105,6 +106,7 @@ function EditCourse() {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+  useDocumentTitle(`Kursu editlə -  ${formData.name}`)
   if (!formData) {
     return <h2>Loading...</h2>;
   }

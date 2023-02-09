@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import useDocumentTitle from "../tools/useDocumentTitle";
 
 function AddEmployee() {
   const [formData, setFormData] = useState({
@@ -62,6 +63,7 @@ function AddEmployee() {
         setError(error.response.data.message);
       });
   };
+  useDocumentTitle("Əməkdaş əlavə et")
   return (
     <>
       <h2>Əmakdaş əlavə et</h2>

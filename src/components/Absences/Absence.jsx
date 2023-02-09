@@ -15,6 +15,7 @@ import { Skeleton } from "@mui/material";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./Absence.css";
+import useDocumentTitle from "../tools/useDocumentTitle";
 const Absence = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -51,27 +52,20 @@ const Absence = () => {
         console.log(error);
       });
   }, []);
-  const handleSearch = (searchQuery) => {
-    const filteredStudents = students.filter((student) =>
-      student.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setStudents(filteredStudents);
-  };
+ 
 
   const options = [
     { value: "1", label: "FD3F2321" },
     { value: "2", label: "FE23A232" },
     { value: "3", label: "BE032223" },
   ];
-
+  useDocumentTitle("Davamiyyət")
   return (
     <div>
       <div className="section-title">
-        <h2>Dəvamiyyət</h2>
+        <h2>Davamiyyət</h2>
       </div>
-      <div className="absence-select">
-        <SearchForm onSearch={handleSearch} />
-      </div>
+      
       <div className="absence-select">
         <label htmlFor="absence-select">Qrupu seçin</label>
         <Select
@@ -1045,7 +1039,7 @@ export default Absence;
 //   return (
 //     <div>
 //       <div className="section-title">
-//         <h2>Dəvamiyyət</h2>
+//         <h2>Davamiyyət</h2>
 //       </div>
 //       <div className="absence-select">
 //         <SearchForm onSearch={handleSearch} />

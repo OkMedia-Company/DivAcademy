@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function AddTeacherForm() {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -63,6 +64,7 @@ function AddTeacherForm() {
         });
     };
   };
+  useDocumentTitle("Müəllim əlavə etmək")
   return (
     <>
       <h2>Müəllim əlavə etmək</h2>

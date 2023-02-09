@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
+import useDocumentTitle from "../tools/useDocumentTitle";
 
 function AddCourse() {
   const [status, setStatus] = useState("");
@@ -38,8 +39,7 @@ function AddCourse() {
         setError(error.response.data.message);
       });
   };
-  console.log(status);
-  console.log(formData);
+   useDocumentTitle("Kurs əlavə et")
   return (
     <>
       <h2>Add Course</h2>

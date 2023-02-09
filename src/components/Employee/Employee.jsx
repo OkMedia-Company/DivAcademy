@@ -13,6 +13,7 @@ import { CiEdit } from "react-icons/ci";
 import { Skeleton } from "@mui/material";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 const Employee = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -55,7 +56,7 @@ const Employee = () => {
     );
     setStudents(filteredStudents);
   };
-
+  useDocumentTitle("Əmakdaşlar")
   return (
     <div>
       <div className="section-title">

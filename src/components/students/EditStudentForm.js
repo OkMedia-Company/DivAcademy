@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useRef } from "react";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function EditForm() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -113,6 +114,9 @@ function EditForm() {
         setErrorStatus(error.response.status);
       });
   };
+  useDocumentTitle(
+    `Tələbə düzəlişi - ${formData?.name} ${formData?.last_name}`
+  );
   if (!formData?.id) {
     return (
       <div className="pt-5">
@@ -382,7 +386,6 @@ function EditForm() {
                       onChange={handleFileChange}
                     />
                   </Button>
-                
                 </div>
                 <div className="col-5 delete-image-button">
                   <Button

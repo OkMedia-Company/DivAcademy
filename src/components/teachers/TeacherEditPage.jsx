@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 
 function TeacherEditPage() {
   const { userId } = useParams();
@@ -96,12 +97,13 @@ function TeacherEditPage() {
         setError(error.response.data.message);
       });
   };
+  useDocumentTitle("Müəllim düzəliş et")
   if (!formData) {
     return <h2>Loading...</h2>;
   }
   return (
     <>
-      <h2>Edit Teacher</h2>
+      <h2>Müəllim düzəliş et</h2>
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">

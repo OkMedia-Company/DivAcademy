@@ -130,6 +130,16 @@ const Sidebar = () => {
                   </li>
                   <li className="side-item">
                     <NavLink
+                      to="mentors"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "nav-links"
+                      }
+                    >
+                      Mentorlar
+                    </NavLink>
+                  </li>
+                  <li className="side-item">
+                    <NavLink
                       to="graduates"
                       className={({ isActive }) =>
                         isActive ? "active" : "nav-links"
@@ -198,6 +208,17 @@ const Sidebar = () => {
                       }
                     >
                       Dəvamiyyət
+                    </NavLink>
+                  </li>
+
+                  <li className="side-item">
+                    <NavLink
+                      to="classrooms"
+                      className={({ isActive }) =>
+                        isActive ? "active" : "nav-links"
+                      }
+                    >
+                      Dərs otaqları
                     </NavLink>
                   </li>
                 </ul>

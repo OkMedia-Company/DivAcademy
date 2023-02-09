@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/Contexts";
 import Logo from "../../imgs/div-logo.png";
 import axios from "axios";
+import useDocumentTitle from "../tools/useDocumentTitle";
 const schema = Yup.object().shape({
   email: Yup.string()
     .required("Email daxil edilməlidir")
@@ -44,7 +45,7 @@ function Login() {
     }
   };
  
-
+  useDocumentTitle("Login")
   return (
     <div className="login-main">
       <div className="logo-top">

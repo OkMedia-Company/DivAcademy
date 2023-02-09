@@ -13,6 +13,11 @@
   padding: 5px 0;
   transition: all 0.3s ease-in-out;
 }
+.table-icon-diplom{
+  color: #2e7d32;
+  font-size: 20px;
+}
+
 .students-page .filter li a.active {
   border-bottom: 2px solid #454545;
   color: #454545;

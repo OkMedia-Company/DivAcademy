@@ -6,16 +6,9 @@
   margin: 40px 0;
 }
 
-.salam {
-  background-color: red;
-  width:20px;
-  height: 20px;
-}
-.sagol {
-  background-color: green;
-  width:20px;
-  height: 20px;
-}
+ .select__menu  div{
+  width: 100% !important;
+ }
 
 .main-add-form-inner {
   background: #fff;

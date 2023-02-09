@@ -1,8 +1,9 @@
 import React from 'react'
 import './Dashboard.css'
+import useDocumentTitle from '../tools/useDocumentTitle'
 
 const Dashboard = () => {
- 
+ useDocumentTitle('Dashboard')
   return (
     <div className='dashboard'>
               <h2 className="section-title">Dashboard</h2>

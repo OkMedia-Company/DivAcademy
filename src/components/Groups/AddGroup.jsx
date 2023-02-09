@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Groups.css";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function AddGroup() {
   const [courses, setCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
@@ -114,6 +115,7 @@ function AddGroup() {
         setError(error.response.data.message);
       });
   };
+  useDocumentTitle("Qrup Əlavə Et");
   return (
     <div className="main-add-form">
       <form onSubmit={handleSubmit}>

@@ -18,7 +18,7 @@ const SearchForm = ({ onSearch }) => {
     <form className="searchForm">
       <input
         name="name"
-        placeholder="Ad soyad, ata adı və ya tələbə nömrəsi ilə axtarış"
+        placeholder="Ad, soyad və ya telefon nömrəsi ilə axtarış"
         onChange={handleChange}
       />
       <button onClick={handleSearch}>

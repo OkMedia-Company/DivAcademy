@@ -3,6 +3,7 @@ import axios from "axios";
 import { Skeleton } from "@mui/material";
 import Select from "react-select";
 import { useParams } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 function AddStudentsToGroup() {
   const [students, setStudents] = useState([]);
   const [selectedStudentIds, setSelectedStudentIds] = useState("");
@@ -83,7 +84,7 @@ function AddStudentsToGroup() {
   if (status == "200") {
     setError("");
   }
-
+  useDocumentTitle("Qrupa tələbə əlavə et")
   if (students == "" || groups == "") {
     return (
       <div className="pt-5">

@@ -14,6 +14,7 @@ import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./teachers.css";
+import useDocumentTitle  from "../../components/tools/useDocumentTitle";
 function Teachers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -56,7 +57,7 @@ function Teachers() {
     );
     setSearchResults(results);
   }, [searchTerm]);
-
+  useDocumentTitle("Müəllimlər");
   return (
     <div>
       <div className="section-title">

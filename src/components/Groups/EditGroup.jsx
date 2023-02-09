@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import useDocumentTitle from "../tools/useDocumentTitle";
 
 function EditGroup() {
   let { groupId } = useParams();
@@ -117,6 +118,7 @@ function EditGroup() {
     }
   };
 
+  useDocumentTitle("Qrupda düzəliş et")
   if (!groupData?.id) {
     return <h2>Loading...</h2>;
   }

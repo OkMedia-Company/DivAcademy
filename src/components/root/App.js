@@ -28,7 +28,8 @@ import EditCourse from "../Courses/EditCourse";
 import AddGroup from "../Groups/AddGroup";
 import EditGroup from "../Groups/EditGroup";
 import AddToStudentGroup from "../Groups/AddToStudentGroup";
-
+import Mentors from "../Mentors/Mentors";
+import Classrooms from "../Classrooms/Classrooms";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -53,12 +54,14 @@ function App() {
                 element={<AddToStudentGroup />}
               />
                 <Route path="teachers" element={<Teachers />} />
+                <Route path="mentors"  element={<Mentors/>} />
                 <Route path="graduates" element={<Graduates />} />
                 <Route path="birthday" element={<Birthday />} />
                 <Route path="employee" element={<Employees />} />
                 <Route path="courses" element={<Courses />} />
                 <Route path="addcourse" element={<AddCourse />} />
                 <Route path="groups" element={<Groups />} />
+                <Route path="classrooms" element={<Classrooms />} />
                 <Route path="addgroup" element={<AddGroup />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />

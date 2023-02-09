@@ -14,6 +14,7 @@ import { Skeleton } from "@mui/material";
 import "./Graduates.css";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import useDocumentTitle from "../tools/useDocumentTitle";
 const Graduates = () => {
   const [students, setStudents] = useState([]);
   const [page, setPage] = useState(0);
@@ -55,7 +56,7 @@ const Graduates = () => {
     );
     setStudents(filteredStudents);
   };
-
+  useDocumentTitle("Məzunlar")
   return (
     <div>
       <div className="section-title">
