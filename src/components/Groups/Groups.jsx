@@ -53,8 +53,8 @@ function Groups() {
       <h2>Qruplar</h2>
       <SearchForm onSearch={searchForm} />
       <div className="d-flex justify-content-end ">
-        <Link to="/addstudentstogroup" className="teacher-add-link">
-          Qrupa tələbə əlavə et
+        <Link to="/addgroup" className="teacher-add-link">
+          Qrup əlavə et
         </Link>
       </div>
       <div className="teachers-content pt-5">

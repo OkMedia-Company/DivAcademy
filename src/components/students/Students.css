@@ -7,6 +7,10 @@
 .students-page .filter li {
   margin-right: 28px;
 }
+.error-input {
+  color: #ff2c2e;
+  font-size: 13px;
+}
 .students-page .filter li a {
   color: #b4b4b4;
   font-size: 14px;

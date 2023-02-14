@@ -39,7 +39,6 @@ const Students = () => {
     setPage(newPage);
   };
   useEffect(() => {
-    console.log(state)
     const token = localStorage.getItem("token");
     axios
       .get("https://div.globalsoft.az/api/students", {
@@ -73,7 +72,6 @@ const Students = () => {
   const stateChange = (event) => {
     dispatch({ type: "setLoading", payload: event.target });
   };
-  console.log(state)
   useDocumentTitle("Tələbələr");
   return (
     <div className="students-page">
