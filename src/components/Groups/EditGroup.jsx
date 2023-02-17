@@ -100,7 +100,7 @@ function EditGroup() {
     });
   };
   const handleDelete = async () => {
-      try {
+    try {
       const response = await axios.delete(
         `https://div.globalsoft.az/api/groups/${groupId}`,
         {
@@ -118,79 +118,79 @@ function EditGroup() {
     }
   };
 
-  useDocumentTitle("Qrupda düzəliş et")
+  useDocumentTitle("Qrupda düzəliş et");
   if (!groupData?.id) {
     return <h2>Loading...</h2>;
   }
 
   return (
     <form onSubmit={handleSubmit} className="main-add-form">
-    <div className="main-add-form-inner row">
-      <div>
-        <label>Group Code:</label>
-        <input
-          type="text"
-          defaultValue={groupData.group_code}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label>Course:</label>
-        <input
-          type="text"
-          name="course_name"
-          value={groupData.course_name}
-          disabled
-        />
-      </div>
-      <div>
-        <label>Teacher:</label>
-        <input
-          type="text"
-          name="teacher_name"
-          value={groupData.teacher_name}
-          disabled
-        />
-      </div>
-      <div>
-        <label>Start Date:</label>
-        <input
-          type="date"
-          name="start_date"
-          value={groupData.start_date}
-          onChange={(e) =>
-            setGroupData({ ...groupData, start_date: e.target.value })
-          }
-        />
-      </div>
-      <div>
-        <label>End Date:</label>
-        <input
-          type="date"
-          name="end_date"
-          value={groupData.end_date}
-          onChange={(e) =>
-            setGroupData({ ...groupData, end_date: e.target.value })
-          }
-        />
-      </div>
-      <div>
-        <label>Lessons:</label>
+      <div className="main-add-form-inner row">
         <div>
-          <label>Week Day:</label>
-          <input type="text" name="week_day" />
-          <label>Time:</label>
-          <input type="text" name="time" />
+          <label>Group Code:</label>
+          <input
+            type="text"
+            defaultValue={groupData.group_code}
+            onChange={handleChange}
+          />
         </div>
-        <button onClick={handleAddLesson} type="button">
-          Add Lesson
+        <div>
+          <label>Course:</label>
+          <input
+            type="text"
+            name="course_name"
+            value={groupData.course_name}
+            disabled
+          />
+        </div>
+        <div>
+          <label>Teacher:</label>
+          <input
+            type="text"
+            name="teacher_name"
+            value={groupData.teacher_name}
+            disabled
+          />
+        </div>
+        <div>
+          <label>Start Date:</label>
+          <input
+            type="date"
+            name="start_date"
+            value={groupData.start_date}
+            onChange={(e) =>
+              setGroupData({ ...groupData, start_date: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <label>End Date:</label>
+          <input
+            type="date"
+            name="end_date"
+            value={groupData.end_date}
+            onChange={(e) =>
+              setGroupData({ ...groupData, end_date: e.target.value })
+            }
+          />
+        </div>
+        <div>
+          <label>Lessons:</label>
+          <div>
+            <label>Week Day:</label>
+            <input type="text" name="week_day" />
+            <label>Time:</label>
+            <input type="text" name="time" />
+          </div>
+          <button onClick={handleAddLesson} type="button">
+            Add Lesson
+          </button>
+        </div>
+        <button type="submit">Update</button>
+        <button type="submit" onClick={handleDelete}>
+          Delete
         </button>
-      </div>
-      <button type="submit">Update</button>
-      <button type="submit" onClick={handleDelete}>
-        Delete
-      </button>
-      {error && <p>{error}</p>}
+        {error && <p>{error}</p>}
       </div>
     </form>
   );

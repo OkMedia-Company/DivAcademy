@@ -34,7 +34,7 @@ const Students = () => {
     }
   };
   const [state, dispatch] = useReducer(reducer, initialState);
- 
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -72,10 +72,10 @@ const Students = () => {
   const stateChange = (event) => {
     dispatch({ type: "setLoading", payload: event.target });
   };
+
   useDocumentTitle("Tələbələr");
   return (
     <div className="students-page">
-      {/* <button onClick={stateChange}>Click</button> */}
       <div className="section-title">
         <h2>Tələbələr</h2>
       </div>

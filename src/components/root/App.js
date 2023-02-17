@@ -33,6 +33,7 @@ import Classrooms from "../Classrooms/Classrooms";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
+  
   return (
     <>
       <AuthContext.Provider value={{ token, setToken, user, setUser }}>

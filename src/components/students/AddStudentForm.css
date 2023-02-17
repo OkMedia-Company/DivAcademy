@@ -89,10 +89,11 @@
  
  .delete-image-button label {
     border-color: red !important;
+    background-color: red !important;
  }
  .delete-image-button label:hover {
-    background-color: red !important;
     color: #fff !important;
+    background-color: transparent !important;
     border-color: red !important;
  }
 .image-preview {

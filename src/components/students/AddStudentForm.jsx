@@ -158,7 +158,6 @@ const Form = () => {
         setImageBase64(fileReader.result);
         formData.image = imageBase64;
       };
-      e;
       axios
         .post("https://div.globalsoft.az/api/students", formData, {
           headers: {
@@ -789,7 +788,6 @@ const Form = () => {
                     Şəkli sil
                   </Button>
                 </div>
-
                 <Dialog
                   open={open}
                   onClose={handleClose}
@@ -799,9 +797,7 @@ const Form = () => {
                   <DialogTitle id="alert-dialog-title">
                     {"Şəkil silinsin?"}
                   </DialogTitle>
-                  <DialogContent>
-                
-                  </DialogContent>
+                  <DialogContent></DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Ləğv et</Button>
                     <Button onClick={handleFileDelete} autoFocus>

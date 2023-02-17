@@ -9,18 +9,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import { Skeleton } from "@mui/material";
 import useDocumentTitle from "../tools/useDocumentTitle";
-
 function Birthdays() {
+  
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [birthdayToday, setBirthdayToday] = useState([]);
   const [birthdayMonth, setBirthdayMonth] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -67,7 +66,7 @@ function Birthdays() {
         <div className="section-title">
           <h2>Bu Gün Ad günü Olanlar</h2>
         </div>
-        <SearchForm  onSearch={handleSearchForm}/>
+        <SearchForm onSearch={handleSearchForm} />
         <div className="birthdays-content pt-3">
           <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
             <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
@@ -89,7 +88,6 @@ function Birthdays() {
                     <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                       Email
                     </TableCell>
-                  
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -169,22 +167,21 @@ function Birthdays() {
                             >
                               {birthday.email}
                             </TableCell>
-                         
                           </TableRow>
                         ))}
                 </TableBody>
               </Table>
             </TableContainer>
             <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={birthdayMonth.length}
-            rowsPerPage={rowsPerPage}
-            labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            sx={{ padding: 0, margin: 0 }}
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={birthdayMonth.length}
+              rowsPerPage={rowsPerPage}
+              labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{ padding: 0, margin: 0 }}
             />
           </Paper>
         </div>
@@ -196,7 +193,7 @@ function Birthdays() {
         <div className="section-title">
           <h2>Bu Ay Ad günü Olanlar</h2>
         </div>
-        <SearchForm   onSearch={handleSearchForm}/>
+        <SearchForm onSearch={handleSearchForm} />
         <div className="birthdays-content pt-3">
           <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
             <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
@@ -218,7 +215,6 @@ function Birthdays() {
                     <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                       Email
                     </TableCell>
-                 
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -298,22 +294,21 @@ function Birthdays() {
                             >
                               {birthday.email}
                             </TableCell>
-                        
                           </TableRow>
                         ))}
                 </TableBody>
               </Table>
             </TableContainer>
             <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={birthdayMonth.length}
-            rowsPerPage={rowsPerPage}
-            labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            sx={{ padding: 0, margin: 0 }}
+              rowsPerPageOptions={[10, 25, 100]}
+              component="div"
+              count={birthdayMonth.length}
+              rowsPerPage={rowsPerPage}
+              labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{ padding: 0, margin: 0 }}
             />
           </Paper>
         </div>
