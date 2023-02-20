@@ -30,13 +30,68 @@ import EditGroup from "../Groups/EditGroup";
 import AddToStudentGroup from "../Groups/AddToStudentGroup";
 import Mentors from "../Mentors/Mentors";
 import Classrooms from "../Classrooms/Classrooms";
+import TransactionType from "../TransactionTypes/TransactionType";
+import AddTransactionForm from "../TransactionTypes/AddTransactionForm";
+import axios from "axios";
+import Transaction from "../Transaction/Transaction";
+import TransactionAdd from "../Transaction/AddTransaction";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-  
+  const [courses, setCourses] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [transactionCategories, setTransactionCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const endpoints = [
+      "https://div.globalsoft.az/api/courses",
+      "https://div.globalsoft.az/api/groups",
+      "https://div.globalsoft.az/api/transaction_categories",
+      
+    ];
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      accept: "application/json",
+    };
+    Promise.all(
+      endpoints.map((endpoint) =>
+        axios
+          .get(endpoint, { headers })
+          .then((response) => response.data)
+          .catch((error) => console.log(error))
+      )
+    )
+      .then((data) => {
+        const [courses, groups,transactionCategories] = data;
+        setCourses(courses);
+        setGroups(groups);
+        setTransactionCategories(transactionCategories);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError(error);
+      });
+  }, []);
   return (
     <>
-      <AuthContext.Provider value={{ token, setToken, user, setUser }}>
+      <AuthContext.Provider
+        value={{
+          token,
+          setToken,
+          user,
+          setUser,
+          courses,
+          groups,
+          error,
+          transactionCategories,
+          setTransactionCategories,
+          loading,
+          setGroups,
+        }}
+      >
         <div className="RoutePages">
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -51,11 +106,11 @@ function App() {
                 <Route path="courses/:userId" element={<EditCourse />} />
                 <Route path="groups/:groupId" element={<EditGroup />} />
                 <Route
-                path="groups/:groupId/addstudent"
-                element={<AddToStudentGroup />}
-              />
+                  path="groups/:groupId/addstudent"
+                  element={<AddToStudentGroup />}
+                />
                 <Route path="teachers" element={<Teachers />} />
-                <Route path="mentors"  element={<Mentors/>} />
+                <Route path="mentors" element={<Mentors />} />
                 <Route path="graduates" element={<Graduates />} />
                 <Route path="birthday" element={<Birthday />} />
                 <Route path="employee" element={<Employees />} />
@@ -67,8 +122,14 @@ function App() {
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />
                 <Route path="addemployee" element={<AddEmployee />} />
-              
                 <Route path="absence" element={<Absence />} />
+                <Route path="incomeoutcometips" element={<TransactionType />} />
+                <Route path="incomeoutcome" element={<Transaction />} />
+                <Route path="incomeoutcomeadd" element={<TransactionAdd />} />
+                <Route
+                  path="addtransactionform"
+                  element={<AddTransactionForm />}
+                />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Route>

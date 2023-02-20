@@ -1,12 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import validationSchema from "../tools/Validation";
 import useDocumentTitle from "../tools/useDocumentTitle";
+import InputMask from "react-input-mask";
+import Select from "react-select";
+import { AuthContext } from "../context/Contexts";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 function AddTeacherForm() {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
+  const [selectedOption, setSelectedOption] = useState(null);
+  const groups = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     image: "",
     name: "",
@@ -21,11 +32,40 @@ function AddTeacherForm() {
     registration_day: "",
     current_groups: "",
   });
-
+  const handleVerication = async (event) => {
+    const { name, value } = event.target;
+    try {
+      await validationSchema.validateAt(name, formData);
+      setErrors({ ...errors, [name]: "" });
+    } catch (error) {
+      setErrors({ ...errors, [name]: error.message });
+    }
+  };
+  const handleFileDelete = (event) => {
+    event.preventDefault();
+    setOpen(false);
+    console.log(imageBase64);
+    setImageFile("");
+    setImageBase64("");
+    // imageRef.current.value = "";
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleSelectChange = (selectedOption) => {
+    setSelectedOption(selectedOption.value);
+    groups.groups.groups?.map((group) => {
+      if (selectedOption.value === group.group_code) {
+        formData.graduation_day = group.end_date;
+      }
+    });
+  };
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
   useEffect(() => {
     if (!imageFile) return;
     const fileReader = new FileReader();
@@ -46,7 +86,6 @@ function AddTeacherForm() {
     fileReader.onload = () => {
       setImageBase64(fileReader.result);
       formData.image = imageBase64;
-
       axios
         .post("https://div.globalsoft.az/api/teachers", formData, {
           headers: {
@@ -64,7 +103,7 @@ function AddTeacherForm() {
         });
     };
   };
-  useDocumentTitle("Müəllim əlavə etmək")
+  useDocumentTitle("Müəllim əlavə etmək");
   return (
     <>
       <h2>Müəllim əlavə etmək</h2>
@@ -109,6 +148,41 @@ function AddTeacherForm() {
                     />
                     <br />
                   </div>
+                  <div className=" col-6">
+                    <label htmlFor="id_number">
+                      Şəxsiyyət vəsiqəsi nömrəsi:
+                    </label>
+                    <input
+                      type="text"
+                      name="id_number"
+                      id="id_number"
+                      onKeyUp={handleVerication}
+                      value={formData.id_number}
+                      onChange={handleChange}
+                    />
+                    {errors.id_number && (
+                      <div className="error-input">{errors.id_number}</div>
+                    )}
+                    <br />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className=" col-6">
+                    <label htmlFor="fin">FİN:</label>
+                    <input
+                      type="text"
+                      name="fin"
+                      id="fin"
+                      onKeyUp={handleVerication}
+                      value={formData.fin}
+                      onChange={handleChange}
+                    />
+                    {
+                      <div className="error-input">
+                        {errors.fin && errors.fin}
+                      </div>
+                    }
+                  </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
                     <input
@@ -122,32 +196,55 @@ function AddTeacherForm() {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col-6">
-                    <label htmlFor="phone">Telefon:</label>
+                  <div className=" col-6">
+                    <label htmlFor="edu_email"> Edu email :</label>
                     <input
-                      type="text"
-                      name="phone"
-                      id="phone"
-                      value={formData.phone}
+                      type="edu_email"
+                      name="edu_email"
+                      id="edu_email"
+                      onKeyUp={handleVerication}
+                      value={formData.edu_email}
                       onChange={handleChange}
                     />
-                    <br />
+                    {
+                      <div className="error-input">
+                        {errors.edu_email && errors.edu_email}
+                      </div>
+                    }
                   </div>
                   <div className="col-6">
-                    <label htmlFor="email">Email:</label>
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={formData.email}
+                    <label htmlFor="phone">Telefon:</label>
+                    <InputMask
+                      name="phone"
+                      id="phone"
+                      alwaysShowMask={true}
+                      prefix="+994"
+                      mask="+\9\9\4999999999"
                       onChange={handleChange}
+                      value={formData.phone}
                     />
                     <br />
                   </div>
                 </div>
                 <div className="row">
+                  <div className=" col-6">
+                    <label htmlFor="email"> Şəxsi email:</label>
+                    <input
+                      type="email"
+                      name="email"
+                      onKeyUp={handleVerication}
+                      id="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+                    {
+                      <div className="error-input">
+                        {errors.email && errors.email}
+                      </div>
+                    }
+                  </div>
                   <div className="col-6">
-                    <label htmlFor="password">Password:</label>
+                    <label htmlFor="password">Şifrə:</label>
                     <input
                       type="password"
                       name="password"
@@ -157,8 +254,113 @@ function AddTeacherForm() {
                     />
                     <br />
                   </div>
+                </div>
+                <div className="row">
+                  <div className=" col-6">
+                    <label htmlFor="university">Universiteti:</label>
+                    <input
+                      type="text"
+                      name="university"
+                      id="university"
+                      value={formData.university}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className=" col-6">
+                    <label htmlFor="ixtisas">İxtisası:</label>
+                    <input
+                      type="text"
+                      name="ixtisas"
+                      id="ixtisas"
+                      value={formData.ixtisas}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className=" col-6">
+                    <label htmlFor="university_add_score">Qəbul balı:</label>
+                    <input
+                      type="text"
+                      name="university_add_score"
+                      id="university_add_score"
+                      value={formData.university_add_score}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className=" col-6">
+                    <label htmlFor="working_place">İş yeri:</label>
+                    <input
+                      type="text"
+                      name="working_place"
+                      id="working_place"
+                      value={formData.working_place}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className=" col-6">
+                    <label htmlFor="vezife">Vəzifə:</label>
+                    <input
+                      type="text"
+                      name="vezife"
+                      id="vezife"
+                      value={formData.vezife}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+
                   <div className="col-6">
-                    <label htmlFor="user_type">User type:</label>
+                    <label htmlFor="current_groups">Cari qrupları:</label>
+                    <Select
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                          color: "black",
+                          width: "100%",
+                          "&:hover": {
+                            borderColor: "none",
+                            outline: "none",
+                            boxShadow: "none",
+                          },
+                        }),
+                      }}
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        width: "100%",
+                        color: "black",
+                        colors: {
+                          ...theme.colors,
+                          primary25: "rgb(242, 242, 242)",
+                          primary: "rgb(242, 242, 242)",
+                        },
+                      })}
+                      classNamePrefix="select"
+                      isClearable={false}
+                      onChange={handleSelectChange}
+                      isSearchable={true}
+                      name="color"
+                      isMulti={true}
+                      placeholder="Qrup seçin"
+                      options={groups.groups.groups?.map((group) => {
+                        return {
+                          value: group.group_code,
+                          label: group.group_code,
+                        };
+                      })}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="user_type">İstifadəçi tipi:</label>
                     <input
                       type="number"
                       name="user_type"
@@ -168,8 +370,6 @@ function AddTeacherForm() {
                     />
                     <br />
                   </div>
-                </div>
-                <div className="row">
                   <div className="col-6">
                     <label htmlFor="status">Status:</label>
                     <input
@@ -181,45 +381,67 @@ function AddTeacherForm() {
                     />
                     <br />
                   </div>
-                  <div className="col-6">
-                    <label htmlFor="registration_day">Registration day:</label>
-                    <input
-                      type="date"
-                      name="registration_day"
-                      id="registration_day"
-                      value={formData.registration_day}
-                      onChange={handleChange}
-                    />
-                    <br />
-                  </div>
                 </div>
-                <label htmlFor="current_groups">Current groups:</label>
-                <input
-                  type="text"
-                  name="current_groups"
-                  id="current_groups"
-                  value={formData.current_groups}
-                  onChange={handleChange}
-                />
-                <br />
-              </div>
-              <div className="file-upload image-upload row col">
-                <img src={imageFile} alt="" className="image-preview" />
-                <Button variant="outlined" component="label">
-                  Upload photo
+                <div className="col-12">
+                  <label htmlFor="registration_day">İşə başlama tarixi :</label>
                   <input
-                    hidden
-                    accept="image/*"
-                    multiple
-                    type="file"
-                    name="image"
-                    id="image"
-                    onChange={handleFileChange}
-                    size="medium"
-                    className="image-upload-input"
-                    sx={{ borderRadius: "1px solid #000" }}
+                    type="date"
+                    name="registration_day"
+                    id="registration_day"
+                    value={formData.registration_day}
+                    onChange={handleChange}
                   />
-                </Button>
+                  <br />
+                </div>
+              </div>
+
+              <div className="image-upload col-4 ">
+                <img src={imageBase64} className="image-preview" />
+                <div className="row ms-4">
+                  <div className="col-6">
+                    <Button variant="outlined" component="label">
+                      Şəkil yüklə
+                      <input
+                        hidden
+                        type="file"
+                        name="image"
+                        size="medium"
+                        id="image"
+                        className="image-upload-input"
+                        sx={{ borderRadius: "1px solid #000" }}
+                        onChange={handleFileChange}
+                      />
+                    </Button>
+                  </div>
+                  <div className="col-5 delete-image-button">
+                    <Button
+                      variant="outlined"
+                      component="label"
+                      color="error"
+                      onClick={handleClickOpen}
+                    >
+                      Şəkli sil
+                    </Button>
+                  </div>
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">
+                      {"Şəkil silinsin?"}
+                    </DialogTitle>
+                    <DialogContent></DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Ləğv et</Button>
+                      <Button onClick={handleFileDelete} autoFocus>
+                        Razı
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </div>
+                <br />
               </div>
               <br />
               <div className="form-error">{error}</div>

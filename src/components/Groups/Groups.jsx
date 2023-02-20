@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchForm from "../tools/SearchForm";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,16 +10,15 @@ import TablePagination from "@mui/material/TablePagination";
 import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import { CiEdit } from "react-icons/ci";
-import axios from "axios";
-
+import { AuthContext } from "../context/Contexts";
 import { Skeleton } from "@mui/material";
 import { Link } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
 function Groups() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [groups, setGroups] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const groups = useContext(AuthContext)
+  const loading = useContext(AuthContext)
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -30,23 +29,6 @@ function Groups() {
   const searchForm = (searchTerm) => {
     console.log(searchTerm);
   };
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    axios
-      .get(`https://div.globalsoft.az/api/groups`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setGroups(response.data.groups);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
   useDocumentTitle("Qruplar")
   return (
     <div>
@@ -88,7 +70,7 @@ function Groups() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loading
+                {loading?.loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
                       <TableRow key={i}>
                         <TableCell>
@@ -117,7 +99,7 @@ function Groups() {
                         </TableCell>
                       </TableRow>
                     ))
-                  : groups
+                  : groups?.groups.groups
                       .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage

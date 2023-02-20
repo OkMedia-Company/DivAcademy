@@ -6,7 +6,8 @@ import { useParams } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
 function AddStudentsToGroup() {
   const [students, setStudents] = useState([]);
-  const [selectedStudentIds, setSelectedStudentIds] = useState("");
+  const [selectedStudentIds, setSelectedStudentIds] = useState([
+  ]);
   const [groups, setGroups] = useState([]);
   const [selectedGroupId, setSelectedGroupId] = useState("");
 
@@ -55,16 +56,18 @@ function AddStudentsToGroup() {
     fetchGroups();
   }, []);
 
-  const handleStudentChange = (event) => {
-    setSelectedStudentIds(event.target.value);
-  };
+  function setStudentsId(studentIds) {
+    const formattedStudentIds = studentIds.map((id) => ({ student_id: id.value }));
+    setSelectedStudentIds(formattedStudentIds);
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = {
       group_id: selectedGroupId,
-      student_id: selectedStudentIds,
+      students: selectedStudentIds,
     };
+    console.log(data);
     axios
       .post("https://div.globalsoft.az/api/group_students", data, {
         headers: {
@@ -84,7 +87,7 @@ function AddStudentsToGroup() {
   if (status == "200") {
     setError("");
   }
-  useDocumentTitle("Qrupa tələbə əlavə et")
+  useDocumentTitle("Qrupa tələbə əlavə et");
   if (students == "" || groups == "") {
     return (
       <div className="pt-5">
@@ -106,11 +109,12 @@ function AddStudentsToGroup() {
       <form onSubmit={handleSubmit} className="main-add-form-inner flex-column">
         <label>Select Group:</label>
         <Select
-          className="basic-single"
+          className="basic-single w-100"
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
               borderColor: "none",
+              width: "100%",
               outline: "none",
               boxShadow: "none",
               color: "black",
@@ -139,7 +143,6 @@ function AddStudentsToGroup() {
               label: group.name,
             };
           })}
-          
           isClearable={true}
           isSearchable={true}
           name="color"
@@ -149,28 +152,19 @@ function AddStudentsToGroup() {
               label: group.group_code,
             };
           })}
+          placeholder="Qrupu seçin"
           onChange={(e) => setSelectedGroupId(e.value)}
         />
-
-        {/* <select
-          value={selectedGroupId}
-          onChange={(e) => setSelectedGroupId(e.target.value)}
-        >
-          {groups.map((group) => (
-            <option key={group.id} value={group.id} disabled={true}>
-              {group.group_code}
-            </option>
-          ))}
-        </select> */}
         <br />
         <label>Select Students:</label>
         <Select
-          className="basic-single"
+          className="basic-single w-100"
           styles={{
             control: (baseStyles, state) => ({
               ...baseStyles,
               borderColor: "none",
               outline: "none",
+              width: "100%",
               boxShadow: "none",
               color: "black",
 
@@ -192,9 +186,11 @@ function AddStudentsToGroup() {
             },
           })}
           classNamePrefix="select"
-          defaultValue={students[0]}
           isClearable={true}
           isSearchable={true}
+          isMulti={true}
+          placeholder="Tələbələri seçin"
+          onChange={setStudentsId}
           name="color"
           options={students.map((student) => {
             return {
@@ -202,18 +198,9 @@ function AddStudentsToGroup() {
               label: student.name + " " + student.last_name,
             };
           })}
-          onChange={(e) => setSelectedGroupId(e.value)}
         />
-
-        {/* <select onChange={handleStudentChange}>
-          {students?.map((student) => (
-            <option key={student.id} value={student.id}>
-              {student.name} {student.last_name}
-            </option>
-          ))}
-        </select> */}
         <br />
-        <button type="submit">Add Students to Group</button>
+        <button type="submit">Seçilənləri qrupa əlavə et</button>
         {status && <p>{status}</p>}
         {error && <p>{error}</p>}
       </form>

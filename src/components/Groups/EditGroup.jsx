@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import useDocumentTitle from "../tools/useDocumentTitle";
+import { AuthContext } from "../context/Contexts";
 
 function EditGroup() {
   let { groupId } = useParams();
@@ -14,48 +15,8 @@ function EditGroup() {
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
   const token = localStorage.getItem("token");
-  useEffect(() => {
-    async function fetchGroupData() {
-      try {
-        const response = await axios.get(
-          `https://div.globalsoft.az/api/groups`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              accept: "application/json",
-            },
-          }
-        );
-        const group = response.data.groups.filter(
-          (group) => group.id === parseInt(groupId)
-        );
-        setGroupData(group[0]);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchGroupData();
-  }, []);
-  // useEffect(() => {
-  //   async function fetchLessons() {
-  //     try {
-  //       const response = await axios.get(
-  //         "https://div.globalsoft.az/api/lesson_days",
-  //         {
-  //           headers: {
-  //             Authorization: ` Bearer ${token}`,
-  //             accept: "application/json",
-  //           },
-  //         }
-  //       );
-  //       setGroupData({ ...groupData, lessons: response.data.lesson_days });
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   fetchLessons();
-  // }, []);
-
+  const groupsData = useContext(AuthContext);
+  const groups = groupsData?.groups.groups.filter((group) => group.id == groupId);
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -92,7 +53,6 @@ function EditGroup() {
   const handleChange = (event) => {
     setGroupData({ ...groupData, [event.target.name]: event.target.value });
   };
-
   const handleAddLesson = () => {
     setGroupData({
       ...groupData,
@@ -119,7 +79,7 @@ function EditGroup() {
   };
 
   useDocumentTitle("Qrupda düzəliş et");
-  if (!groupData?.id) {
+  if (!groups) {
     return <h2>Loading...</h2>;
   }
 

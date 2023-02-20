@@ -5,12 +5,11 @@ import { Alert, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
 import Select from "react-select";
-import * as yup from "yup";
+import validationSchema from "../tools/Validation";
 import InputMask from "react-input-mask";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 const Form = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -98,29 +97,6 @@ const Form = () => {
     next_payment_date: "2022-01-01",
   });
 
-  const validationSchema = yup.object().shape({
-    id_number: yup
-      .string()
-      .matches(
-        /^[a-zA-Z0-9]{7}$/,
-        "Şəxsiyyət vəsiqəsi nömrəsi 7 rəqəmli yalnız hərflərdən və rəqəmlərdən ibarət olmalıdır"
-      )
-      .required("ID Number is required"),
-    email: yup.string().email("Düzgün email daxil edin"),
-    edu_email: yup.string().email("Düzgün email daxil edin"),
-    phone_number: yup
-      .string()
-      .matches(
-        /^\+994\d{9}$/,
-        "Phone number must start with +994 and have 9 digits after it"
-      )
-      .required("Phone number is required"),
-    fin: yup
-      .string("FIN yalniz herfden")
-      .min(7, "FIN yalnız 7 rəqəmdən ibarət olmalıdır")
-      .max(7, "FIN yalnız 7 rəqəmdən ibarət olmalıdır"),
-  });
-
   const handleVerication = async (event) => {
     const { name, value } = event.target;
     try {
@@ -148,34 +124,36 @@ const Form = () => {
     if (selectedOption === null) {
       formData.reference = `${event.target.value}`;
     }
-    if (imageFile === null) {
-      setError("Xahiş edirik şəkil seçin");
-    }
+    // const phoneWithoutFormat = formData.phone.replace(/[^\d]/g, ''); // removes all non-digits from the phone number
+    const phoneAsNumber = parseInt(formData.phone, 10); // base 10 is specified to ensure proper parsing
+    formData.phone = phoneAsNumber;
     if (imageFile !== null) {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(imageFile);
       fileReader.onload = () => {
         setImageBase64(fileReader.result);
-        formData.image = imageBase64;
+        formData.image =
+          "https://images.unsplash.com/photo-1603782637810-95d06f1d5663?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80";
       };
-      axios
-        .post("https://div.globalsoft.az/api/students", formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          setError("");
-          navigate("/students");
-        })
-        .catch((error) => {
-          console.error(error);
-          setError(error.response.data.message);
-        });
     }
+
+    axios
+      .post("https://div.globalsoft.az/api/students", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setError("");
+        navigate("/students");
+      })
+      .catch((error) => {
+        console.error(error);
+        setError(error.response.data.message);
+      });
   };
   const handleFileDelete = (event) => {
     setOpen(false);
@@ -345,7 +323,7 @@ const Form = () => {
                     id="phone"
                     alwaysShowMask={true}
                     prefix="+994"
-                    mask="+\9\9\4\ (99) 999-99-99"
+                    mask="+\9\9\4999999999"
                     onChange={handleChange}
                     value={formData.phone}
                   />

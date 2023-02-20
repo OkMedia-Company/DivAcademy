@@ -14,7 +14,7 @@ import { CiEdit } from "react-icons/ci";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import "./teachers.css";
-import useDocumentTitle  from "../../components/tools/useDocumentTitle";
+import useDocumentTitle from "../../components/tools/useDocumentTitle";
 function Teachers() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -85,13 +85,10 @@ function Teachers() {
                     Telefonu
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Emaili
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Qeydiyyat tarixi
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Cari qruplari
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Növbəti maaş günü
                   </TableCell>
                   <TableCell
                     align="left"
@@ -154,8 +151,7 @@ function Teachers() {
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {teacher.name} {teacher.last_name}{" "}
-                            {teacher.father_name}
+                            {teacher.name} {teacher.last_name}
                           </TableCell>
                           <TableCell
                             align="left"
@@ -164,19 +160,14 @@ function Teachers() {
                           >
                             {teacher.phone}
                           </TableCell>
+                        
+                          
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {teacher.email}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {teacher.registration_day}
+                            {teacher.current_groups}
                           </TableCell>
                           <TableCell
                             align="left"

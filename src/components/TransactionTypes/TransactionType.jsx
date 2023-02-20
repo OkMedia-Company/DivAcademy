@@ -1,77 +1,87 @@
-import React, { useContext, useEffect, useState } from "react";
-import SearchForm from "../tools/SearchForm";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import { CiEdit } from "react-icons/ci";
+import {
+  Paper,
+  Skeleton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+} from "@mui/material";
 import axios from "axios";
-import { Button, Skeleton } from "@mui/material";
-import { Link } from "react-router-dom";
-import useDocumentTitle from "../tools/useDocumentTitle";
-import { AuthContext } from "../context/Contexts";
-function Courses() {
+import React, { useEffect, useState } from "react";
+import SearchForm from "../tools/SearchForm";
+import { NavLink } from "react-router-dom";
+import { CiEdit } from "react-icons/ci";
+function TransactionType() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const courses = useContext(AuthContext);
-  const loading = useContext(AuthContext);
+  const [transactions, settransactions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(true);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
-  function calculateTotalPrice(course) {
-    const match = course.course_duration.match(/\d+/);
-    const months = match ? parseInt(match[0], 10) : 0;
-    return course.monthly_price * months;
-  }
-
-  useDocumentTitle("Kurslar");
+  const [transactionCategories, setTransactionCategories] = useState([]);
+  const token = localStorage.getItem("token");
+  useEffect(() => {
+    axios
+      .get("https://div.globalsoft.az/api/transaction_categories", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        setTransactionCategories(res.data.transaction_categories);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div>
       <div className="section-title">
-        <h2>Kurslar</h2>
+        <h2>Gəlir və xərc tipləri</h2>
       </div>
-      <SearchForm />
-      <div className="courses-content pt-4">
-        <div className="filter-add-main">
-          <Link to="/addcourse">
-            <a className="teacher-add-link">Kurs əlavə et</a>
-          </Link>
-        </div>
+      <SearchForm onSearch={handleChange} />
+      <div className="filter-add-main">
+        <NavLink to="/addtransactionform" className="filter-add teacher-add-link">
+          Gəlir və xərc tipi əlavə et
+        </NavLink>
       </div>
-      <div className="courses-content pt-5">
+      <div className="transactions-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
           <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Kurs adı
+                    Maliyyə kateqoriyası adı
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Kurs ödənişi (aylıq)
+                    Başlıq
                   </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Kurs ödənişi (tam)
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Müddəti
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Əməliyyatlar
-                  </TableCell>
+                  <TableCell
+                    align="left"
+                    colSpan={3}
+                    sx={{ py: 1, px: 2 }}
+                  ></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loading?.loading
+                {loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
                       <TableRow key={i}>
                         <TableCell>
@@ -100,37 +110,28 @@ function Courses() {
                         </TableCell>
                       </TableRow>
                     ))
-                  : courses?.courses.course?.slice(
+                  : transactionCategories
+                      .slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
-                      .map((course) => (
-                        <TableRow key={course.id} hover>
-                          <TableCell sx={{ py: 1, px: 2 }}>
-                            {course.name}
+                      .map((transaction) => (
+                        <TableRow key={transaction.id} hover>
+                         
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {transaction.name} 
                           </TableCell>
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {course.monthly_price} AZN
+                            {transaction.title}
                           </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {calculateTotalPrice(course)} AZN
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {course.course_duration} ay
-                          </TableCell>
-
                           <TableCell
                             align="left"
                             colSpan={3}
@@ -138,9 +139,9 @@ function Courses() {
                           >
                             <div className="table-btn-edit">
                               <button>
-                                <Link to={`/courses/${course.id}`}>
+                                <NavLink to={`/transactions/${transaction.id}`}>
                                   <CiEdit /> Edit
-                                </Link>
+                                </NavLink>
                               </button>
                             </div>
                           </TableCell>
@@ -152,11 +153,13 @@ function Courses() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={courses.length}
+            count={transactions.length}
             rowsPerPage={rowsPerPage}
+            labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
             page={page}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+            sx={{ padding: 0, margin: 0 }}
           />
         </Paper>
       </div>
@@ -164,4 +167,4 @@ function Courses() {
   );
 }
 
-export default Courses;
+export default TransactionType;
