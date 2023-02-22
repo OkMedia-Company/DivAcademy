@@ -6,6 +6,8 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { FcCancel } from "react-icons/fc";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import SearchForm from "../tools/SearchForm";
@@ -56,7 +58,7 @@ const Graduates = () => {
     );
     setStudents(filteredStudents);
   };
-  useDocumentTitle("Məzunlar")
+  useDocumentTitle("Məzunlar");
   return (
     <div>
       <div className="section-title">
@@ -77,26 +79,13 @@ const Graduates = () => {
                     Şəkil
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Ad Soyad Ata adi
+                    Ad Soyad
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Doğum tarixi
-                  </TableCell>
-
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Universiteti
+                    Telefon
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Qəbul balı
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Telefonu
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Email
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Qeydiyyat günü
+                    Məzun günü
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Referans
@@ -105,24 +94,29 @@ const Graduates = () => {
                     Kurs
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Qrup
+                    Qrup kodu
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Status
+                    Dərs qrafiki
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Harada işləyir
+                    Müəllimi
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    İş yeri
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Diplom vəziyyəti
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Diplom seriyası
                   </TableCell>
 
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Məzun günü
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Əmaliyyatlar
-                  </TableCell>
+                  <TableCell
+                    align="left"
+                    colSpan={3}
+                    sx={{ py: 1, px: 2 }}
+                  ></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -175,29 +169,6 @@ const Graduates = () => {
                             sx={{ py: 1, px: 2 }}
                           >
                             {student.name} {student.last_name}{" "}
-                            {student.father_name}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.birthday}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.university}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.university_add_score}
                           </TableCell>
                           <TableCell
                             align="left"
@@ -206,19 +177,13 @@ const Graduates = () => {
                           >
                             {student.phone}
                           </TableCell>
+
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {student.email}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.registration_day}
+                            {student.graduation_day}
                           </TableCell>
                           <TableCell
                             align="left"
@@ -232,7 +197,7 @@ const Graduates = () => {
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            <div className="table-course">{student.course}</div>
+                            {student.course}
                           </TableCell>
                           <TableCell
                             align="left"
@@ -241,14 +206,21 @@ const Graduates = () => {
                           >
                             {student.group}
                           </TableCell>
-
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {student.status}
+                            {student.ders}
                           </TableCell>
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {student.teacher}
+                          </TableCell>
+                       
                           <TableCell
                             align="left"
                             colSpan={3}
@@ -262,14 +234,18 @@ const Graduates = () => {
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {student.diploma_sn}
+                           {student.is_diploma == 1 ? (
+                              <AiOutlineCheckCircle className="table-icon-diplom" />
+                            ) : (
+                              <FcCancel className="table-icon-diplom" />
+                            )}
                           </TableCell>
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {student.graduation_day}
+                            {student.diploma_sn}
                           </TableCell>
 
                           <TableCell

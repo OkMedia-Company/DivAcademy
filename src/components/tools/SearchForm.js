@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import "./SearchForm.css";
 import PropTypes from "prop-types";
-const SearchForm = ({ onSearch }) => {
+const SearchForm = ({ onSearch, placeHolder }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleChange = (event) => {
@@ -18,7 +18,9 @@ const SearchForm = ({ onSearch }) => {
     <form className="searchForm">
       <input
         name="name"
-        placeholder="Ad, soyad və ya telefon nömrəsi ilə axtarış"
+        placeholder={
+          placeHolder != null ? `${placeHolder}` : "Ad, soyad və ya telefon nömrəsi ilə axtarış"
+        }
         onChange={handleChange}
       />
       <button onClick={handleSearch}>
@@ -26,7 +28,7 @@ const SearchForm = ({ onSearch }) => {
       </button>
     </form>
   );
-}; 
+};
 
 SearchForm.propTypes = {
   onSearch: PropTypes.func.isRequired,

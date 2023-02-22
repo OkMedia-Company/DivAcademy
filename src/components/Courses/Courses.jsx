@@ -17,7 +17,7 @@ import { AuthContext } from "../context/Contexts";
 function Courses() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const courses = useContext(AuthContext);
+  const courses = useContext(AuthContext)?.courses.course;
   const loading = useContext(AuthContext);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -39,7 +39,7 @@ function Courses() {
       <div className="section-title">
         <h2>Kurslar</h2>
       </div>
-      <SearchForm />
+      <SearchForm placeHolder="Kurs adına görə axtarış" />
       <div className="courses-content pt-4">
         <div className="filter-add-main">
           <Link to="/addcourse">
@@ -57,10 +57,10 @@ function Courses() {
                     Kurs adı
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Kurs ödənişi (aylıq)
+                    Aylıq ödəniş
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Kurs ödənişi (tam)
+                    Toplam məbləğ
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Müddəti
@@ -100,7 +100,8 @@ function Courses() {
                         </TableCell>
                       </TableRow>
                     ))
-                  : courses?.courses.course?.slice(
+                  : courses
+                      ?.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
@@ -152,7 +153,7 @@ function Courses() {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={courses.length}
+            count={courses?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onChangePage={handleChangePage}

@@ -12,19 +12,14 @@ const theme = createTheme({
   },
 });
 function HomeLayout() {
-
   return (
     <div>
       <div className="flexMain">
-      
         <ThemeProvider theme={theme}>
-
-            <Sidebar />
-            
-            <Main />
+          <Sidebar />
+          <Main />
         </ThemeProvider>
       </div>
-
     </div>
   );
 }

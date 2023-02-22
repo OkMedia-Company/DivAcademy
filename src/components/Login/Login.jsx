@@ -19,6 +19,7 @@ const schema = Yup.object().shape({
 
 function Login() {
   const currentUser = useContext(AuthContext);
+  console.log(currentUser)
   const navigate = useNavigate();
   const [error,setError] = React.useState("")
   const login = async (data) => {

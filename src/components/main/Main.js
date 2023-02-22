@@ -14,7 +14,6 @@ const Main = () => {
       try {
         const response = await axios.get(
           "https://div.globalsoft.az/api/authUser",
-
           {
             headers: {
               Authorization: `Bearer ${userToken}`,

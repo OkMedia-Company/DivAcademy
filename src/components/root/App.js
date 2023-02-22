@@ -35,6 +35,7 @@ import AddTransactionForm from "../TransactionTypes/AddTransactionForm";
 import axios from "axios";
 import Transaction from "../Transaction/Transaction";
 import TransactionAdd from "../Transaction/AddTransaction";
+import AddMentorForm from "../Mentors/AddMentor";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -43,13 +44,14 @@ function App() {
   const [transactionCategories, setTransactionCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [teachers , setTeachers] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const endpoints = [
       "https://div.globalsoft.az/api/courses",
       "https://div.globalsoft.az/api/groups",
       "https://div.globalsoft.az/api/transaction_categories",
-      
+      "https://div.globalsoft.az/api/teachers",
     ];
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -64,9 +66,10 @@ function App() {
       )
     )
       .then((data) => {
-        const [courses, groups,transactionCategories] = data;
+        const [courses, groups, transactionCategories,teachers] = data;
         setCourses(courses);
         setGroups(groups);
+        setTeachers(teachers);
         setTransactionCategories(transactionCategories);
         setLoading(false);
       })
@@ -85,6 +88,7 @@ function App() {
           setUser,
           courses,
           groups,
+          teachers,
           error,
           transactionCategories,
           setTransactionCategories,
@@ -121,6 +125,7 @@ function App() {
                 <Route path="addgroup" element={<AddGroup />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />
+                <Route path="addmentorform" element={<AddMentorForm />} />
                 <Route path="addemployee" element={<AddEmployee />} />
                 <Route path="absence" element={<Absence />} />
                 <Route path="incomeoutcometips" element={<TransactionType />} />

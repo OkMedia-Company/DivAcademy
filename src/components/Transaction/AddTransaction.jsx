@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
 import Select from "react-select";
 import { AuthContext } from "../context/Contexts";
 function TransactionAdd() {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     transaction_category_id: "",
@@ -16,7 +17,7 @@ function TransactionAdd() {
     month: "",
   });
   const handleSelectChange = (selectedOption) => {
-    // setFormData({ ...formData, transaction_category_id: selectedOption.value });
+    setFormData({ ...formData, transaction_category_id: selectedOption.value });
   };
   const transactionCategories = useContext(AuthContext).transactionCategories.transaction_categories;
 

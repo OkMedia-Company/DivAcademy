@@ -221,7 +221,7 @@ function EditEmployee() {
             <div className="row">
               <div className="col-6">
                 <Button variant="contained" color="primary" type="submit">
-                  Save
+                  Yadda saxla
                 </Button>
               </div>
               <div className="col-6">
@@ -231,7 +231,7 @@ function EditEmployee() {
                   color="secondary"
                   onClick={handleDelete}
                 >
-                  Delete
+                  Sil
                 </Button>
               </div>
             </div>

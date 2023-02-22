@@ -56,7 +56,7 @@ const Employee = () => {
     );
     setStudents(filteredStudents);
   };
-  useDocumentTitle("Əmakdaşlar")
+  useDocumentTitle("Əmakdaşlar");
   return (
     <div>
       <div className="section-title">
@@ -82,30 +82,19 @@ const Employee = () => {
                     Şəkil
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Ad Soyad Ata adi
+                    Ad Soyad
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Vəzifə
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Müddət
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Telefon
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Doğum tarixi
-                  </TableCell>
-
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Telefonu
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Email
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Qeydiyyat günü
-                  </TableCell>
-
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Vəzifəsi
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Maaş
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Əmaliyyatlar
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -158,32 +147,16 @@ const Employee = () => {
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {employee.name} {employee.last_name}{" "}
-                            {employee.father_name}
+                            {employee.name} {employee.last_name} 
                           </TableCell>
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {employee.birthday}
+                            {employee.position}
                           </TableCell>
 
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.phone}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.email}
-                          </TableCell>
                           <TableCell
                             align="left"
                             colSpan={3}
@@ -197,17 +170,29 @@ const Employee = () => {
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            <div className="table-course">
-                              {employee.position}
-                            </div>
+                            {employee.phone}
                           </TableCell>
-
                           <TableCell
                             align="left"
                             colSpan={3}
                             sx={{ py: 1, px: 2 }}
                           >
-                            {employee.salary}
+                            {employee.birthday}
+                          </TableCell>
+
+                        
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            <div className="table-btn-edit">
+                              <button>
+                                <NavLink to={`/employee/${employee.id}`}>
+                                   Maaş tarixçəsi
+                                </NavLink>
+                              </button>
+                            </div>
                           </TableCell>
                           <TableCell
                             align="left"

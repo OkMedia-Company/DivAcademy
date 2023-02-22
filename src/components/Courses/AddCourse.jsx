@@ -42,7 +42,7 @@ function AddCourse() {
    useDocumentTitle("Kurs əlavə et")
   return (
     <>
-      <h2>Add Course</h2>
+      <h2>Kurs əlavə et</h2>
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">

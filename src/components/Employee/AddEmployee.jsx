@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
 import useDocumentTitle from "../tools/useDocumentTitle";
-
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 function AddEmployee() {
   const [formData, setFormData] = useState({
     image: "",
@@ -23,10 +26,26 @@ function AddEmployee() {
   const [imageFile, setImageFile] = useState("");
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   let navigate = useNavigate();
   const token = localStorage.getItem("token");
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+  const handleFileDelete = (event) => {
+    setOpen(false);
+
+    event.preventDefault();
+    console.log(imageBase64);
+    setImageFile("");
+    setImageBase64("");
+    // imageRef.current.value = "";
   };
 
   const handleFileChange = (event) => {
@@ -63,7 +82,7 @@ function AddEmployee() {
         setError(error.response.data.message);
       });
   };
-  useDocumentTitle("Əməkdaş əlavə et")
+  useDocumentTitle("Əməkdaş əlavə et");
   return (
     <>
       <h2>Əmakdaş əlavə et</h2>
@@ -173,33 +192,61 @@ function AddEmployee() {
               </div>
               <div className="form-group col">
                 <label htmlFor="status">Status:</label>
-                <select
+                <input 
+                  type="text"
                   name="status"
                   id="status"
                   onChange={handleChange}
-                  defaultValue={formData.status}
-                >
-                  <option value="1">Aktiv</option>
-                  <option value="0">Passiv</option>
-                </select>
+                />
               </div>
             </div>
 
-            <div className="form-group col image-upload">
+            <div className="image-upload col-4 ">
               <img src={imageBase64} className="image-preview" />
-              <Button variant="outlined" component="label">
-                Upload photo
-                <input
-                  hidden
-                  type="file"
-                  name="image"
-                  size="medium"
-                  id="image"
-                  className="image-upload-input"
-                  sx={{ borderRadius: "1px solid #000" }}
-                  onChange={handleFileChange}
-                />
-              </Button>
+              <div className="row ms-4">
+                <div className="col-6">
+                  <Button variant="outlined" component="label">
+                    Şəkil yüklə
+                    <input
+                      hidden
+                      type="file"
+                      name="image"
+                      size="medium"
+                      id="image"
+                      className="image-upload-input"
+                      sx={{ borderRadius: "1px solid #000" }}
+                      onChange={handleFileChange}
+                    />
+                  </Button>
+                </div>
+                <div className="col-5 delete-image-button">
+                  <Button
+                    variant="outlined"
+                    component="label"
+                    color="error"
+                    onClick={handleClickOpen}
+                  >
+                    Şəkli sil
+                  </Button>
+                </div>
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"Şəkil silinsin?"}
+                  </DialogTitle>
+                  <DialogContent></DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose}>Ləğv et</Button>
+                    <Button onClick={handleFileDelete} autoFocus>
+                      Razı
+                    </Button>
+                  </DialogActions>
+                </Dialog>
+              </div>
               <br />
             </div>
             <div className="form-group col-12">

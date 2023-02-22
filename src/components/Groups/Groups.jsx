@@ -17,8 +17,8 @@ import useDocumentTitle from "../tools/useDocumentTitle";
 function Groups() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const groups = useContext(AuthContext)
-  const loading = useContext(AuthContext)
+  const groups = useContext(AuthContext)?.groups?.groups;
+  const loading = useContext(AuthContext);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -29,11 +29,13 @@ function Groups() {
   const searchForm = (searchTerm) => {
     console.log(searchTerm);
   };
-  useDocumentTitle("Qruplar")
+  useDocumentTitle("Qruplar");
   return (
     <div>
-      <h2>Qruplar</h2>
-      <SearchForm onSearch={searchForm} />
+      <div className="section-title">
+        <h2>Qruplar</h2>
+      </div>
+      <SearchForm onSearch={searchForm} placeHolder="Qrup adına görə axtarış" />
       <div className="d-flex justify-content-end ">
         <Link to="/addgroup" className="teacher-add-link">
           Qrup əlavə et
@@ -52,20 +54,25 @@ function Groups() {
                     Kurs
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
-                    Müəllimin adı
+                    Tələbə sayı
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
-                    Dərs saatı
+                    Müəllim
+                  </TableCell>
+                  <TableCell align="left" colSpan={3}>
+                    Mentor
+                  </TableCell>
+                  <TableCell align="left" colSpan={3}>
+                    Dərs qrafiki
+                  </TableCell>
+                  <TableCell align="left" colSpan={3}>
+                    Dərs otağı
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
                     Başlama tarixi
                   </TableCell>
                   <TableCell align="left" colSpan={3}>
                     Bitmə tarixi
-                  </TableCell>
-                  <TableCell align="left" colSpan={3}></TableCell>
-                  <TableCell align="left" colSpan={3}>
-                    Əməliyyatlar
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -99,8 +106,8 @@ function Groups() {
                         </TableCell>
                       </TableRow>
                     ))
-                  : groups?.groups.groups
-                      .slice(
+                  : groups
+                      ?.slice(
                         page * rowsPerPage,
                         page * rowsPerPage + rowsPerPage
                       )
@@ -113,16 +120,38 @@ function Groups() {
                             {item.course_name}
                           </TableCell>
                           <TableCell align="left" colSpan={3}>
+                            23
+                          </TableCell>
+                          <TableCell align="left" colSpan={3}>
                             {item.teacher_name}
                           </TableCell>
                           <TableCell align="left" colSpan={3}>
-                            {item.lectureDate}
+                            Ümid
+                          </TableCell>
+                          <TableCell align="left" colSpan={3}>
+                            1-3-5 15:00
+                          </TableCell>
+                          <TableCell align="left" colSpan={3}>
+                            905 Yaşıl otaq
                           </TableCell>
                           <TableCell align="left" colSpan={3}>
                             {item.start_date}
                           </TableCell>
                           <TableCell align="left" colSpan={3}>
                             {item.end_date}
+                          </TableCell>
+                          <TableCell
+                            align="left"
+                            colSpan={4}
+                            sx={{ py: 1, px: 0 }}
+                          >
+                            <div className="table-btn-edit">
+                              <button>
+                                <Link to={`/groups/${item.id}`}>
+                                  Qrup tələbələri
+                                </Link>
+                              </button>
+                            </div>
                           </TableCell>
                           <TableCell
                             align="left"
