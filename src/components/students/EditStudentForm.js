@@ -12,7 +12,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import InputMask from "react-input-mask";
 import useDocumentTitle from "../tools/useDocumentTitle";
-import profilePhoto from "../../imgs/profile-photo.jpeg";
 function EditForm() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -116,7 +115,7 @@ function EditForm() {
         });
         setFormData(student[0]);
       });
-  }, [userId]);
+  }, [userId, token]);
 
   const handleChange = (event) => {
     if (event.target.name === "fin") {
@@ -145,6 +144,7 @@ function EditForm() {
     setImageBase64("");
     imageRef.current.value = "";
   };
+
   useEffect(() => {
     axios
       .get("https://div.globalsoft.az/api/courses", {
@@ -189,6 +189,7 @@ function EditForm() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+
       })
       .then((response) => {
         setStatus(response.status);
@@ -200,6 +201,7 @@ function EditForm() {
         setErrorStatus(error.response.status);
       });
   };
+
 
   const handleDelete = (event) => {
     event.preventDefault();

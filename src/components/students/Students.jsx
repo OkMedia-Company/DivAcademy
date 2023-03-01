@@ -55,10 +55,19 @@ const Students = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
   const handleSearch = (searchQuery) => {
-    const filteredStudents = students.filter((student) =>
-      student.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    /* Search students by name, surname or phone number */
+    const filteredStudents = students.filter((student) => {
+      return (
+        student.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        student.phone.includes(searchQuery)
+      );
+    });
+    if (filteredStudents.length === 0) {
+      setStudents(students)
+    }
     setStudents(filteredStudents);
   };
   const handleSortClick = (key) => {
@@ -72,6 +81,7 @@ const Students = () => {
       direction = "descending";
     }
     setSortConfig({ key, direction });
+    setStudents(sortedStudents)
   };
   const sortedStudents = useMemo(() => {
     let sortedStudents = [...students];
@@ -88,7 +98,6 @@ const Students = () => {
     }
     return sortedStudents;
   }, [students, sortConfig]);
-  console.log(sortedStudents);
   useDocumentTitle("Tələbələr");
   return (
     <div className="students-page">
@@ -274,7 +283,7 @@ const Students = () => {
                       </TableCell>
                     </TableRow>
                   ))
-                  : sortedStudents
+                  : students
                     .slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage
