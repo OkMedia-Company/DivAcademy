@@ -4,11 +4,10 @@ import useDocumentTitle from '../tools/useDocumentTitle'
 function Classrooms() {
 
 
-    useDocumentTitle("Dərs otaqları")
+  useDocumentTitle("Dərs otaqları")
   return (
     <div>
-        Dərs otaqları
-
+      Dərs otaqları
     </div>
   )
 }

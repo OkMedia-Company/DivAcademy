@@ -123,3 +123,24 @@
   width: 500px;
   border-radius: 5px;
 }
+
+
+.absence-status-good {
+  background-color: #00ff00;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.absence-status-normal {
+  background-color: #ffff00;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.absence-status-bad {
+  background-color: #ff0000;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}

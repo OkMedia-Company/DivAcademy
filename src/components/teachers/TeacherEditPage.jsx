@@ -10,6 +10,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import validationSchema from "../tools/Validation";
 function TeacherEditPage() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -17,6 +18,7 @@ function TeacherEditPage() {
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
   let navigate = useNavigate();
@@ -49,7 +51,7 @@ function TeacherEditPage() {
     setSelectedOption(selectedOption.value);
     groups.groups.groups?.map((group) => {
       if (selectedOption.value === group.group_code) {
-        formData.graduation_day = group.end_date;
+        return formData.graduation_day = group.end_date;
       }
     });
   };
@@ -74,10 +76,15 @@ function TeacherEditPage() {
         });
         setFormData(teacher[0]);
       });
-  }, [userId]);
+  }, [userId, token]);
+
+
+
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
+
   useEffect(() => {
     if (!imageFile) return;
 

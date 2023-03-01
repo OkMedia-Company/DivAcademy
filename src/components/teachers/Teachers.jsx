@@ -38,7 +38,7 @@ function Teachers() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-      })
+      }) 
       .then((response) => {
         setTeachers(response.data.teachers);
         setLoading(false);

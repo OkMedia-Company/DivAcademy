@@ -69,10 +69,10 @@
 .student-add-link {
   position: absolute;
   right: 15px;
-  background-color: #2e7d32;
+  background-color: #1d9f3a;
   border: 1px solid;
   color: white;
-  padding: 4px 10px;
+  padding: 12px 30px;
   border-radius: 3px;
 }
 .filter-add {
@@ -100,4 +100,23 @@ input[type="date"] {
 }
 .teacher-add-link:hover {
   color: #fff;
+}
+
+
+th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sorting-arrow-down {
+  display: inline-block;
+  font-size: 17px;
+  color: #16b75c;
+  margin-left: 6px;
+}
+.sorting-arrow-up {
+  display: inline-block;
+  font-size: 17px;
+  color: #ff2c2e;
+  margin-left: 6px;
 }

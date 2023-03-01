@@ -19,7 +19,8 @@ function TransactionAdd() {
   const handleSelectChange = (selectedOption) => {
     setFormData({ ...formData, transaction_category_id: selectedOption.value });
   };
-  const transactionCategories = useContext(AuthContext).transactionCategories.transaction_categories;
+  const transactionCategories =
+    useContext(AuthContext).transactionCategories.transaction_categories;
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });

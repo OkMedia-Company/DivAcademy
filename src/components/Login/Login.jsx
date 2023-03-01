@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Formik } from "formik";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import * as Yup from "yup";
 import { useContext } from "react";
@@ -21,7 +21,7 @@ function Login() {
   const currentUser = useContext(AuthContext);
   console.log(currentUser)
   const navigate = useNavigate();
-  const [error,setError] = React.useState("")
+  const [error, setError] = React.useState("")
   const login = async (data) => {
     const config = {
       method: "post",
@@ -30,7 +30,7 @@ function Login() {
         "Content-Type": "application/json",
         Authorization: process.env.REACT_APP_AUTH_TOKEN,
       },
-      data: { 
+      data: {
         email: data.email,
         password: data.password,
       },
@@ -45,7 +45,7 @@ function Login() {
       console.log(error);
     }
   };
- 
+
   useDocumentTitle("Login")
   return (
     <div className="login-main">
@@ -98,7 +98,6 @@ function Login() {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.password}
-                      suggested="current-password"
                       placeholder="Parolunuz"
                       className="form-control"
                     />
@@ -115,7 +114,7 @@ function Login() {
             </div>
           )}
         </Formik>
-        
+
       </div>
     </div>
   );

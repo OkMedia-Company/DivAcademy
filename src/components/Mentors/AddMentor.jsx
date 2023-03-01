@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "@mui/material";
+import { Button } from "@mui/material"; 
 import axios from "axios";
 import validationSchema from "../tools/Validation";
 import useDocumentTitle from "../tools/useDocumentTitle";
@@ -382,30 +382,34 @@ function AddMentorForm() {
                     <br />
                   </div>
                 </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="salary_group">Qrup başına əmək haqqı:</label>
-                  <input
-                    type="text"
-                    name="salary_group"
-                    id="salary_group"
-                    value={formData.salary_group}
-                    onChange={handleChange}
-                  />
-                  <br />
+                <div className="row">
+                  <div className="col-6">
+                    <label htmlFor="salary_group">
+                      Qrup başına əmək haqqı:
+                    </label>
+                    <input
+                      type="text"
+                      name="salary_group"
+                      id="salary_group"
+                      value={formData.salary_group}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="registration_day">
+                      İşə başlama tarixi :
+                    </label>
+                    <input
+                      type="date"
+                      name="registration_day"
+                      id="registration_day"
+                      value={formData.registration_day}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
                 </div>
-                <div className="col-6">
-                  <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                  <input
-                    type="date"
-                    name="registration_day"
-                    id="registration_day"
-                    value={formData.registration_day}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
               </div>
               <div className="image-upload col-4 ">
                 <img src={imageBase64} className="image-preview" />

@@ -44,7 +44,8 @@ function App() {
   const [transactionCategories, setTransactionCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [teachers , setTeachers] = useState([]);
+  const [students, setStudents] = useState([]);
+  const [teachers, setTeachers] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const endpoints = [
@@ -52,6 +53,7 @@ function App() {
       "https://div.globalsoft.az/api/groups",
       "https://div.globalsoft.az/api/transaction_categories",
       "https://div.globalsoft.az/api/teachers",
+      "https://div.globalsoft.az/api/students"
     ];
     const headers = {
       Authorization: `Bearer ${token}`,
@@ -66,9 +68,10 @@ function App() {
       )
     )
       .then((data) => {
-        const [courses, groups, transactionCategories,teachers] = data;
+        const [courses, groups, transactionCategories, teachers, students] = data;
         setCourses(courses);
         setGroups(groups);
+        setStudents(students);
         setTeachers(teachers);
         setTransactionCategories(transactionCategories);
         setLoading(false);
@@ -93,6 +96,8 @@ function App() {
           transactionCategories,
           setTransactionCategories,
           loading,
+          students,
+          setStudents,
           setGroups,
         }}
       >

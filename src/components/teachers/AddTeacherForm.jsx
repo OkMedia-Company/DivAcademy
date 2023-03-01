@@ -59,7 +59,7 @@ function AddTeacherForm() {
     setSelectedOption(selectedOption.value);
     groups.groups.groups?.map((group) => {
       if (selectedOption.value === group.group_code) {
-        formData.graduation_day = group.end_date;
+        return formData.graduation_day = group.end_date;
       }
     });
   };

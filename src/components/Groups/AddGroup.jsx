@@ -303,72 +303,70 @@ function AddGroup() {
               />
             </div>
           </div>
-          <div className="row pt-3">
-            <div className="col-12">
-              <label>Dərs otağı:</label>
-              <Select
-                className="basic-single w-100"
-                styles={{
-                  control: (baseStyles, state) => ({
-                    ...baseStyles,
+          <div className="  pt-3 col-12">
+            <label>Dərs otağı:</label>
+            <Select
+              className=""
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  borderColor: "none",
+                  width: "100% !important",
+                  outline: "none",
+                  boxShadow: "none",
+                  color: "black",
+
+                  "&:hover": {
                     borderColor: "none",
-                    width: "100%",
                     outline: "none",
                     boxShadow: "none",
-                    color: "black",
-
-                    "&:hover": {
-                      borderColor: "none",
-                      outline: "none",
-                      boxShadow: "none",
-                    },
-                  }),
-                }}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  color: "black",
-                  colors: {
-                    ...theme.colors,
-                    primary25: "rgb(242, 242, 242)",
-                    primary: "rgb(242, 242, 242)",
                   },
-                })}
-                classNamePrefix="select"
-                defaultValue={[
-                  {
-                    value: "905 yaşıl otaq",
-                    label: "905 yaşıl otaq",
-                  },
-                ]}
-                isClearable={true}
-                isSearchable={true}
-                name="color"
-                options={[
-                  {
-                    value: "905 yaşıl otaq",
-                    label: "905 yaşıl otaq",
-                  },
-                  {
-                    value: "905 mavi otaq",
-                    label: "905 mavi otaq",
-                  },
-                  {
-                    value: "908 kofeşop otağı",
-                    label: "908 kofeşop otağı",
-                  },
-                ]}
-                placeholder="Müəllimi seçin"
-                onChange={(e) => setSelectedGroupId(e)}
-              />
-            </div>
+                }),
+              }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                color: "black",
+                colors: {
+                  ...theme.colors,
+                  primary25: "rgb(242, 242, 242)",
+                  primary: "rgb(242, 242, 242)",
+                },
+              })}
+              classNamePrefix="select"
+              defaultValue={[
+                {
+                  value: "905 yaşıl otaq",
+                  label: "905 yaşıl otaq",
+                },
+              ]}
+              isClearable={true}
+              isSearchable={true}
+              name="color"
+              options={[
+                {
+                  value: "905 yaşıl otaq",
+                  label: "905 yaşıl otaq",
+                },
+                {
+                  value: "905 mavi otaq",
+                  label: "905 mavi otaq",
+                },
+                {
+                  value: "908 kofeşop otağı",
+                  label: "908 kofeşop otağı",
+                },
+              ]}
+              placeholder="Müəllimi seçin"
+              onChange={(e) => setSelectedGroupId(e)}
+            />
           </div>
           <button type="submit">Qrup əlavə et</button>
           {status && <p>{status}</p>}
           {error && <p>{error}</p>}
         </div>
-      </form>
-    </div>
+      </form >
+    </div >
   );
 }
 
