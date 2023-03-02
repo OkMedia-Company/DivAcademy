@@ -409,25 +409,47 @@ function TeacherEditPage() {
                     />
                     <br />
                   </div>
-                  <div className="col-6">
-                    <label htmlFor="user_type">İstifadəçi tipi:</label>
-                    <input
-                      type="number"
-                      name="user_type"
-                      id="user_type"
-                      value={formData.user_type}
-                      onChange={handleChange}
-                    />
-                    <br />
-                  </div>
+
                   <div className="col-6">
                     <label htmlFor="status">Status:</label>
-                    <input
-                      type="text"
-                      name="status"
-                      id="status"
-                      value={formData.status}
-                      onChange={handleChange}
+                    <Select
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                          color: "black",
+                          width: "100%",
+                          "&:hover": {
+                            borderColor: "none",
+                            outline: "none",
+                            boxShadow: "none",
+                          },
+                        }),
+                      }}
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        width: "100%",
+                        color: "black",
+                        colors: {
+                          ...theme.colors,
+                          primary25: "rgb(242, 242, 242)",
+                          primary: "rgb(242, 242, 242)",
+                        },
+                      })}
+                      classNamePrefix="select"
+                      isClearable={false}
+                      onChange={handleSelectChange}
+                      isSearchable={true}
+                      name="color"
+                      placeholder="Status seçin"
+                      options={[
+                        { value: "Aktiv", label: "Aktiv" },
+                        { value: "Passiv", label: "Passiv" }
+
+                      ]}
                     />
                     <br />
                   </div>

@@ -17,7 +17,7 @@ import { AuthContext } from "../context/Contexts";
 function Courses() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const courses = useContext(AuthContext)?.courses.course;
+  const courses = useContext(AuthContext).cachedData.current.courses.course;
   const loading = useContext(AuthContext);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -73,80 +73,80 @@ function Courses() {
               <TableBody>
                 {loading?.loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
-                      <TableRow key={i}>
-                        <TableCell>
-                          <Skeleton variant="rounded" width={40} height={40} />
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton variant="rounded" width={40} height={40} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                  : courses
+                    ?.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    .map((course) => (
+                      <TableRow key={course.id} hover>
+                        <TableCell sx={{ py: 1, px: 2 }}>
+                          {course.name}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {course.monthly_price} AZN
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {calculateTotalPrice(course)} AZN
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {course.course_duration} ay
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
-                        </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
-                        </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
-                        </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <Link to={`/courses/${course.id}`}>
+                                <CiEdit /> Edit
+                              </Link>
+                            </button>
+                          </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  : courses
-                      ?.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((course) => (
-                        <TableRow key={course.id} hover>
-                          <TableCell sx={{ py: 1, px: 2 }}>
-                            {course.name}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {course.monthly_price} AZN
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {calculateTotalPrice(course)} AZN
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {course.course_duration} ay
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <Link to={`/courses/${course.id}`}>
-                                  <CiEdit /> Edit
-                                </Link>
-                              </button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>

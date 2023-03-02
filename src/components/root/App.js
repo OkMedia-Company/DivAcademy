@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Dashboard from "../dashboard/Dashboard";
 import { Routes, Route } from "react-router-dom";
@@ -46,6 +46,7 @@ function App() {
   const [error, setError] = useState(null);
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const cachedData = useRef({});
   useEffect(() => {
     const token = localStorage.getItem("token");
     const endpoints = [
@@ -73,6 +74,13 @@ function App() {
         setGroups(groups);
         setStudents(students);
         setTeachers(teachers);
+        cachedData.current = {
+          courses,
+          groups,
+          transactionCategories,
+          teachers,
+          students,
+        };
         setTransactionCategories(transactionCategories);
         setLoading(false);
       })
@@ -96,6 +104,7 @@ function App() {
           transactionCategories,
           setTransactionCategories,
           loading,
+          cachedData,
           students,
           setStudents,
           setGroups,

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Alert, Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
+import Select from "react-select"
 function EditEmployee() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -72,6 +73,11 @@ function EditEmployee() {
         console.error(error);
         setError(error.response.data.message);
       });
+  };
+
+
+  const handleSelectChange = (event) => {
+    setFormData({ ...formData, position: event.value });
   };
   const handleDelete = (event) => {
     event.preventDefault();
@@ -189,6 +195,50 @@ function EditEmployee() {
                     id="salary"
                     value={formData.salary}
                     onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className=" col-12">
+                  <label htmlFor="address">Status:</label>
+                  <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderColor: "none",
+                        outline: "none",
+                        boxShadow: "none",
+                        color: "black",
+                        width: "100%",
+                        "&:hover": {
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                        },
+                      }),
+                    }}
+                    theme={(theme) => ({
+                      ...theme,
+                      borderRadius: 0,
+                      width: "100%",
+                      color: "black",
+                      colors: {
+                        ...theme.colors,
+                        primary25: "rgb(242, 242, 242)",
+                        primary: "rgb(242, 242, 242)",
+                      },
+                    })}
+                    classNamePrefix="select"
+                    isClearable={false}
+                    onChange={handleSelectChange}
+                    isSearchable={true}
+                    name="color"
+                    placeholder="Status seçin"
+                    options={[
+                      { value: "Aktiv", label: "Aktiv" },
+                      { value: "Passiv", label: "Passiv" }
+
+                    ]}
                   />
                 </div>
               </div>

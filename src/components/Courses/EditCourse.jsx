@@ -145,7 +145,7 @@ function EditCourse() {
             </div>
             <div className="row">
               <div className="form-group col-6">
-              <Button
+                <Button
                   className="delete-button"
                   variant="contained"
                   color="secondary"
@@ -154,7 +154,7 @@ function EditCourse() {
                   Sil
                 </Button>
               </div>
-              <div className="form-group col-6">
+              <div className="form-group row col-6">
                 <Button type="submit">Yadda saxla</Button>
               </div>
             </div>

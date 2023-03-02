@@ -39,7 +39,7 @@ function AddCourse() {
         setError(error.response.data.message);
       });
   };
-   useDocumentTitle("Kurs əlavə et")
+  useDocumentTitle("Kurs əlavə et")
   return (
     <>
       <h2>Kurs əlavə et</h2>
@@ -74,7 +74,7 @@ function AddCourse() {
               />
             </div>
 
-            <div className="form-group col-12">
+            <div className="form-group  row col-12">
               {error && <p className="error">{error}</p>}
               <Button type="submit">Save</Button>
             </div>
