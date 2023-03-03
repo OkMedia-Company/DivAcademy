@@ -46,7 +46,7 @@ function AddCourse() {
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
-            <div className="main-add-form_input row col-8">
+            <div className="main-add-form_input row ">
               <label htmlFor="name">Kursun adı:</label>
               <input
                 type="text"
@@ -55,7 +55,7 @@ function AddCourse() {
                 onChange={handleChange}
               />
             </div>
-            <div className="main-add-form_input row col-8">
+            <div className="main-add-form_input row ">
               <label htmlFor="monthly_price">Kursun aylıq qiyməti:</label>
               <input
                 type="number"
@@ -64,7 +64,7 @@ function AddCourse() {
                 onChange={handleChange}
               />
             </div>
-            <div className="main-add-form_input row col-8">
+            <div className="main-add-form_input row ">
               <label htmlFor="course_duration">Kursun müddəti (ayla):</label>
               <input
                 type="number"

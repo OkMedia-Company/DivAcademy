@@ -6,11 +6,7 @@ function Classrooms() {
 
   useDocumentTitle("Dərs otaqları")
   return (
-    <div>
-      {/* Create MUI table that will display classrooms with td with classrom names and dates*/}
-
-
-
+    <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -43,54 +39,43 @@ function Classrooms() {
           </TableHead>
           <TableBody>
             <TableRow>
-
               <TableCell component="th" scope="row">
-                1-ci dərs otağı
+                905 Mavi otaq
               </TableCell>
               <TableCell component="th" scope="row">
-                1-ci dərs otağı
+                Yoxdu
               </TableCell>
               <TableCell component="th" scope="row">
-                1-ci dərs otağı
+                Var
               </TableCell>
               <TableCell component="th" scope="row">
-                1-ci dərs otağı
-              </TableCell>
-            </TableRow>
-            <TableRow
-            >
-              <TableCell component="th" scope="row">
-                1-ci dərs otağı
+                Yoxdu
               </TableCell>
             </TableRow>
-            <TableRow
-
-            >
+            <TableRow>
               <TableCell component="th" scope="row">
-                1-ci dərs otağı
+                905 Mavi otaq
               </TableCell>
             </TableRow>
             <TableRow
 
             >
               <TableCell component="th" scope="row">
-                1-ci dərs otağı
+                908 Qırmızı otaq
+              </TableCell>
+            </TableRow>
+            <TableRow
+
+            >
+              <TableCell component="th" scope="row">
+                915 Kofeshop otaq
               </TableCell>
             </TableRow>
 
           </TableBody>
         </Table>
       </TableContainer>
-
-
-
-
-
-
-
-
-
-    </div >
+    </ >
   )
 }
 

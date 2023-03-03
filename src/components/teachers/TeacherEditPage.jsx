@@ -453,17 +453,17 @@ function TeacherEditPage() {
                     />
                     <br />
                   </div>
-                </div>
-                <div className="col-12">
-                  <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                  <input
-                    type="date"
-                    name="registration_day"
-                    id="registration_day"
-                    value={formData.registration_day}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="col-6">
+                    <label htmlFor="registration_day">İşə başlama tarixi :</label>
+                    <input
+                      type="date"
+                      name="registration_day"
+                      id="registration_day"
+                      value={formData.registration_day}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
                 </div>
               </div>
 

@@ -58,6 +58,17 @@ function Birthdays() {
     }
     fetchData();
   }, []);
+
+  function birthDayAgeCalculate(birthDay) {
+    const today = new Date();
+    const birthDate = new Date(birthDay);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
   useDocumentTitle("Ad günləri");
   return (
     <>
@@ -92,84 +103,84 @@ function Birthdays() {
                 <TableBody>
                   {loading
                     ? Array.from({ length: rowsPerPage }, (_, i) => (
-                        <TableRow key={i}>
-                          <TableCell>
-                            <Skeleton
-                              variant="rounded"
-                              width={40}
-                              height={40}
+                      <TableRow key={i}>
+                        <TableCell>
+                          <Skeleton
+                            variant="rounded"
+                            width={40}
+                            height={40}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                      </TableRow>
+                    ))
+                    : birthdayToday
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((birthday) => (
+                        <TableRow key={birthday.id} hover>
+                          <TableCell sx={{ py: 1, px: 2 }}>
+                            <Avatar
+                              src={`https://div.globalsoft.az/${birthday.image}`}
+                              alt={birthday.name}
+                              sx={{ width: 30, height: 30 }}
                             />
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthday.name} {birthday.last_name}
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthday.user_type == 1 ? "Tələbə" : ""}
+                            {birthday.user_type == 2 ? "Müəllim" : ""}
+                            {birthday.user_type == 3 ? "Əməkdaş" : ""}
+                            {birthday.user_type == 4 ? "Məzun" : ""}
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthday.birthday}
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthDayAgeCalculate(birthday.birthday)}
                           </TableCell>
                         </TableRow>
-                      ))
-                    : birthdayToday
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((birthday) => (
-                          <TableRow key={birthday.id} hover>
-                            <TableCell sx={{ py: 1, px: 2 }}>
-                              <Avatar
-                                src={`https://div.globalsoft.az/${birthday.image}`}
-                                alt={birthday.name}
-                                sx={{ width: 30, height: 30 }}
-                              />
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.name} {birthday.last_name}
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.user_type == 1 ? "Tələbə" : ""}
-                              {birthday.user_type == 2 ? "Müəllim" : ""}
-                              {birthday.user_type == 3 ? "Əməkdaş" : ""}
-                              {birthday.user_type == 4 ? "Məzun" : ""}
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.phone}
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.email}
-                            </TableCell>
-                          </TableRow>
-                        ))}
+                      ))}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -221,84 +232,84 @@ function Birthdays() {
                 <TableBody>
                   {loading
                     ? Array.from({ length: rowsPerPage }, (_, i) => (
-                        <TableRow key={i}>
-                          <TableCell>
-                            <Skeleton
-                              variant="rounded"
-                              width={40}
-                              height={40}
+                      <TableRow key={i}>
+                        <TableCell>
+                          <Skeleton
+                            variant="rounded"
+                            width={40}
+                            height={40}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton variant="text" width={150} />
+                        </TableCell>
+                      </TableRow>
+                    ))
+                    : birthdayMonth
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((birthday) => (
+                        <TableRow key={birthday.id} hover>
+                          <TableCell sx={{ py: 1, px: 2 }}>
+                            <Avatar
+                              src={`https://div.globalsoft.az/${birthday.image}`}
+                              alt={birthday.name}
+                              sx={{ width: 30, height: 30 }}
                             />
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthday.name} {birthday.last_name}
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthday.user_type == 1 ? "Tələbə" : ""}
+                            {birthday.user_type == 2 ? "Müəllim" : ""}
+                            {birthday.user_type == 3 ? "Əməkdaş" : ""}
+                            {birthday.user_type == 4 ? "Məzun" : ""}
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthday.birthday}
                           </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
-                          </TableCell>
-                          <TableCell>
-                            <Skeleton variant="text" width={150} />
+                          <TableCell
+                            align="left"
+                            colSpan={3}
+                            sx={{ py: 1, px: 2 }}
+                          >
+                            {birthDayAgeCalculate(birthday.birthday)}
                           </TableCell>
                         </TableRow>
-                      ))
-                    : birthdayMonth
-                        .slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                        .map((birthday) => (
-                          <TableRow key={birthday.id} hover>
-                            <TableCell sx={{ py: 1, px: 2 }}>
-                              <Avatar
-                                src={`https://div.globalsoft.az/${birthday.image}`}
-                                alt={birthday.name}
-                                sx={{ width: 30, height: 30 }}
-                              />
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.name} {birthday.last_name}
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.user_type == 1 ? "Tələbə" : ""}
-                              {birthday.user_type == 2 ? "Müəllim" : ""}
-                              {birthday.user_type == 3 ? "Əməkdaş" : ""}
-                              {birthday.user_type == 4 ? "Məzun" : ""}
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.phone}
-                            </TableCell>
-                            <TableCell
-                              align="left"
-                              colSpan={3}
-                              sx={{ py: 1, px: 2 }}
-                            >
-                              {birthday.email}
-                            </TableCell>
-                          </TableRow>
-                        ))}
+                      ))}
                 </TableBody>
               </Table>
             </TableContainer>

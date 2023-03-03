@@ -56,6 +56,20 @@ const Employee = () => {
     );
     setStudents(filteredStudents);
   };
+  const duration = (end) => {
+    const now = new Date();
+    const endDate = new Date(end);
+    console.log(endDate)
+    const diff = now.getTime() - endDate;
+    const year = 1000 * 60 * 60 * 24 * 365;
+    console.log(endDate);
+    const years = (diff / year);
+    if (years.toFixed(1) == 1.0) {
+      return `1 il`;
+    } else {
+      return `${years.toFixed(1)} il`;
+    }
+  };
   useDocumentTitle("Əmakdaşlar");
   return (
     <div>
@@ -101,114 +115,116 @@ const Employee = () => {
               <TableBody>
                 {loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
-                      <TableRow key={i}>
-                        <TableCell>
-                          <Skeleton variant="rounded" width={40} height={40} />
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton variant="rounded" width={40} height={40} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                  : students
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    .map((employee) => (
+                      <TableRow key={employee.id} hover>
+                        <TableCell sx={{ py: 1, px: 2 }}>
+                          <Avatar
+                            src={`https://div.globalsoft.az/${employee.image}`}
+                            alt={employee.name}
+                            sx={{ width: 30, height: 30 }}
+                          />
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {employee.name} {employee.last_name}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {employee.position}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {
+                            duration(employee.registration_day)
+                          }
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {employee.phone}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {employee.birthday}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <NavLink to={`/employee/${employee.id}`}>
+                                Maaş tarixçəsi
+                              </NavLink>
+                            </button>
+                          </div>
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <NavLink to={`/employee/${employee.id}`}>
+                                <CiEdit /> Edit
+                              </NavLink>
+                            </button>
+                          </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  : students
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((employee) => (
-                        <TableRow key={employee.id} hover>
-                          <TableCell sx={{ py: 1, px: 2 }}>
-                            <Avatar
-                              src={`https://div.globalsoft.az/${employee.image}`}
-                              alt={employee.name}
-                              sx={{ width: 30, height: 30 }}
-                            />
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.name} {employee.last_name} 
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.position}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.registration_day}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.phone}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {employee.birthday}
-                          </TableCell>
-
-                        
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <NavLink to={`/employee/${employee.id}`}>
-                                   Maaş tarixçəsi
-                                </NavLink>
-                              </button>
-                            </div>
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <NavLink to={`/employee/${employee.id}`}>
-                                  <CiEdit /> Edit
-                                </NavLink>
-                              </button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>

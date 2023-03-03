@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchForm from "../tools/SearchForm";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -7,7 +7,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
-import Button from "@mui/material/Button";
 import TableRow from "@mui/material/TableRow";
 import { CiEdit } from "react-icons/ci";
 import { AuthContext } from "../context/Contexts";
@@ -79,108 +78,108 @@ function Groups() {
               <TableBody>
                 {loading?.loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
-                      <TableRow key={i}>
-                        <TableCell>
-                          <Skeleton variant="rounded" width={40} height={40} />
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton variant="rounded" width={40} height={40} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                  : groups
+                    ?.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    .map((item) => (
+                      <TableRow key={item.id} hover>
+                        <TableCell align="left" colSpan={3}>
+                          {item.group_code}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          {item.course_name}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          23
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          {item.teacher_name}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          Ümid
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          1-3-5 15:00
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          905 Yaşıl otaq
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell align="left" colSpan={3}>
+                          {item.start_date}
+                        </TableCell>
+                        <TableCell align="left" colSpan={3}>
+                          {item.end_date}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          colSpan={4}
+                          sx={{ py: 1, px: 0 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <Link to={`/groups/${item.id}`}>
+                                Qrup tələbələri
+                              </Link>
+                            </button>
+                          </div>
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          colSpan={4}
+                          sx={{ py: 1, px: 0 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <Link to={`/groups/${item.id}`}>
+                                <CiEdit /> Edit
+                              </Link>
+                            </button>
+                          </div>
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          colSpan={4}
+                          sx={{ py: 1, px: 0 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <Link to={`/groups/${item.id}/addstudent`}>
+                                Qrupa tələbə əlavə et
+                              </Link>
+                            </button>
+                          </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  : groups
-                      ?.slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((item) => (
-                        <TableRow key={item.id} hover>
-                          <TableCell align="left" colSpan={3}>
-                            {item.group_code}
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            {item.course_name}
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            23
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            {item.teacher_name}
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            Ümid
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            1-3-5 15:00
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            905 Yaşıl otaq
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            {item.start_date}
-                          </TableCell>
-                          <TableCell align="left" colSpan={3}>
-                            {item.end_date}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={4}
-                            sx={{ py: 1, px: 0 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <Link to={`/groups/${item.id}`}>
-                                  Qrup tələbələri
-                                </Link>
-                              </button>
-                            </div>
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={4}
-                            sx={{ py: 1, px: 0 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <Link to={`/groups/${item.id}`}>
-                                  <CiEdit /> Edit
-                                </Link>
-                              </button>
-                            </div>
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={4}
-                            sx={{ py: 1, px: 0 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <Link to={`/groups/${item.id}/addstudent`}>
-                                  Qrupa tələbə əlavə et
-                                </Link>
-                              </button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>

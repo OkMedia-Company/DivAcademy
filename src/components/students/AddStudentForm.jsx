@@ -443,53 +443,7 @@ const Form = () => {
                   <br />
                 </div>
               </div>
-              <div className=" row">
 
-                <div className=" col-6">
-                  <label htmlFor="status">Status:</label>
-                  <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        color: "black",
-                        width: "100%",
-                        "&:hover": {
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                        },
-                      }),
-                    }}
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 0,
-                      width: "100%",
-                      color: "black",
-                      colors: {
-                        ...theme.colors,
-                        primary25: "rgb(242, 242, 242)",
-                        primary: "rgb(242, 242, 242)",
-                      },
-                    })}
-                    classNamePrefix="select"
-                    isClearable={false}
-                    onChange={handleSelectChange}
-                    isSearchable={true}
-                    name="color"
-                    placeholder="Status seçin"
-                    options={[
-                      { value: "Aktiv", label: "Aktiv" },
-                      { value: "Passiv", label: "Passiv" }
-
-                    ]}
-                  />
-
-                  <br />
-                </div>
-              </div>
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="birthday"> Doğum tarixi </label>
@@ -759,7 +713,55 @@ const Form = () => {
                   <br />
                 </div>
               </div>
+              <div className=" row">
+
+                <div className=" col-12">
+                  <label htmlFor="status">Status:</label>
+                  <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderColor: "none",
+                        outline: "none",
+                        boxShadow: "none",
+                        color: "black",
+                        width: "100%",
+                        "&:hover": {
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                        },
+                      }),
+                    }}
+                    theme={(theme) => ({
+                      ...theme,
+                      borderRadius: 0,
+                      width: "100%",
+                      color: "black",
+                      colors: {
+                        ...theme.colors,
+                        primary25: "rgb(242, 242, 242)",
+                        primary: "rgb(242, 242, 242)",
+                      },
+                    })}
+                    classNamePrefix="select"
+                    isClearable={false}
+                    onChange={handleSelectChange}
+                    isSearchable={true}
+                    name="color"
+                    placeholder="Status seçin"
+                    options={[
+                      { value: "Aktiv", label: "Aktiv" },
+                      { value: "Passiv", label: "Passiv" }
+
+                    ]}
+                  />
+
+                  <br />
+                </div>
+              </div>
             </div>
+
             <div className="image-upload col-4 ">
               <img src={imageBase64} className="image-preview" />
               <div className="row ms-4">

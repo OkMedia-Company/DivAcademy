@@ -116,7 +116,7 @@ function EditCourse() {
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
-            <div className="main-add-form_input row col-8">
+            <div className="main-add-form_input row ">
               <label htmlFor="name">Kursun adı:</label>
               <input
                 type="text"
@@ -125,7 +125,7 @@ function EditCourse() {
                 onChange={handleChange}
               />
             </div>
-            <div className="main-add-form_input row col-8">
+            <div className="main-add-form_input row ">
               <label htmlFor="monthly_price">Kursun aylıq qiyməti:</label>
               <input
                 type="number"
@@ -134,7 +134,7 @@ function EditCourse() {
                 onChange={handleChange}
               />
             </div>
-            <div className="main-add-form_input row col-8">
+            <div className="main-add-form_input row ">
               <label htmlFor="course_duration">Kursun müddəti (ayla):</label>
               <input
                 type="number"
@@ -143,20 +143,18 @@ function EditCourse() {
                 onChange={handleChange}
               />
             </div>
-            <div className="row">
-              <div className="form-group col-6">
-                <Button
-                  className="delete-button"
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleDelete}
-                >
-                  Sil
-                </Button>
-              </div>
-              <div className="form-group row col-6">
-                <Button type="submit">Yadda saxla</Button>
-              </div>
+            <div className="form-group row col-6">
+              <Button
+                className="delete-button"
+                variant="contained"
+                color="secondary"
+                onClick={handleDelete}
+              >
+                Sil
+              </Button>
+            </div>
+            <div className="form-group row col-6">
+              <Button type="submit">Yadda saxla</Button>
             </div>
           </div>
         </form>

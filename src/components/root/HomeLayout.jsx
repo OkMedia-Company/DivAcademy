@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Sidebar from "../sidebar/Sidebar";
 import Main from "../main/Main";
+import { Outlet } from "react-router-dom";
 const theme = createTheme({
   typography: {
     allVariants: {
@@ -11,6 +12,8 @@ const theme = createTheme({
     },
   },
 });
+
+
 function HomeLayout() {
   return (
     <div>

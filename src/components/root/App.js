@@ -89,6 +89,10 @@ function App() {
         setError(error);
       });
   }, []);
+  useEffect(() => {
+    window.location.pathname === "/" && window.location.replace("/login");
+  }, []);
+
   return (
     <>
       <AuthContext.Provider

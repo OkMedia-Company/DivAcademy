@@ -402,20 +402,20 @@ function AddTeacherForm() {
                     />
                     <br />
                   </div>
+                  <div className="col-6">
+                    <label htmlFor="registration_day">İşə başlama tarixi :</label>
+                    <input
+                      type="date"
+                      name="registration_day"
+                      id="registration_day"
+                      value={formData.registration_day}
+                      onChange={handleChange}
+                    />
+                    <br />
+                  </div>
                 </div>
-                <div className="col-12">
-                  <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                  <input
-                    type="date"
-                    name="registration_day"
-                    id="registration_day"
-                    value={formData.registration_day}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
 
+              </div>
               <div className="image-upload col-4 ">
                 <img src={imageBase64} className="image-preview" />
                 <div className="row ms-4">

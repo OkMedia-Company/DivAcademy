@@ -78,6 +78,8 @@ function EditGroup() {
       lessons: [...groupData.lessons, { week_day: "", time: "" }],
     });
   };
+
+
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
