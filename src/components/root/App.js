@@ -36,6 +36,7 @@ import axios from "axios";
 import Transaction from "../Transaction/Transaction";
 import TransactionAdd from "../Transaction/AddTransaction";
 import AddMentorForm from "../Mentors/AddMentor";
+import EventReserve from "../Classrooms/EventReserve";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -140,6 +141,7 @@ function App() {
                 <Route path="addcourse" element={<AddCourse />} />
                 <Route path="groups" element={<Groups />} />
                 <Route path="classrooms" element={<Classrooms />} />
+                <Route path="eventreserve" element={<EventReserve />} />
                 <Route path="addgroup" element={<AddGroup />} />
                 <Route path="addstudentform" element={<AddStudentForm />} />
                 <Route path="addteacherform" element={<AddTeacherForm />} />

@@ -1,12 +1,20 @@
 import React from 'react'
-import useDocumentTitle from '../tools/useDocumentTitle'
+import useDocumentTitle from '../tools/useDocumentTitle';
+import { NavLink } from 'react-router-dom';
+import { Button } from '@mui/material';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
 function Classrooms() {
-
-
   useDocumentTitle("Dərs otaqları")
   return (
     <>
+      <div className="section-title">
+        <h2>Dərs otaqları</h2>
+      </div>
+      <div className="filter-add-main">
+        <NavLink to="/eventreserve" className="filter-add teacher-add-link">
+          Tədbir üçün rezerv et
+        </NavLink>
+      </div>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
