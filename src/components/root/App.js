@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Dashboard from "../dashboard/Dashboard";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./Pages.css";
 import Students from "../students/Students";
 import Teachers from "../teachers/Teachers";
@@ -35,8 +35,10 @@ import AddTransactionForm from "../TransactionTypes/AddTransactionForm";
 import axios from "axios";
 import Transaction from "../Transaction/Transaction";
 import TransactionAdd from "../Transaction/AddTransaction";
+import { ErrorBoundary } from 'react-error-boundary'
 import AddMentorForm from "../Mentors/AddMentor";
 import EventReserve from "../Classrooms/EventReserve";
+import ErrorFallback from "./ErrorBoundary";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -90,77 +92,85 @@ function App() {
         setError(error);
       });
   }, []);
-  useEffect(() => {
-    window.location.pathname === "/" && window.location.replace("/login");
-  }, []);
+  const navigate = useNavigate();
+  // useEffect(() => {
+  //   window.location.pathname === "/" && window.location.replace("/login");
+  // }, []);
 
   return (
     <>
-      <AuthContext.Provider
-        value={{
-          token,
-          setToken,
-          user,
-          setUser,
-          courses,
-          groups,
-          teachers,
-          error,
-          transactionCategories,
-          setTransactionCategories,
-          loading,
-          cachedData,
-          students,
-          setStudents,
-          setGroups,
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onReset={() => {
+          navigate("/login", { replace: true })
         }}
       >
-        <div className="RoutePages">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/" element={<PrivateRoutes />}>
-              <Route path="/" element={<HomeLayout />}>
-                <Route path="dashboard" element={<Dashboard />} />
-                <Route path="students" element={<Students />} />
-                <Route path="students/:userId" element={<StudentInnerPage />} />
-                <Route path="teachers/:userId" element={<TeacherEditPage />} />
-                <Route path="employee/:userId" element={<EditEmployee />} />
-                <Route path="courses/:userId" element={<EditCourse />} />
-                <Route path="groups/:groupId" element={<EditGroup />} />
-                <Route
-                  path="groups/:groupId/addstudent"
-                  element={<AddToStudentGroup />}
-                />
-                <Route path="teachers" element={<Teachers />} />
-                <Route path="mentors" element={<Mentors />} />
-                <Route path="graduates" element={<Graduates />} />
-                <Route path="birthday" element={<Birthday />} />
-                <Route path="employee" element={<Employees />} />
-                <Route path="courses" element={<Courses />} />
-                <Route path="addcourse" element={<AddCourse />} />
-                <Route path="groups" element={<Groups />} />
-                <Route path="classrooms" element={<Classrooms />} />
-                <Route path="eventreserve" element={<EventReserve />} />
-                <Route path="addgroup" element={<AddGroup />} />
-                <Route path="addstudentform" element={<AddStudentForm />} />
-                <Route path="addteacherform" element={<AddTeacherForm />} />
-                <Route path="addmentorform" element={<AddMentorForm />} />
-                <Route path="addemployee" element={<AddEmployee />} />
-                <Route path="absence" element={<Absence />} />
-                <Route path="incomeoutcometips" element={<TransactionType />} />
-                <Route path="incomeoutcome" element={<Transaction />} />
-                <Route path="incomeoutcomeadd" element={<TransactionAdd />} />
-                <Route
-                  path="addtransactionform"
-                  element={<AddTransactionForm />}
-                />
-                <Route path="*" element={<NotFound />} />
+        <AuthContext.Provider
+          value={{
+            token,
+            setToken,
+            user,
+            setUser,
+            courses,
+            groups,
+            teachers,
+            error,
+            transactionCategories,
+            setTransactionCategories,
+            loading,
+            cachedData,
+            students,
+            setStudents,
+            setGroups,
+          }}
+        >
+          <div className="RoutePages">
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/" element={<PrivateRoutes />}>
+                <Route path="/" element={<HomeLayout />}>
+                  <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="students" element={<Students />} />
+                  <Route path="students/:userId" element={<StudentInnerPage />} />
+                  <Route path="teachers/:userId" element={<TeacherEditPage />} />
+                  <Route path="employee/:userId" element={<EditEmployee />} />
+                  <Route path="courses/:userId" element={<EditCourse />} />
+                  <Route path="groups/:groupId" element={<EditGroup />} />
+                  <Route
+                    path="groups/:groupId/addstudent"
+                    element={<AddToStudentGroup />}
+                  />
+                  <Route path="teachers" element={<Teachers />} />
+                  <Route path="mentors" element={<Mentors />} />
+                  <Route path="graduates" element={<Graduates />} />
+                  <Route path="birthday" element={<Birthday />} />
+                  <Route path="employee" element={<Employees />} />
+                  <Route path="courses" element={<Courses />} />
+                  <Route path="addcourse" element={<AddCourse />} />
+                  <Route path="groups" element={<Groups />} />
+                  <Route path="classrooms" element={<Classrooms />} />
+                  <Route path="eventreserve" element={<EventReserve />} />
+                  <Route path="addgroup" element={<AddGroup />} />
+                  <Route path="addstudentform" element={<AddStudentForm />} />
+                  <Route path="addteacherform" element={<AddTeacherForm />} />
+                  <Route path="addmentorform" element={<AddMentorForm />} />
+                  <Route path="addemployee" element={<AddEmployee />} />
+                  <Route path="absence" element={<Absence />} />
+                  <Route path="incomeoutcometips" element={<TransactionType />} />
+                  <Route path="incomeoutcome" element={<Transaction />} />
+                  <Route path="incomeoutcomeadd" element={<TransactionAdd />} />
+                  <Route
+                    path="addtransactionform"
+                    element={<AddTransactionForm />}
+                  />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
-        </div>
-      </AuthContext.Provider>
+            </Routes>
+          </div>
+        </AuthContext.Provider>
+      </ErrorBoundary>
     </>
   );
 }

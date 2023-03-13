@@ -172,7 +172,7 @@ function TeacherEditPage() {
                       value={formData.name}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className="col-6">
                     <label htmlFor="last_name">Soyad:</label>
@@ -183,7 +183,7 @@ function TeacherEditPage() {
                       value={formData.last_name}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -196,7 +196,7 @@ function TeacherEditPage() {
                       value={formData.father_name}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="id_number">
@@ -213,7 +213,7 @@ function TeacherEditPage() {
                     {errors.id_number && (
                       <div className="error-input">{errors.id_number}</div>
                     )}
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -242,7 +242,7 @@ function TeacherEditPage() {
                       value={formData.birthday}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -273,7 +273,7 @@ function TeacherEditPage() {
                       onChange={handleChange}
                       value={formData.phone}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -302,7 +302,7 @@ function TeacherEditPage() {
                       value={formData.password}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -315,7 +315,7 @@ function TeacherEditPage() {
                       value={formData.university}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="ixtisas">İxtisası:</label>
@@ -326,7 +326,7 @@ function TeacherEditPage() {
                       value={formData.ixtisas}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="university_add_score">Qəbul balı:</label>
@@ -337,7 +337,7 @@ function TeacherEditPage() {
                       value={formData.university_add_score}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="working_place">İş yeri:</label>
@@ -348,7 +348,7 @@ function TeacherEditPage() {
                       value={formData.working_place}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -361,7 +361,7 @@ function TeacherEditPage() {
                       value={formData.vezife}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
 
                   <div className="col-6">
@@ -407,7 +407,7 @@ function TeacherEditPage() {
                         };
                       })}
                     />
-                    <br />
+
                   </div>
 
                   <div className="col-6">
@@ -451,7 +451,7 @@ function TeacherEditPage() {
 
                       ]}
                     />
-                    <br />
+
                   </div>
                   <div className="col-6">
                     <label htmlFor="registration_day">İşə başlama tarixi :</label>
@@ -462,7 +462,7 @@ function TeacherEditPage() {
                       value={formData.registration_day}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
               </div>
@@ -513,9 +513,9 @@ function TeacherEditPage() {
                     </DialogActions>
                   </Dialog>
                 </div>
-                <br />
+
               </div>
-              <br />
+
               {<Alert severity="error" className="mt-3"> {error}</Alert>}
 
               <div className="row mt-2">

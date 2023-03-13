@@ -116,7 +116,7 @@ function Groups() {
                           {item.group_code}
                         </TableCell>
                         <TableCell align="left" colSpan={3}>
-                          {item.course_name}
+                          {item.courses.name}
                         </TableCell>
                         <TableCell align="left" colSpan={3}>
                           23

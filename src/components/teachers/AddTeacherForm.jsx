@@ -121,7 +121,7 @@ function AddTeacherForm() {
                       value={formData.name}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className="col-6">
                     <label htmlFor="last_name">Soyad:</label>
@@ -132,7 +132,7 @@ function AddTeacherForm() {
                       value={formData.last_name}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -145,7 +145,7 @@ function AddTeacherForm() {
                       value={formData.father_name}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="id_number">
@@ -162,7 +162,7 @@ function AddTeacherForm() {
                     {errors.id_number && (
                       <div className="error-input">{errors.id_number}</div>
                     )}
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -191,7 +191,7 @@ function AddTeacherForm() {
                       value={formData.birthday}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -222,7 +222,7 @@ function AddTeacherForm() {
                       onChange={handleChange}
                       value={formData.phone}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -251,7 +251,7 @@ function AddTeacherForm() {
                       value={formData.password}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -264,7 +264,7 @@ function AddTeacherForm() {
                       value={formData.university}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="ixtisas">İxtisası:</label>
@@ -275,7 +275,7 @@ function AddTeacherForm() {
                       value={formData.ixtisas}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="university_add_score">Qəbul balı:</label>
@@ -286,7 +286,7 @@ function AddTeacherForm() {
                       value={formData.university_add_score}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                   <div className=" col-6">
                     <label htmlFor="working_place">İş yeri:</label>
@@ -297,7 +297,7 @@ function AddTeacherForm() {
                       value={formData.working_place}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
                 <div className="row">
@@ -310,7 +310,7 @@ function AddTeacherForm() {
                       value={formData.vezife}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
 
                   <div className="col-6">
@@ -356,7 +356,7 @@ function AddTeacherForm() {
                         };
                       })}
                     />
-                    <br />
+
                   </div>
 
                   <div className="col-6">
@@ -400,7 +400,7 @@ function AddTeacherForm() {
 
                       ]}
                     />
-                    <br />
+
                   </div>
                   <div className="col-6">
                     <label htmlFor="registration_day">İşə başlama tarixi :</label>
@@ -411,7 +411,7 @@ function AddTeacherForm() {
                       value={formData.registration_day}
                       onChange={handleChange}
                     />
-                    <br />
+
                   </div>
                 </div>
 
@@ -462,9 +462,9 @@ function AddTeacherForm() {
                     </DialogActions>
                   </Dialog>
                 </div>
-                <br />
+
               </div>
-              <br />
+
               <div className="form-error">{error}</div>
               <Button type="submit" variant="contained" color="primary">
                 Əlavə et

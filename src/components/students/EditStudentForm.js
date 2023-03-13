@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRef } from "react";
 import "./AddStudentForm.css";
 import axios from "axios";
+import React from "react"
 import { Alert, Button, Skeleton } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
@@ -11,7 +12,20 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import InputMask from "react-input-mask";
+
+import dayjs from 'dayjs';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import defaultAvatar from "../../imgs/defaultAvatar.png"
+
 import useDocumentTitle from "../tools/useDocumentTitle";
+import { useDropzone } from "react-dropzone";
 function EditForm() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -21,12 +35,20 @@ function EditForm() {
   const [errorStatus, setErrorStatus] = useState("");
   const [courses, setCourses] = useState([]);
   const [groups, setGroups] = useState([]);
+  const [student, setStudent] = useState([]);
   const imageRef = useRef(null);
 
   const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const handleClickOpen = () => {
     setOpen(true);
+  };
+  const handleDateChange = (date) => {
+    formData.birthday = dayjs(date).format("DD-MM-YYYY");
+  };
+  const handleDateChanges = (newDate) => {
+    console.log(dayjs(newDate).format("DD-MM-YYYY"));
+    setDate(dayjs(newDate).format("DD-MM-YYYY"));
   };
   const handleClose = () => {
     setOpen(false);
@@ -52,7 +74,18 @@ function EditForm() {
   const handleCourseChange = (selectedOption) => {
     formData.course = selectedOption.map((course) => course.value);
   };
+  const onDrop = useCallback(acceptedFiles => {
+    acceptedFiles.forEach(file => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImageBase64(reader.result);
+        formData.image = imageBase64;
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
   const [selectedOption, setSelectedOption] = useState("");
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption.value);
@@ -102,22 +135,24 @@ function EditForm() {
   const token = localStorage.getItem("token");
   useEffect(() => {
     axios
-      .get(`https://div.globalsoft.az/api/students`, {
+      .get(`https://div.globalsoft.az/api/students/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
+
         },
       })
       .then((response) => {
-        const student = response.data.students.filter((item) => {
-          return item.id == userId;
-        });
-        setFormData(student[0]);
+        setFormData(response.data.students[0]);
+      }
+      )
+      .catch((error) => {
+        console.log(error);
       });
   }, [userId, token]);
-
   const handleChange = (event) => {
+
     if (event.target.name === "fin") {
       event.target.value = event.target.value.toUpperCase();
     }
@@ -228,7 +263,7 @@ function EditForm() {
   useDocumentTitle(
     `Tələbə düzəlişi - ${formData?.name} ${formData?.last_name}`
   );
-  if (!formData?.id) {
+  if (!student) {
     return (
       <div className="pt-5">
         <Skeleton variant="text" sx={{ fontSize: "1rem" }} animation="wave" />
@@ -247,316 +282,7 @@ function EditForm() {
   return (
     <>
       <h2>Tələbə düzəlişi</h2>
-      {/* <div className="main-add-form">
-        <form onSubmit={handleSubmit}>
-          <div className="main-add-form-inner row">
-            <div className=" main-add-form_input col-8">
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="name">Ad:</label>
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="last_name">Soyad:</label>
-                  <input
-                    type="text"
-                    name="last_name"
-                    id="last_name"
-                    value={formData.last_name}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="father_name">Ata adı:</label>
-                  <input
-                    type="text"
-                    name="father_name"
-                    id="father_name"
-                    value={formData.father_name}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="phone">Telefon:</label>
-                  <InputMask
-                    name="phone"
-                    id="phone"
-                    alwaysShowMask={true}
-                    prefix="+994"
-                    mask="+\9\9\4\ (99) 999-99-99"
-                    onChange={handleChange}
-                    value={formData.phone}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="email">E-mail:</label>
-                  <input
-                    type="text"
-                    name="email"
-                    id="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
 
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="password">Parol </label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="birthday">Doğum tarixi:</label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    value={formData.birthday}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="group">Qrup:</label>
-                  <input
-                    type="text"
-                    name="group"
-                    id="group"
-                    value={formData.group}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="course">Kurs:</label>
-                  <input
-                    type="text"
-                    name="course"
-                    id="course"
-                    value={formData.course}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="status">Status:</label>
-                  <input
-                    type="text"
-                    name="status"
-                    id="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="start_date">Qeydiyyat tarixi:</label>
-                  <input
-                    type="date"
-                    name="start_date"
-                    id="start_date"
-                    value={formData.registration_day}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="end_date">Referans:</label>
-                  <input
-                    type="text"
-                    name="end_date"
-                    id="end_date"
-                    value={formData.reference}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="end_date">Diplom seriya nömrəsi:</label>
-                  <input
-                    type="text"
-                    name="end_date"
-                    id="end_date"
-                    value={formData.diploma_sn}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="university">Universiteti:</label>
-                  <input
-                    type="text"
-                    name="university"
-                    id="university"
-                    value={formData.university}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="Workplace">İş yeri:</label>
-                  <input
-                    type="text"
-                    name="Workplace"
-                    id="Workplace"
-                    value={formData.workplace}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-
-                <div className="col-6">
-                  <label htmlFor="payment">Universitet giriş balı:</label>
-                  <input
-                    type="number"
-                    name="payment"
-                    id="payment"
-                    value={formData.university_add_score}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-6">
-                  <label htmlFor="payment_date">Növbəti ödəniş tarixi:</label>
-                  <input
-                    type="date"
-                    name="payment_date"
-                    id="payment_date"
-                    value={formData.next_payment_date}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className="col-6">
-                  <label htmlFor="payment_date">Dərs cədvəli:</label>
-                  <input
-                    type="text"
-                    name="payment_date"
-                    id="payment_date"
-                    value={formData.lesson_table}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-
-              <label htmlFor="payment_date">Is diploma:</label>
-              <input
-                type="text"
-                name="payment_date"
-                id="payment_date"
-                value={formData.is_diploma}
-                onChange={handleChange}
-              />
-              <br />
-            </div>
-            <div className="image-upload row col-4">
-              <img ref={imageRef} src={imageBase64} className="image-preview" />
-              <div className="row ms-4">
-                <div className="col-5">
-                  <Button variant="outlined" component="label">
-                    Şəkil yüklə
-                    <input
-                      hidden
-                      type="file"
-                      name="image"
-                      size="medium"
-                      id="image"
-                      className="image-upload-input"
-                      sx={{ borderRadius: "1px solid #000" }}
-                      onChange={handleFileChange}
-                    />
-                  </Button>
-                </div>
-                <div className="col-5 delete-image-button">
-                  <Button
-                    variant="outlined"
-                    component="label"
-                    color="error"
-                    onClick={handleFileDelete}
-                  >
-                    <BsTrash className="me-1" /> Şəkli sil
-                  </Button>
-                </div>
-              </div>
-              <br />
-            </div>
-            <Alert severity="error" className="mt-2">
-              {error} {errorStatus}
-            </Alert>
-            <div className="row">
-              <div className="col-6">
-                <button type="submit" className="submit-button">
-                  Təsdiq et
-                </button>
-              </div>
-              <div className="col-6">
-                <Button
-                  className="delete-button"
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleClickOpen}
-                >
-                  Sil
-                </Button>
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Tələbə məlumatları silinsin ?"}
-                  </DialogTitle>
-                  <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      Əminsiz ?
-                    </DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Ləğv et</Button>
-                    <Button onClick={handleDelete} autoFocus>
-                      Razı
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div> */}
       <div className="main-add-form">
         <form onSubmit={handleSubmit}>
           <div className="main-add-form-inner row">
@@ -571,7 +297,7 @@ function EditForm() {
                     value={formData.name}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
                 <div className="col-6">
                   <label htmlFor="last_name">Soyad:</label>
@@ -582,7 +308,7 @@ function EditForm() {
                     value={formData.last_name}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
               </div>
               <div className=" row">
@@ -595,7 +321,7 @@ function EditForm() {
                     value={formData.father_name}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
                 <div className=" col-6">
                   <label htmlFor="id_number">Şəxsiyyət vəsiqəsi nömrəsi:</label>
@@ -610,7 +336,7 @@ function EditForm() {
                   {errors.id_number && (
                     <div className="error-input">{errors.id_number}</div>
                   )}
-                  <br />
+
                 </div>
               </div>
               <div className="row">
@@ -631,6 +357,50 @@ function EditForm() {
                   }
                 </div>
                 <div className=" col-6">
+                  <label htmlFor="birthday"> Doğum tarixi </label>
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChange}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
+
+                </div>
+
+              </div>
+              <div className=" row">
+                <div className="col-6">
+                  <label htmlFor="password">Hesabın şifrəsi: </label>
+                  <input
+                    type="text"
+                    name="password"
+                    id="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="phone">Mobil nömrə:</label>
+                  <InputMask
+                    name="phone"
+                    id="phone"
+                    alwaysShowMask={true}
+                    prefix="+994"
+                    mask="+\9\9\4999999999"
+                    onChange={handleChange}
+                    value={formData.phone}
+                  />
+
+                </div>
+
+              </div>
+              <div className=" row">
+                <div className=" col-6">
                   <label htmlFor="email"> Şəxsi email:</label>
                   <input
                     type="email"
@@ -645,18 +415,6 @@ function EditForm() {
                       {errors.email && errors.email}
                     </div>
                   }
-                </div>
-              </div>
-              <div className=" row">
-                <div className="col-6">
-                  <label htmlFor="password">Email şifrəsi: </label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
                 </div>
                 <div className=" col-6">
                   <label htmlFor="edu_email"> Edu email :</label>
@@ -674,34 +432,96 @@ function EditForm() {
                     </div>
                   }
                 </div>
+
+              </div>
+              <div className=" row">
+                <div className="col-6">
+                  <label htmlFor="email_password">Edu email şifrəsi: </label>
+                  <input
+                    type="text"
+                    name="email_password"
+                    id="email_password"
+                    value={formData.email_password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="university">Universiteti:</label>
+                  <input
+                    type="text"
+                    name="university"
+                    id="university"
+                    value={formData.university}
+                    onChange={handleChange}
+                  />
+
+                </div>
               </div>
               <div className=" row">
                 <div className=" col-6">
-                  <label htmlFor="phone">Mobil nömrə:</label>
-                  <InputMask
-                    name="phone"
-                    id="phone"
-                    alwaysShowMask={true}
-                    prefix="+994"
-                    mask="+\9\9\4\ (99) 999-99-99"
+                  <label htmlFor="ixtisas">İxtisası:</label>
+                  <input
+                    type="text"
+                    name="ixtisas"
+                    id="ixtisas"
+                    value={formData.ixtisas}
                     onChange={handleChange}
-                    value={formData.phone}
                   />
-                  <br />
+
                 </div>
+                <div className=" col-6">
+                  <label htmlFor="university_add_score">Qəbul balı:</label>
+                  <input
+                    type="text"
+                    name="university_add_score"
+                    id="university_add_score"
+                    value={formData.university_add_score}
+                    onChange={handleChange}
+                  />
+
+                </div>
+
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="workplace">İş yeri:</label>
+                  <input
+                    type="text"
+                    name="workplace"
+                    id="workplace"
+                    value={formData.workplace}
+                    onChange={handleChange}
+                  />
+
+                </div>
+
+                <div className=" col-6">
+                  <label htmlFor="next_payment_date">Vəzifə</label>
+                  <input
+                    type="text"
+                    name="vezife"
+                    id="vezife"
+                    value={formData.vezife}
+                    onChange={handleChange}
+                  />
+
+                </div>
+              </div>
+              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="registration_day">Qeydiyyat günü:</label>
-                  <input
-                    type="date"
-                    name="registration_day"
-                    id="registration_day"
-                    value={formData.registration_day}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
                 </div>
-              </div>
-              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="reference">Referans:</label>
                   <Select
@@ -752,7 +572,7 @@ function EditForm() {
                         value={formData.reference_addition}
                         onChange={handleChange}
                       />
-                      <br />
+
                     </div>
                   )}
                   {selectedOption === "Tanış tövsiyəsi" && (
@@ -765,7 +585,7 @@ function EditForm() {
                         value={formData.reference_addition}
                         onChange={handleChange}
                       />
-                      <br />
+
                     </div>
                   )}
                   {selectedOption === "Korporativ satış" && (
@@ -778,45 +598,13 @@ function EditForm() {
                         value={formData.reference_addition}
                         onChange={handleChange}
                       />
-                      <br />
                     </div>
                   )}
-                  {/* <label htmlFor="reference">Referans:</label>
-                  <input
-                    type="text"
-                    name="reference"
-                    id="reference"
-                    value={formData.reference}
-                    onChange={handleChange}
-                  />
-                  <br /> */}
+
                 </div>
 
-                <div className=" col-6">
-                  <label htmlFor="student_status">Tələbə statusu:</label>
-                  <input
-                    type="text"
-                    name="student_status"
-                    id="student_status"
-                    value={formData.student_status}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
               </div>
-
               <div className=" row">
-                <div className=" col-6">
-                  <label htmlFor="birthday"> Doğum tarixi </label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    value={formData.birthday}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
                 <div className=" col-6">
                   <label htmlFor="course">Kurs:</label>
                   <Select
@@ -857,10 +645,8 @@ function EditForm() {
                       return { value: course.name, label: course.name };
                     })}
                   />
-                  <br />
+
                 </div>
-              </div>
-              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="group">Qrup:</label>
                   <Select
@@ -903,93 +689,41 @@ function EditForm() {
                       };
                     })}
                   />
-                  <br />
+
                 </div>
+
+
+              </div>
+              <div className=" row">
                 <div className=" col-6">
-                  <label htmlFor="lesson_table">Dərs cədvəli:</label>
+                  <label htmlFor="lesson_table">Dərs qrafiki:</label>
                   <input
                     type="text"
                     name="lesson_table"
                     id="lesson_table"
+                    style={{ background: "#bbbbbb" }}
+                    disabled
                     value={formData.lesson_table}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
-              </div>
-              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="graduation_day">Məzun günü:</label>
-                  <input
-                    type="date"
-                    name="graduation_day"
-                    id="graduation_day"
-                    value={formData.graduation_day}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className=" col-6">
-                  <label htmlFor="university">Universiteti:</label>
-                  <input
-                    type="text"
-                    name="university"
-                    id="university"
-                    value={formData.university}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
                 </div>
               </div>
-              <div className=" row">
-                <div className=" col-6">
-                  <label htmlFor="ixtisas">İxtisası:</label>
-                  <input
-                    type="text"
-                    name="ixtisas"
-                    id="ixtisas"
-                    value={formData.ixtisas}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className=" col-6">
-                  <label htmlFor="university_add_score">Qəbul balı:</label>
-                  <input
-                    type="text"
-                    name="university_add_score"
-                    id="university_add_score"
-                    value={formData.university_add_score}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className=" row">
-                <div className=" col-6">
-                  <label htmlFor="workplace">İş yeri:</label>
-                  <input
-                    type="text"
-                    name="workplace"
-                    id="workplace"
-                    value={formData.workplace}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
 
-                <div className=" col-6">
-                  <label htmlFor="next_payment_date">Vəzifə</label>
-                  <input
-                    type="text"
-                    name="vezife"
-                    id="vezife"
-                    value={formData.vezife}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="is_diploma">Sertifikat Vəziyyəti:</label>
@@ -1032,7 +766,7 @@ function EditForm() {
                     ]}
                   />
 
-                  <br />
+
                 </div>
                 <div className=" col-6">
                   <label htmlFor="diploma_sn">Sertifikat seriyası:</label>
@@ -1043,38 +777,46 @@ function EditForm() {
                     value={formData.diploma_sn}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
               </div>
 
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="next_payment_date">Növbəti ödəniş günü</label>
-                  <input
-                    type="date"
-                    disabled={true}
-                    name="next_payment_date"
-                    id="next_payment_date"
-                    value={formData.next_payment_date}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
+
                 </div>
                 <div className=" col-6">
                   <label htmlFor="karyera_merkezi">
                     Karyera mərkəzinin işə düzəltmə tarixi
                   </label>
-                  <input
-                    type="date"
-                    name="karyera_merkezi"
-                    id="karyera_merkezi"
-                    value={formData.karyera_merkezi}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
                 </div>
+              </div>
+              <div className=" row">
 
-                <div className="col-12">
+                <div className=" col-12">
                   <label htmlFor="status">Status:</label>
                   <Select
                     styles={{
@@ -1103,6 +845,11 @@ function EditForm() {
                         primary: "rgb(242, 242, 242)",
                       },
                     })}
+                    defaultValue={
+                      [
+                        { value: "Aktiv", label: "Aktiv" },
+                      ]
+                    }
                     classNamePrefix="select"
                     isClearable={false}
                     onChange={handleSelectChange}
@@ -1115,14 +862,27 @@ function EditForm() {
 
                     ]}
                   />
-                  <br />
+
+
                 </div>
               </div>
             </div>
+
             <div className="image-upload col-4 ">
-              <img src={imageBase64} className="image-preview" />
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {
+                  isDragActive ?
+                    <div
+                      className="image-preview d-flex align-items-center justify-content-center"
+                    >Buraya şəkil sürüşdür</div> :
+                    <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
+
+                }
+              </div>
               <div className="row ms-4">
                 <div className="col-6">
+
                   <Button variant="outlined" component="label">
                     Şəkil yüklə
                     <input
@@ -1165,42 +925,12 @@ function EditForm() {
                   </DialogActions>
                 </Dialog>
               </div>
-              <br />
+
             </div>
             <Alert severity="error" className="mt-2">
               {error}
             </Alert>
-            <div className="row mt-2">
-              <div className="col-6">
-                <button type="submit">Təsdiq et</button>
-              </div>
-              <div className="col-6">
-                <button
-                  type="button"
-                  className="delete-button"
-                  onClick={handleStudentOpen}
-                >
-                  Sil
-                </button>
-                <Dialog
-                  open={open}
-                  onClose={handleStudentClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Tələbə silinsin?"}
-                  </DialogTitle>
-                  <DialogContent></DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleStudentClose}>Ləğv et</Button>
-                    <Button onClick={handleDelete} autoFocus>
-                      Razı
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </div>
-            </div>
+            <button type="submit">Əlavə et</button>
           </div>
         </form>
       </div>

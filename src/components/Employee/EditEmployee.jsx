@@ -246,7 +246,7 @@ function EditEmployee() {
             <div className="form-group col image-upload">
               <img src={imageBase64} className="image-preview" />
               <Button variant="outlined" component="label">
-                Upload photo
+                Şəkil yüklə
                 <input
                   hidden
                   type="file"

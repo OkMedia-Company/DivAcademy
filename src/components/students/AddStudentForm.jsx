@@ -1,16 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./AddStudentForm.css";
 import axios from "axios";
 import { Alert, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
-import Select from "react-select";
+import SelectComponent from "../tools/Select";
 import validationSchema from "../tools/Validation";
+import Select from "react-select";
 import InputMask from "react-input-mask";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from "dayjs";
+import defaultAvatar from "../../imgs/defaultAvatar.png"
+import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
+import { options } from "./options"
+import { handleVerication } from "../tools/handleVerifaction";
+import { useDropzone } from 'react-dropzone';
+import { useCallback } from "react";
+
 const Form = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -19,12 +32,31 @@ const Form = () => {
   const [courses, setCourses] = useState([]);
   const [groups, setGroups] = useState([]);
   const [open, setOpen] = useState(false);
+  const [date, setDate] = useState("");
+
+  const onDrop = useCallback(acceptedFiles => {
+    acceptedFiles.forEach(file => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImageBase64(reader.result);
+        formData.image = imageBase64;
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
   let navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleDateChanges = (newDate) => {
+    console.log(dayjs(newDate).format("DD-MM-YYYY"));
+    setDate(dayjs(newDate).format("DD-MM-YYYY"));
   };
   useEffect(() => {
     if (!imageFile) return;
@@ -75,67 +107,55 @@ const Form = () => {
     name: "Ilqar",
     last_name: "Mammadov",
     father_name: "xelil",
-    birthday: "2022-01-01",
+    birthday: "",
     phone: "",
     email: "xelil1@gmail.com",
     password: 12262222,
-    status: "1",
+    status: "Aktiv",
     id_number: "1234567",
     university: "BDU",
     university_add_score: "444",
-    registration_day: "2022-01-01",
+    registration_day: "",
     reference: "con",
     course: "",
     group: "k45",
-    lesson_table: "derscedveli",
+    lesson_table: "",
     student_status: "1",
     workplace: "baki",
     is_diploma: "1",
     diploma_sn: "123456",
-    graduation_day: "2022-01-01",
+    graduation_day: "",
     next_payment_date: "2022-01-01",
   });
 
-  const handleVerication = async (event) => {
-    const { name, value } = event.target;
-    try {
-      await validationSchema.validateAt(name, formData);
-      setErrors({ ...errors, [name]: "" });
-    } catch (error) {
-      setErrors({ ...errors, [name]: error.message });
-    }
-  };
+
   const token = localStorage.getItem("token");
   const handleChange = async (event) => {
     if (event.target.name === "fin") {
       event.target.value = event.target.value.toUpperCase();
     }
-
     if (event.target.name === "reference_addition") {
       formData.reference = `${selectedOption} | ${event.target.value}`;
     }
-    setFormData({ ...formData, [event.target.name]: event.target.value });
 
-    console.log(formData);
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(formData);
     if (selectedOption === null) {
       formData.reference = `${event.target.value}`;
     }
-    // const phoneWithoutFormat = formData.phone.replace(/[^\d]/g, ''); // removes all non-digits from the phone number
-    const phoneAsNumber = parseInt(formData.phone, 10); // base 10 is specified to ensure proper parsing
+    const phoneAsNumber = parseInt(formData.phone, 10);
     formData.phone = phoneAsNumber;
-    if (imageFile !== null) {
+    if (imageFile != null) {
+      console.log(imageFile);
       const fileReader = new FileReader();
       fileReader.readAsDataURL(imageFile);
       fileReader.onload = () => {
         setImageBase64(fileReader.result);
-        formData.image =
-          "https://images.unsplash.com/photo-1603782637810-95d06f1d5663?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80";
       };
     }
-
     axios
       .post("https://div.globalsoft.az/api/students", formData, {
         headers: {
@@ -164,25 +184,20 @@ const Form = () => {
     // imageRef.current.value = "";
   };
 
-  const options = [
-    { value: "Instagram", label: "Instagram" },
-    { value: "Facebook", label: "Facebook" },
-    { value: "Vebsayt", label: "Vebsayt" },
-    { value: "Tədbir-sərgi", label: "Tədbir-sərgi" },
-    { value: "Demo dərs - seminar", label: "Demo dərs - seminar" },
-    { value: "Tanış tövsiyəsi", label: "Tanış tövsiyəsi" },
-    { value: "DMA", label: "DMA" },
-    { value: "Technest", label: "Technest" },
-    { value: "Korporativ satış", label: "Korporativ satış" },
-    { value: "Digər", label: "Digər" },
-  ];
+
   const handleCourseChange = (selectedOption) => {
     formData.course = selectedOption.value;
   };
+  const handleDateChange = (date) => {
+    formData.birthday = dayjs(date).format("DD-MM-YYYY");
+  };
+
 
   const [selectedOption, setSelectedOption] = useState("");
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption.value);
+    const filteredGroup = groups.filter((group) => group.group_code === selectedOption.value);
+    formData.lesson_table = filteredGroup.map((group) => group.lessons.map((lesson) => lesson.week_day)).join(", ") + " " + filteredGroup.map((group) => group.lessons[0].time).join(", ");
     groups?.map((group) => {
       if (selectedOption.value === group.group_code) {
         formData.graduation_day = group.end_date;
@@ -210,7 +225,7 @@ const Form = () => {
                     value={formData.name}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
                 <div className="col-6">
                   <label htmlFor="last_name">Soyad:</label>
@@ -221,7 +236,7 @@ const Form = () => {
                     value={formData.last_name}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
               </div>
               <div className=" row">
@@ -234,7 +249,7 @@ const Form = () => {
                     value={formData.father_name}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
                 <div className=" col-6">
                   <label htmlFor="id_number">Şəxsiyyət vəsiqəsi nömrəsi:</label>
@@ -249,7 +264,7 @@ const Form = () => {
                   {errors.id_number && (
                     <div className="error-input">{errors.id_number}</div>
                   )}
-                  <br />
+
                 </div>
               </div>
               <div className="row">
@@ -270,6 +285,50 @@ const Form = () => {
                   }
                 </div>
                 <div className=" col-6">
+                  <label htmlFor="birthday"> Doğum tarixi </label>
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChange}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
+
+                </div>
+
+              </div>
+              <div className=" row">
+                <div className="col-6">
+                  <label htmlFor="password">Hesabın şifrəsi: </label>
+                  <input
+                    type="text"
+                    name="password"
+                    id="password"
+                    value={formData?.birthday.split("-").join("")}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="phone">Mobil nömrə:</label>
+                  <InputMask
+                    name="phone"
+                    id="phone"
+                    alwaysShowMask={true}
+                    prefix="+994"
+                    mask="+\9\9\4999999999"
+                    onChange={handleChange}
+                    value={formData.phone}
+                  />
+
+                </div>
+
+              </div>
+              <div className=" row">
+                <div className=" col-6">
                   <label htmlFor="email"> Şəxsi email:</label>
                   <input
                     type="email"
@@ -284,18 +343,6 @@ const Form = () => {
                       {errors.email && errors.email}
                     </div>
                   }
-                </div>
-              </div>
-              <div className=" row">
-                <div className="col-6">
-                  <label htmlFor="password">Email şifrəsi: </label>
-                  <input
-                    type="text"
-                    name="password"
-                    id="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
                 </div>
                 <div className=" col-6">
                   <label htmlFor="edu_email"> Edu email :</label>
@@ -313,34 +360,96 @@ const Form = () => {
                     </div>
                   }
                 </div>
+
+              </div>
+              <div className=" row">
+                <div className="col-6">
+                  <label htmlFor="email_password">Edu email şifrəsi: </label>
+                  <input
+                    type="text"
+                    name="email_password"
+                    id="email_password"
+                    value={formData.email_password}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className=" col-6">
+                  <label htmlFor="university">Universiteti:</label>
+                  <input
+                    type="text"
+                    name="university"
+                    id="university"
+                    value={formData.university}
+                    onChange={handleChange}
+                  />
+
+                </div>
               </div>
               <div className=" row">
                 <div className=" col-6">
-                  <label htmlFor="phone">Mobil nömrə:</label>
-                  <InputMask
-                    name="phone"
-                    id="phone"
-                    alwaysShowMask={true}
-                    prefix="+994"
-                    mask="+\9\9\4999999999"
+                  <label htmlFor="ixtisas">İxtisası:</label>
+                  <input
+                    type="text"
+                    name="ixtisas"
+                    id="ixtisas"
+                    value={formData.ixtisas}
                     onChange={handleChange}
-                    value={formData.phone}
                   />
-                  <br />
+
                 </div>
+                <div className=" col-6">
+                  <label htmlFor="university_add_score">Qəbul balı:</label>
+                  <input
+                    type="text"
+                    name="university_add_score"
+                    id="university_add_score"
+                    value={formData.university_add_score}
+                    onChange={handleChange}
+                  />
+
+                </div>
+
+              </div>
+              <div className=" row">
+                <div className=" col-6">
+                  <label htmlFor="workplace">İş yeri:</label>
+                  <input
+                    type="text"
+                    name="workplace"
+                    id="workplace"
+                    value={formData.workplace}
+                    onChange={handleChange}
+                  />
+
+                </div>
+
+                <div className=" col-6">
+                  <label htmlFor="next_payment_date">Vəzifə</label>
+                  <input
+                    type="text"
+                    name="vezife"
+                    id="vezife"
+                    value={formData.vezife}
+                    onChange={handleChange}
+                  />
+
+                </div>
+              </div>
+              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="registration_day">Qeydiyyat günü:</label>
-                  <input
-                    type="date"
-                    name="registration_day"
-                    id="registration_day"
-                    value={formData.registration_day}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
                 </div>
-              </div>
-              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="reference">Referans:</label>
                   <Select
@@ -391,7 +500,7 @@ const Form = () => {
                         value={formData.reference_addition}
                         onChange={handleChange}
                       />
-                      <br />
+
                     </div>
                   )}
                   {selectedOption === "Tanış tövsiyəsi" && (
@@ -404,7 +513,7 @@ const Form = () => {
                         value={formData.reference_addition}
                         onChange={handleChange}
                       />
-                      <br />
+
                     </div>
                   )}
                   {selectedOption === "Korporativ satış" && (
@@ -417,45 +526,13 @@ const Form = () => {
                         value={formData.reference_addition}
                         onChange={handleChange}
                       />
-                      <br />
                     </div>
                   )}
-                  {/* <label htmlFor="reference">Referans:</label>
-                  <input
-                    type="text"
-                    name="reference"
-                    id="reference"
-                    value={formData.reference}
-                    onChange={handleChange}
-                  />
-                  <br /> */}
+
                 </div>
 
-                <div className=" col-6">
-                  <label htmlFor="student_status">Tələbə statusu:</label>
-                  <input
-                    type="text"
-                    name="student_status"
-                    id="student_status"
-                    value={formData.student_status}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
               </div>
-
               <div className=" row">
-                <div className=" col-6">
-                  <label htmlFor="birthday"> Doğum tarixi </label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    value={formData.birthday}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
                 <div className=" col-6">
                   <label htmlFor="course">Kurs:</label>
                   <Select
@@ -496,10 +573,8 @@ const Form = () => {
                       return { value: course.name, label: course.name };
                     })}
                   />
-                  <br />
+
                 </div>
-              </div>
-              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="group">Qrup:</label>
                   <Select
@@ -542,93 +617,41 @@ const Form = () => {
                       };
                     })}
                   />
-                  <br />
+
                 </div>
+
+
+              </div>
+              <div className=" row">
                 <div className=" col-6">
-                  <label htmlFor="lesson_table">Dərs cədvəli:</label>
+                  <label htmlFor="lesson_table">Dərs qrafiki:</label>
                   <input
                     type="text"
                     name="lesson_table"
                     id="lesson_table"
+                    style={{ background: "#bbbbbb" }}
+                    disabled
                     value={formData.lesson_table}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
-              </div>
-              <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="graduation_day">Məzun günü:</label>
-                  <input
-                    type="date"
-                    name="graduation_day"
-                    id="graduation_day"
-                    value={formData.graduation_day}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className=" col-6">
-                  <label htmlFor="university">Universiteti:</label>
-                  <input
-                    type="text"
-                    name="university"
-                    id="university"
-                    value={formData.university}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
                 </div>
               </div>
-              <div className=" row">
-                <div className=" col-6">
-                  <label htmlFor="ixtisas">İxtisası:</label>
-                  <input
-                    type="text"
-                    name="ixtisas"
-                    id="ixtisas"
-                    value={formData.ixtisas}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-                <div className=" col-6">
-                  <label htmlFor="university_add_score">Qəbul balı:</label>
-                  <input
-                    type="text"
-                    name="university_add_score"
-                    id="university_add_score"
-                    value={formData.university_add_score}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
-              <div className=" row">
-                <div className=" col-6">
-                  <label htmlFor="workplace">İş yeri:</label>
-                  <input
-                    type="text"
-                    name="workplace"
-                    id="workplace"
-                    value={formData.workplace}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
 
-                <div className=" col-6">
-                  <label htmlFor="next_payment_date">Vəzifə</label>
-                  <input
-                    type="text"
-                    name="vezife"
-                    id="vezife"
-                    value={formData.vezife}
-                    onChange={handleChange}
-                  />
-                  <br />
-                </div>
-              </div>
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="is_diploma">Sertifikat Vəziyyəti:</label>
@@ -671,7 +694,7 @@ const Form = () => {
                     ]}
                   />
 
-                  <br />
+
                 </div>
                 <div className=" col-6">
                   <label htmlFor="diploma_sn">Sertifikat seriyası:</label>
@@ -682,90 +705,77 @@ const Form = () => {
                     value={formData.diploma_sn}
                     onChange={handleChange}
                   />
-                  <br />
+
                 </div>
               </div>
 
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="next_payment_date">Növbəti ödəniş günü</label>
-                  <input
-                    type="date"
-                    disabled={true}
-                    name="next_payment_date"
-                    id="next_payment_date"
-                    value={formData.next_payment_date}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
+
                 </div>
                 <div className=" col-6">
                   <label htmlFor="karyera_merkezi">
                     Karyera mərkəzinin işə düzəltmə tarixi
                   </label>
-                  <input
-                    type="date"
-                    name="karyera_merkezi"
-                    id="karyera_merkezi"
-                    value={formData.karyera_merkezi}
-                    onChange={handleChange}
-                  />
-                  <br />
+                  <div className="datepicker">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <Stack spacing={3}>
+                        <MobileDatePicker
+                          inputFormat="DD/MM/YYYY"
+                          onChange={handleDateChanges}
+                          renderInput={(params) => <TextField {...params} />}
+                        />
+                      </Stack>
+                    </LocalizationProvider>
+                  </div>
                 </div>
               </div>
               <div className=" row">
 
                 <div className=" col-12">
                   <label htmlFor="status">Status:</label>
-                  <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        color: "black",
-                        width: "100%",
-                        "&:hover": {
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                        },
-                      }),
-                    }}
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 0,
-                      width: "100%",
-                      color: "black",
-                      colors: {
-                        ...theme.colors,
-                        primary25: "rgb(242, 242, 242)",
-                        primary: "rgb(242, 242, 242)",
-                      },
-                    })}
-                    classNamePrefix="select"
-                    isClearable={false}
-                    onChange={handleSelectChange}
-                    isSearchable={true}
-                    name="color"
-                    placeholder="Status seçin"
+                  <SelectComponent
                     options={[
-                      { value: "Aktiv", label: "Aktiv" },
-                      { value: "Passiv", label: "Passiv" }
-
+                      { value: "1", label: "Aktiv" },
+                      { value: "0", label: "Passiv" },
                     ]}
+                    onChange={handleChange}
+                    value={
+                      { value: "1", label: "Aktiv" }
+                    }
                   />
-
-                  <br />
                 </div>
               </div>
             </div>
 
             <div className="image-upload col-4 ">
-              <img src={imageBase64} className="image-preview" />
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {
+                  isDragActive ?
+                    <div
+                      className="image-preview d-flex align-items-center justify-content-center"
+                      style={{ background: "#bbbbbb", border: "2px dashed #000" }}
+                    >Buraya şəkil sürüşdür</div> :
+                    <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
+
+                }
+              </div>
               <div className="row ms-4">
                 <div className="col-6">
+
                   <Button variant="outlined" component="label">
                     Şəkil yüklə
                     <input
@@ -808,7 +818,7 @@ const Form = () => {
                   </DialogActions>
                 </Dialog>
               </div>
-              <br />
+
             </div>
             <Alert severity="error" className="mt-2">
               {error}

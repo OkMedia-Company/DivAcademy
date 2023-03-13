@@ -177,65 +177,67 @@ function AddEmployee() {
                   />
                 </div>
               </div>
-              <div className="form-group col-6">
-                <label htmlFor="salary">Maaş:</label>
-                <input
-                  type="text"
-                  name="salary"
-                  id="salary"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group col-6">
-                <label htmlFor="registration_day">Qeydiyyat tarixi:</label>
-                <input
-                  type="date"
-                  name="registration_day"
-                  id="registration_day"
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group col">
-                <label htmlFor="status">Status:</label>
-                <Select
-                  styles={{
-                    control: (baseStyles, state) => ({
-                      ...baseStyles,
-                      borderColor: "none",
-                      outline: "none",
-                      boxShadow: "none",
-                      color: "black",
-                      width: "100%",
-                      "&:hover": {
+              <div className=" row ">
+                <div className="form-group col-6">
+                  <label htmlFor="salary">Maaş:</label>
+                  <input
+                    type="text"
+                    name="salary"
+                    id="salary"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group col-6">
+                  <label htmlFor="registration_day">Qeydiyyat tarixi:</label>
+                  <input
+                    type="date"
+                    name="registration_day"
+                    id="registration_day"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group col">
+                  <label htmlFor="status">Status:</label>
+                  <Select
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
                         borderColor: "none",
                         outline: "none",
                         boxShadow: "none",
+                        color: "black",
+                        width: "100%",
+                        "&:hover": {
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                        },
+                      }),
+                    }}
+                    theme={(theme) => ({
+                      ...theme,
+                      borderRadius: 0,
+                      width: "100%",
+                      color: "black",
+                      colors: {
+                        ...theme.colors,
+                        primary25: "rgb(242, 242, 242)",
+                        primary: "rgb(242, 242, 242)",
                       },
-                    }),
-                  }}
-                  theme={(theme) => ({
-                    ...theme,
-                    borderRadius: 0,
-                    width: "100%",
-                    color: "black",
-                    colors: {
-                      ...theme.colors,
-                      primary25: "rgb(242, 242, 242)",
-                      primary: "rgb(242, 242, 242)",
-                    },
-                  })}
-                  classNamePrefix="select"
-                  isClearable={false}
-                  onChange={handleSelectChange}
-                  isSearchable={true}
-                  name="color"
-                  placeholder="Status seçin"
-                  options={[
-                    { value: "Aktiv", label: "Aktiv" },
-                    { value: "Passiv", label: "Passiv" }
+                    })}
+                    classNamePrefix="select"
+                    isClearable={false}
+                    onChange={handleSelectChange}
+                    isSearchable={true}
+                    name="color"
+                    placeholder="Status seçin"
+                    options={[
+                      { value: "Aktiv", label: "Aktiv" },
+                      { value: "Passiv", label: "Passiv" }
 
-                  ]}
-                />
+                    ]}
+                  />
+                </div>
               </div>
             </div>
 

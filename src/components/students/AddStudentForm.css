@@ -47,6 +47,7 @@
   background: #16b75c;
   font-weight: 500;
   font-size: 16px;
+  box-shadow:none;
   line-height: 130%;
   border-radius: 16px;
   border: none;
@@ -83,6 +84,7 @@
   font-size: 14px;
   line-height: 150%;
   color: #bababa;
+  padding-top: 25px;
   margin-bottom: 8px;
   padding-left: 6px;
 }
@@ -101,6 +103,7 @@
   height: 170px;
   border-radius: 50%;
   border: 1px solid #ccc;
+  color: #fff;
   margin: 20px;
 }
 .image-upload label {

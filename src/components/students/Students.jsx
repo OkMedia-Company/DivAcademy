@@ -23,7 +23,7 @@ const Students = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sortingArrow, setSortingArrow] = useState(false)
+  const [sortingArrow, setSortingArrow] = useState(true)
   const [sortConfig, setSortConfig] = useState({
     key: null,
     direction: null,
@@ -31,6 +31,7 @@ const Students = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
@@ -71,7 +72,9 @@ const Students = () => {
     setStudents(filteredStudents);
   };
   const handleSortClick = (key) => {
-    setSortingArrow(!sortingArrow)
+    if (sortConfig.key === key) {
+      setSortingArrow(!sortingArrow)
+    }
     let direction = "ascending";
     if (
       sortConfig &&
@@ -150,86 +153,133 @@ const Students = () => {
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("name")}
+                    id="name"
                   >
                     Ad Soyad
-
-                    {sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : <AiOutlineArrowUp className="sorting-arrow-up" />
+                    {
+                      sortConfig.key === "name" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
                     }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("email")}
                   >
                     Email
+                    {
+                      sortConfig.key === "email" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("phone")}
                   >
                     Telefon
+                    {
+                      sortConfig.key === "phone" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("register_date")}
                   >
                     Qeydiyyat günü
+                    {
+                      sortConfig.key === "register_date" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("status")}
                   >
                     Referans
+                    {
+                      sortConfig.key === "status" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("course")}
                   >
                     Kurs
+                    {
+                      sortConfig.key === "course" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("group_code")}
                   >
                     Qrup kodu
+                    {
+                      sortConfig.key === "group_code" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("group_name")}
                   >
                     Dərs qrafiki
+
+                    {
+                      sortConfig.key === "group_name" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("university")}
                   >
                     Universiteti
+                    {
+                      sortConfig.key === "university" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("faculty")}
                   >
                     Qəbul balı
+                    {
+                      sortConfig.key === "faculty" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("graduation_date")}
                   >
                     Məzun günü
+                    {
+                      sortConfig.key === "graduation_date" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("workplace")}
                   >
                     İş yeri
+                    {
+                      sortConfig.key === "workplace" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("diploma_status")}
                   >
                     Diplom vəziyyəti
+                    {
+                      sortConfig.key === "diploma_status" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("diploma_series")}
                   >
                     Diplom seriyası
+                    {
+                      sortConfig.key === "diploma_series" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("next_payment")}
                   >
                     Növbəti ödəniş
+                    {
+                      sortConfig.key === "next_payment" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}
                     onClick={() => handleSortClick("birth_date")}
                   >
                     Doğum tarixi
+                    {
+                      sortConfig.key === "birth_date" && sortingArrow ? <AiOutlineArrowDown className="sorting-arrow-down" /> : ""
+                    }
                   </TableCell>
                   <TableCell
                     align="left"
@@ -246,11 +296,7 @@ const Students = () => {
                     colSpan={3}
                     sx={{ py: 1, px: 2 }}
                   ></TableCell>
-                  <TableCell
-                    align="left"
-                    colSpan={3}
-                    sx={{ py: 1, px: 2 }}
-                  ></TableCell>
+
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -339,7 +385,7 @@ const Students = () => {
                           {student.registration_day
                             .split("-")
                             .reverse()
-                            .join("-")}
+                            .join(".")}
                         </TableCell>
                         <TableCell
                           align="left"

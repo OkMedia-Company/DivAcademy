@@ -110,13 +110,19 @@ th {
 
 .sorting-arrow-down {
   display: inline-block;
-  font-size: 17px;
+  font-size: 13px;
   color: #16b75c;
   margin-left: 6px;
 }
 .sorting-arrow-up {
   display: inline-block;
-  font-size: 17px;
+  font-size: 13px;
   color: #ff2c2e;
   margin-left: 6px;
+}
+
+
+.datepicker fieldset ,.datepicker input{
+  border:none;
+  cursor: pointer;
 }
