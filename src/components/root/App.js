@@ -77,13 +77,6 @@ function App() {
         setGroups(groups);
         setStudents(students);
         setTeachers(teachers);
-        cachedData.current = {
-          courses,
-          groups,
-          transactionCategories,
-          teachers,
-          students,
-        };
         setTransactionCategories(transactionCategories);
         setLoading(false);
       })
