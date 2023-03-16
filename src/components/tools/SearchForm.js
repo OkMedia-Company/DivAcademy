@@ -4,16 +4,13 @@ import "./SearchForm.css";
 import PropTypes from "prop-types";
 const SearchForm = ({ onSearch, placeHolder }) => {
   const [searchQuery, setSearchQuery] = useState("");
-
   const handleChange = (event) => {
     setSearchQuery(event.target.value);
   };
-
   const handleSearch = (e) => {
     e.preventDefault();
     onSearch(searchQuery);
   };
-
   return (
     <form className="searchForm">
       <input
@@ -29,7 +26,6 @@ const SearchForm = ({ onSearch, placeHolder }) => {
     </form>
   );
 };
-
 SearchForm.propTypes = {
   onSearch: PropTypes.func.isRequired,
 };

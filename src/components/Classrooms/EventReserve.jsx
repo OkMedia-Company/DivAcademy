@@ -159,8 +159,6 @@ function EventReserve() {
                                                 { value: "20:00", label: "20:00" },
                                             ]}
                                         />
-
-
                                     </div>
                                     <div className=" col-12">
                                         <label htmlFor="fin">Tədbirin bitmə saatı:</label>

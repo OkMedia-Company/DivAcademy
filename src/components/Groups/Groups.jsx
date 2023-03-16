@@ -30,7 +30,7 @@ function Groups() {
   };
   useDocumentTitle("Qruplar");
   return (
-    <div>
+    <>
       <div className="section-title">
         <h2>Qruplar</h2>
       </div>
@@ -134,10 +134,10 @@ function Groups() {
                           905 Yaşıl otaq
                         </TableCell>
                         <TableCell align="left" colSpan={3}>
-                          {item.start_date}
+                          {item.start_date.split("-").reverse().join("-")}
                         </TableCell>
                         <TableCell align="left" colSpan={3}>
-                          {item.end_date}
+                          {item.end_date.split("-").reverse().join("-")}
                         </TableCell>
                         <TableCell
                           align="left"
@@ -194,7 +194,7 @@ function Groups() {
           />
         </Paper>
       </div>
-    </div>
+    </>
   );
 }
 

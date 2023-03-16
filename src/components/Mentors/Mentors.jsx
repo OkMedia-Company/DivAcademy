@@ -29,7 +29,6 @@ function Mentors() {
     key: null,
     direction: null,
   });
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

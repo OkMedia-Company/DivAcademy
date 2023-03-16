@@ -39,6 +39,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import AddMentorForm from "../Mentors/AddMentor";
 import EventReserve from "../Classrooms/EventReserve";
 import ErrorFallback from "./ErrorBoundary";
+import AddLessonDayAbsence from "../Absences/AbsenceAdd";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -49,7 +50,6 @@ function App() {
   const [error, setError] = useState(null);
   const [students, setStudents] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const cachedData = useRef({});
   useEffect(() => {
     const token = localStorage.getItem("token");
     const endpoints = [
@@ -77,6 +77,7 @@ function App() {
         setGroups(groups);
         setStudents(students);
         setTeachers(teachers);
+
         setTransactionCategories(transactionCategories);
         setLoading(false);
       })
@@ -111,7 +112,6 @@ function App() {
             transactionCategories,
             setTransactionCategories,
             loading,
-            cachedData,
             students,
             setStudents,
             setGroups,
@@ -150,6 +150,8 @@ function App() {
                   <Route path="addmentorform" element={<AddMentorForm />} />
                   <Route path="addemployee" element={<AddEmployee />} />
                   <Route path="absence" element={<Absence />} />
+                  <Route path="absenceadd" element={<AddLessonDayAbsence />} />
+
                   <Route path="incomeoutcometips" element={<TransactionType />} />
                   <Route path="incomeoutcome" element={<Transaction />} />
                   <Route path="incomeoutcomeadd" element={<TransactionAdd />} />

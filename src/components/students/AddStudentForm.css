@@ -133,3 +133,20 @@
   flex-direction: column;
   align-items: center;
 }
+
+
+.id-number {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.id-number-main {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+ 
+
+.id-number-main .select__indicator-separator {
+  display: none;
+}

@@ -26,6 +26,7 @@ import defaultAvatar from "../../imgs/defaultAvatar.png"
 
 import useDocumentTitle from "../tools/useDocumentTitle";
 import { useDropzone } from "react-dropzone";
+import SelectComponent from "../tools/Select";
 function EditForm() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -325,14 +326,66 @@ function EditForm() {
                 </div>
                 <div className=" col-6">
                   <label htmlFor="id_number">Şəxsiyyət vəsiqəsi nömrəsi:</label>
-                  <input
-                    type="text"
-                    name="id_number"
-                    id="id_number"
-                    onKeyUp={handleVerication}
-                    value={formData.id_number}
-                    onChange={handleChange}
-                  />
+                  <div className="id-number-main">
+                    <div className="id-number-type">
+                      <Select
+                        styles={{
+                          control: (baseStyles, state) => ({
+                            ...baseStyles,
+                            borderColor: "none",
+                            outline: "none",
+                            boxShadow: "none",
+                            backgroundColor: "#f5f5f5 !important",
+                            color: "black",
+                            minHeight: "54px",
+                            width: "100px",
+                            "&:hover": {
+                              borderColor: "none",
+                              outline: "none",
+                              boxShadow: "none",
+                            },
+                          }),
+                        }}
+                        theme={(theme) => ({
+                          ...theme,
+                          borderRadius: 0,
+                          width: "2px !important",
+                          color: "black",
+                          colors: {
+                            ...theme.colors,
+                            primary25: "rgb(242, 242, 242)",
+                            primary: "rgb(242, 242, 242)",
+                          },
+                        })}
+                        classNamePrefix="select"
+                        isClearable={false}
+                        placeholder="AA"
+                        onChange={handleSelectChange}
+                        isSearchable={true}
+                        name="color"
+                        options={
+                          [
+                            { value: "AA", label: "AA" },
+                            { value: "AZE", label: "AZE" },
+                          ]
+                        }
+                      />
+                    </div>
+                    <div className="id-number col-9">
+                      <input
+                        type="text"
+                        name="id_number"
+                        id="id_number"
+                        onKeyUp={handleVerication}
+                        value={formData.id_number}
+                        style={{ borderRadius: "0px 14px 14px 0" }}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.id_number && (
+                      <div className="error-input">{errors.id_number}</div>
+                    )}
+                  </div>
                   {errors.id_number && (
                     <div className="error-input">{errors.id_number}</div>
                   )}
@@ -524,41 +577,10 @@ function EditForm() {
                 </div>
                 <div className=" col-6">
                   <label htmlFor="reference">Referans:</label>
-                  <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        color: "black",
-                        width: "100%",
-                        "&:hover": {
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                        },
-                      }),
-                    }}
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 0,
-                      width: "100%",
-                      color: "black",
-                      colors: {
-                        ...theme.colors,
-                        primary25: "rgb(242, 242, 242)",
-                        primary: "rgb(242, 242, 242)",
-                      },
-                    })}
-                    classNamePrefix="select"
-                    defaultValue={options[0]}
-                    isClearable={false}
-                    onChange={handleSelectChange}
-                    isSearchable={true}
-                    name="color"
-                    placeholder="Referans seçin"
+                  <SelectComponent
+                    placeholer="Referans seçin"
                     options={options}
+                    onChange={handleSelectChange}
                   />
                   {selectedOption === "Tədbir-sərgi" && (
                     <div className="col">
@@ -645,7 +667,6 @@ function EditForm() {
                       return { value: course.name, label: course.name };
                     })}
                   />
-
                 </div>
                 <div className=" col-6">
                   <label htmlFor="group">Qrup:</label>
@@ -727,46 +748,17 @@ function EditForm() {
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="is_diploma">Sertifikat Vəziyyəti:</label>
-                  <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        color: "black",
-                        width: "100%",
-                        "&:hover": {
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                        },
-                      }),
-                    }}
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 0,
-                      width: "100%",
-                      color: "black",
-                      colors: {
-                        ...theme.colors,
-                        primary25: "rgb(242, 242, 242)",
-                        primary: "rgb(242, 242, 242)",
-                      },
-                    })}
-                    classNamePrefix="select"
-                    isClearable={false}
+
+                  <SelectComponent
+                    name="is_diploma"
+                    value={formData.is_diploma}
                     onChange={handleDiplomaChange}
-                    isSearchable={true}
-                    name="color"
                     placeholder="Sertifikat Vəziyyəti"
                     options={[
                       { value: "1", label: "Sertifakat aldı" },
                       { value: "0", label: "Sertifakat verilməyib" },
                     ]}
                   />
-
-
                 </div>
                 <div className=" col-6">
                   <label htmlFor="diploma_sn">Sertifikat seriyası:</label>
@@ -780,7 +772,6 @@ function EditForm() {
 
                 </div>
               </div>
-
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="next_payment_date">Növbəti ödəniş günü</label>
@@ -862,8 +853,6 @@ function EditForm() {
 
                     ]}
                   />
-
-
                 </div>
               </div>
             </div>

@@ -17,7 +17,7 @@ import { AuthContext } from "../context/Contexts";
 function Courses() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const courses = useContext(AuthContext).cachedData.current.courses.course;
+  const courses = useContext(AuthContext).courses.course;
   const loading = useContext(AuthContext);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -35,7 +35,7 @@ function Courses() {
 
   useDocumentTitle("Kurslar");
   return (
-    <div>
+    <>
       <div className="section-title">
         <h2>Kurslar</h2>
       </div>
@@ -161,7 +161,7 @@ function Courses() {
           />
         </Paper>
       </div>
-    </div>
+    </>
   );
 }
 

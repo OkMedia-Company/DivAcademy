@@ -37,6 +37,7 @@ export default function SelectComponent(props) {
                 isClearable={false}
                 onChange={props.onChange}
                 isSearchable={true}
+                isMulti={props.isMulti}
                 name="color"
                 placeholder={props.placeholder}
                 options={props.options}
