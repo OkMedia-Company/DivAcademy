@@ -43,13 +43,13 @@ function Courses() {
       <div className="courses-content pt-4">
         <div className="filter-add-main">
           <Link to="/addcourse">
-            <a className="teacher-add-link">Kurs əlavə et</a>
+            <span className="teacher-add-link">Kurs əlavə et</span>
           </Link>
         </div>
       </div>
       <div className="courses-content pt-5">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
-          <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
+          <TableContainer sx={{ maxHeight: 500, padding: "0" }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>

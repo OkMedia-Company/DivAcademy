@@ -40,6 +40,7 @@ import AddMentorForm from "../Mentors/AddMentor";
 import EventReserve from "../Classrooms/EventReserve";
 import ErrorFallback from "./ErrorBoundary";
 import AddLessonDayAbsence from "../Absences/AbsenceAdd";
+import GroupsStudents from "../Groups/GroupsStudents";
 function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
@@ -90,7 +91,6 @@ function App() {
   // useEffect(() => {
   //   window.location.pathname === "/" && window.location.replace("/login");
   // }, []);
-
   return (
     <>
       <ErrorBoundary
@@ -142,6 +142,7 @@ function App() {
                   <Route path="courses" element={<Courses />} />
                   <Route path="addcourse" element={<AddCourse />} />
                   <Route path="groups" element={<Groups />} />
+                  <Route path="groupstudents/:groupId" element={<GroupsStudents />} />
                   <Route path="classrooms" element={<Classrooms />} />
                   <Route path="eventreserve" element={<EventReserve />} />
                   <Route path="addgroup" element={<AddGroup />} />
@@ -151,7 +152,6 @@ function App() {
                   <Route path="addemployee" element={<AddEmployee />} />
                   <Route path="absence" element={<Absence />} />
                   <Route path="absenceadd" element={<AddLessonDayAbsence />} />
-
                   <Route path="incomeoutcometips" element={<TransactionType />} />
                   <Route path="incomeoutcome" element={<Transaction />} />
                   <Route path="incomeoutcomeadd" element={<TransactionAdd />} />

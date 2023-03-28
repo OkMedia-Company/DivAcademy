@@ -55,7 +55,6 @@ const Form = () => {
     setOpen(false);
   };
   const handleDateChanges = (newDate) => {
-    console.log(dayjs(newDate).format("DD-MM-YYYY"));
     setDate(dayjs(newDate).format("DD-MM-YYYY"));
   };
   useEffect(() => {
@@ -127,8 +126,6 @@ const Form = () => {
     graduation_day: "",
     next_payment_date: "2022-01-01",
   });
-
-
   const token = localStorage.getItem("token");
   const handleChange = async (event) => {
     if (event.target.name === "fin") {

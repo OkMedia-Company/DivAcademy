@@ -11,6 +11,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import validationSchema from "../tools/Validation";
+import DatePicker from "../tools/DatePicker";
 function TeacherEditPage() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -235,14 +236,7 @@ function TeacherEditPage() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <input
-                      type="date"
-                      name="birthday"
-                      id="birthday"
-                      value={formData.birthday}
-                      onChange={handleChange}
-                    />
-
+                    <DatePicker />
                   </div>
                 </div>
                 <div className="row">
@@ -361,9 +355,7 @@ function TeacherEditPage() {
                       value={formData.vezife}
                       onChange={handleChange}
                     />
-
                   </div>
-
                   <div className="col-6">
                     <label htmlFor="current_groups">Cari qrupları:</label>
                     <Select
@@ -409,7 +401,10 @@ function TeacherEditPage() {
                     />
 
                   </div>
-
+                  <div className="col-6">
+                    <label htmlFor="registration_day">İşə başlama tarixi :</label>
+                    <DatePicker />
+                  </div>
                   <div className="col-6">
                     <label htmlFor="status">Status:</label>
                     <Select
@@ -444,6 +439,11 @@ function TeacherEditPage() {
                       onChange={handleSelectChange}
                       isSearchable={true}
                       name="color"
+                      value={
+                        [
+                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
+                        ]
+                      }
                       placeholder="Status seçin"
                       options={[
                         { value: "Aktiv", label: "Aktiv" },
@@ -451,22 +451,9 @@ function TeacherEditPage() {
 
                       ]}
                     />
-
-                  </div>
-                  <div className="col-6">
-                    <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                    <input
-                      type="date"
-                      name="registration_day"
-                      id="registration_day"
-                      value={formData.registration_day}
-                      onChange={handleChange}
-                    />
-
                   </div>
                 </div>
               </div>
-
               <div className="image-upload col-4 ">
                 <img src={imageBase64} className="image-preview" />
                 <div className="row ms-4">

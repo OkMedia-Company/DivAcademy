@@ -4,6 +4,7 @@ import { Alert, Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
 import Select from "react-select"
+import DatePicker from "../tools/DatePicker";
 function EditEmployee() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -145,13 +146,7 @@ function EditEmployee() {
                 </div>
                 <div className=" col-6">
                   <label htmlFor="birthday">Doğum tarixi:</label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    value={formData.birthday}
-                    onChange={handleChange}
-                  />
+                  <DatePicker />
                 </div>
               </div>
               <div className="row">

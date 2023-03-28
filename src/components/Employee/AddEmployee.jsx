@@ -8,6 +8,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Select from "react-select";
+import DatePicker from "../tools/DatePicker";
 function AddEmployee() {
   const [formData, setFormData] = useState({
     image: "",
@@ -127,12 +128,8 @@ function AddEmployee() {
                 </div>
                 <div className=" col-6 ">
                   <label htmlFor="birthday">Doğum tarixi:</label>
-                  <input
-                    type="date"
-                    name="birthday"
-                    id="birthday"
-                    onChange={handleChange}
-                  />
+                  <DatePicker />
+
                 </div>
               </div>
 
@@ -189,12 +186,7 @@ function AddEmployee() {
                 </div>
                 <div className="form-group col-6">
                   <label htmlFor="registration_day">Qeydiyyat tarixi:</label>
-                  <input
-                    type="date"
-                    name="registration_day"
-                    id="registration_day"
-                    onChange={handleChange}
-                  />
+                  <DatePicker />
                 </div>
                 <div className="form-group col">
                   <label htmlFor="status">Status:</label>

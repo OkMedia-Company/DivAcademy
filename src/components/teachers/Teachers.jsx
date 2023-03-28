@@ -38,7 +38,7 @@ function Teachers() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-      }) 
+      })
       .then((response) => {
         setTeachers(response.data.teachers);
         setLoading(false);
@@ -71,7 +71,7 @@ function Teachers() {
       </div>
       <div className="teachers-content pt-3">
         <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
-          <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
+          <TableContainer sx={{ maxHeight: 500, padding: "0" }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
@@ -105,101 +105,101 @@ function Teachers() {
               <TableBody>
                 {loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
-                      <TableRow key={i}>
-                        <TableCell>
-                          <Skeleton variant="rounded" width={40} height={40} />
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton variant="rounded" width={40} height={40} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                  : teachers
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    .map((teacher) => (
+                      <TableRow key={teacher.id} hover>
+                        <TableCell sx={{ py: 1, px: 2 }}>
+                          <Avatar
+                            src={`https://div.globalsoft.az/${teacher.image}`}
+                            alt={teacher.name}
+                            sx={{ width: 30, height: 30 }}
+                          />
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {teacher.name} {teacher.last_name}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {teacher.phone}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {teacher.current_groups}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {teacher.current_groups}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn">
+                            <button> Maaş tarixçəsi</button>
+                          </div>
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
-                        </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <NavLink to={`/teachers/${teacher.id}`}>
+                                <CiEdit /> Edit
+                              </NavLink>
+                            </button>
+                          </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  : teachers
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((teacher) => (
-                        <TableRow key={teacher.id} hover>
-                          <TableCell sx={{ py: 1, px: 2 }}>
-                            <Avatar
-                              src={`https://div.globalsoft.az/${teacher.image}`}
-                              alt={teacher.name}
-                              sx={{ width: 30, height: 30 }}
-                            />
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {teacher.name} {teacher.last_name}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {teacher.phone}
-                          </TableCell>
-                        
-                          
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {teacher.current_groups}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {teacher.current_groups}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn">
-                              <button> Maaş tarixçəsi</button>
-                            </div>
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <NavLink to={`/teachers/${teacher.id}`}>
-                                  <CiEdit /> Edit
-                                </NavLink>
-                              </button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>

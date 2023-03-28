@@ -88,7 +88,7 @@ const Employee = () => {
             <Table
               stickyHeader
               aria-label="sticky table"
-              sx={{ padding: "20px 20px 20px 0" }}
+              sx={{ padding: "20px 0 20px 0" }}
             >
               <TableHead>
                 <TableRow>

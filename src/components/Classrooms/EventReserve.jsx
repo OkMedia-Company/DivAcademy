@@ -11,6 +11,7 @@ function EventReserve() {
         { value: "905 Mavi otaq", label: "905 Mavi otaq" },
         { value: "905 Qara otaq", label: "905 Qara otaq" },
     ];
+
     const formDataValue = {
         room: "",
         event_name: "",
@@ -28,7 +29,8 @@ function EventReserve() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
     const handleVerication = () => {
-    }
+        console.log(formData);
+    };
     useDocumentTitle("Tədbir üçün rezerv et")
     return (
         <>

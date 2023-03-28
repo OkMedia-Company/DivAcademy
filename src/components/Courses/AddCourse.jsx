@@ -13,7 +13,6 @@ function AddCourse() {
   });
   const [error, setError] = useState("");
   let navigate = useNavigate();
-
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -84,5 +83,4 @@ function AddCourse() {
     </>
   );
 }
-
 export default AddCourse;

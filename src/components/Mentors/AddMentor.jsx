@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "@mui/material"; 
+import { Button } from "@mui/material";
 import axios from "axios";
 import validationSchema from "../tools/Validation";
 import useDocumentTitle from "../tools/useDocumentTitle";
@@ -10,6 +10,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import DatePicker from "../tools/DatePicker";
 function AddMentorForm() {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -185,13 +186,7 @@ function AddMentorForm() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <input
-                      type="date"
-                      name="birthday"
-                      id="birthday"
-                      value={formData.birthday}
-                      onChange={handleChange}
-                    />
+                    <DatePicker />
                     <br />
                   </div>
                 </div>
@@ -400,13 +395,8 @@ function AddMentorForm() {
                     <label htmlFor="registration_day">
                       İşə başlama tarixi :
                     </label>
-                    <input
-                      type="date"
-                      name="registration_day"
-                      id="registration_day"
-                      value={formData.registration_day}
-                      onChange={handleChange}
-                    />
+
+                    <DatePicker />
                     <br />
                   </div>
                 </div>

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import SelectComponent from '../tools/Select';
 import dayjs from 'dayjs';
+import DatePicker from '../tools/DatePicker';
 const AddLessonDayAbsence = () => {
     const [selectedOption, setSelectedOption] = useState([]);
     const [students, setStudents] = useState([]);
@@ -55,7 +56,7 @@ const AddLessonDayAbsence = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <h2>Dəvamiyyət əlavə et</h2>
             <div className="main-add-form">
                 <form onSubmit={handleSubmit}>
@@ -99,14 +100,7 @@ const AddLessonDayAbsence = () => {
                                 <div className="row">
                                     <div className="col-6">
                                         <label htmlFor="father_name">Tarix:</label>
-                                        <input
-                                            type="date"
-                                            name="father_name"
-                                            id="father_name"
-                                            value={dayjs(Date.now())}
-                                            onChange={handleChange}
-                                        />
-
+                                        <DatePicker />
                                     </div>
                                     <div className="col-6">
                                         <label htmlFor="mark_lesson">Dərs qiyməti:</label>
@@ -163,7 +157,7 @@ const AddLessonDayAbsence = () => {
                     </div>
                 </form>
             </div >
-        </div >
+        </ >
     );
 };
 

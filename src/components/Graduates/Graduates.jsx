@@ -60,7 +60,7 @@ const Graduates = () => {
   };
   useDocumentTitle("Məzunlar");
   return (
-    <div>
+    <>
       <div className="section-title">
         <h2>Məzunlar</h2>
       </div>
@@ -71,7 +71,7 @@ const Graduates = () => {
             <Table
               stickyHeader
               aria-label="sticky table"
-              sx={{ padding: "20px 20px 20px 0" }}
+              sx={{ padding: "20px 0 20px 0" }}
             >
               <TableHead>
                 <TableRow>
@@ -111,7 +111,6 @@ const Graduates = () => {
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Diplom seriyası
                   </TableCell>
-
                   <TableCell
                     align="left"
                     colSpan={3}
@@ -122,147 +121,147 @@ const Graduates = () => {
               <TableBody>
                 {loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
-                      <TableRow key={i}>
-                        <TableCell>
-                          <Skeleton variant="rounded" width={40} height={40} />
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton variant="rounded" width={40} height={40} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                  : students
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    .map((student) => (
+                      <TableRow key={student.id} hover>
+                        <TableCell sx={{ py: 1, px: 2 }}>
+                          <Avatar
+                            src={`https://div.globalsoft.az/${student.image}`}
+                            alt={student.name}
+                            sx={{ width: 30, height: 30 }}
+                          />
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.name} {student.last_name}{" "}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.phone}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.graduation_day}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.reference}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.course}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.group}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.ders}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.teacher}
+                        </TableCell>
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.workplace}
+                        </TableCell>
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.is_diploma == 1 ? (
+                            <AiOutlineCheckCircle className="table-icon-diplom" />
+                          ) : (
+                            <FcCancel className="table-icon-diplom" />
+                          )}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {student.diploma_sn}
+                        </TableCell>
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <NavLink to={`/students/${student.user_id}`}>
+                                <CiEdit /> Edit
+                              </NavLink>
+                            </button>
+                          </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  : students
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((student) => (
-                        <TableRow key={student.id} hover>
-                          <TableCell sx={{ py: 1, px: 2 }}>
-                            <Avatar
-                              src={`https://div.globalsoft.az/${student.image}`}
-                              alt={student.name}
-                              sx={{ width: 30, height: 30 }}
-                            />
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.name} {student.last_name}{" "}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.phone}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.graduation_day}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.reference}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.course}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.group}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.ders}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.teacher}
-                          </TableCell>
-                       
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.workplace}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                           {student.is_diploma == 1 ? (
-                              <AiOutlineCheckCircle className="table-icon-diplom" />
-                            ) : (
-                              <FcCancel className="table-icon-diplom" />
-                            )}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {student.diploma_sn}
-                          </TableCell>
-
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <NavLink to={`/students/${student.user_id}`}>
-                                  <CiEdit /> Edit
-                                </NavLink>
-                              </button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>
@@ -279,7 +278,7 @@ const Graduates = () => {
           />
         </Paper>
       </div>
-    </div>
+    </>
   );
 };
 

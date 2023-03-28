@@ -146,7 +146,7 @@ function Groups() {
                         >
                           <div className="table-btn-edit">
                             <button>
-                              <Link to={`/groups/${item.id}`}>
+                              <Link to={`/groupstudents/${item.id}`}>
                                 Qrup tələbələri
                               </Link>
                             </button>

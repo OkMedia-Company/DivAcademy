@@ -48,16 +48,16 @@ const Signup = () => {
   const [submit, onSubmited] = useState(false);
   return (
     <>
-    <div className="signup-main">
-    <div className="signup-inner">
-    <h1>Qeydiyyatdan keçin!</h1>
+      <div className="signup-main">
+        <div className="signup-inner">
+          <h1>Qeydiyyatdan keçin!</h1>
           <Formik
             initialValues={{
               firstName: "",
               lastName: "",
               email: "",
-              acceptedTerms: false,  
-              jobType: "",  
+              acceptedTerms: false,
+              jobType: "",
             }}
             validationSchema={Yup.object({
               firstName: Yup.string()
@@ -117,7 +117,7 @@ const Signup = () => {
                 <option value="development">Müəllim</option>
               </MySelect>
 
-             
+
 
               <button type="submit">Submit</button>
             </Form>

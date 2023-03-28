@@ -79,7 +79,7 @@ function Birthdays() {
         <SearchForm onSearch={handleSearchForm} />
         <div className="birthdays-content pt-3">
           <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
-            <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
+            <TableContainer sx={{ maxHeight: 500, padding: "0" }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>
@@ -208,7 +208,7 @@ function Birthdays() {
         <SearchForm onSearch={handleSearchForm} />
         <div className="birthdays-content pt-3">
           <Paper sx={{ width: "100%", overflow: "auto", boxShadow: "none" }}>
-            <TableContainer sx={{ maxHeight: 500, padding: "0 13px" }}>
+            <TableContainer sx={{ maxHeight: 500, padding: "0" }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                   <TableRow>

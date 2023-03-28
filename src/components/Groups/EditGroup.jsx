@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import useDocumentTitle from "../tools/useDocumentTitle";
 import { AuthContext } from "../context/Contexts";
 import Select from "react-select";
+import DatePicker from "../tools/DatePicker";
 function EditGroup() {
   let { groupId } = useParams();
   let navigate = useNavigate();
@@ -272,21 +273,11 @@ function EditGroup() {
           <div className="row pt-3">
             <div className="col-6">
               <label>Başlama tarixi:</label>
-              <input
-                type="date"
-                name="start_date"
-                value={groupData.start_date}
-                onChange={handleChange}
-              />
+              <DatePicker />
             </div>
             <div className="col-6">
               <label>Bitmə tarixi:</label>
-              <input
-                type="date"
-                name="end_date"
-                value={groupData.end_date}
-                onChange={handleChange}
-              />
+              <DatePicker />
             </div>
           </div>
           <div className="row pt-3">

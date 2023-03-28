@@ -10,6 +10,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import DatePicker from "../tools/DatePicker";
+import { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
+import defaultAvatar from "../../imgs/defaultAvatar.png"
+
 function AddTeacherForm() {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -18,6 +23,20 @@ function AddTeacherForm() {
   const [selectedOption, setSelectedOption] = useState(null);
   const groups = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+
+  const onDrop = useCallback(acceptedFiles => {
+    acceptedFiles.forEach(file => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImageBase64(reader.result);
+        formData.image = imageBase64;
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
   const [formData, setFormData] = useState({
     image: "",
     name: "",
@@ -184,13 +203,7 @@ function AddTeacherForm() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <input
-                      type="date"
-                      name="birthday"
-                      id="birthday"
-                      value={formData.birthday}
-                      onChange={handleChange}
-                    />
+                    <DatePicker />
 
                   </div>
                 </div>
@@ -356,9 +369,13 @@ function AddTeacherForm() {
                         };
                       })}
                     />
-
                   </div>
 
+
+                  <div className="col-6">
+                    <label htmlFor="registration_day">İşə başlama tarixi :</label>
+                    <DatePicker />
+                  </div>
                   <div className="col-6">
                     <label htmlFor="status">Status:</label>
                     <Select
@@ -393,6 +410,11 @@ function AddTeacherForm() {
                       onChange={handleSelectChange}
                       isSearchable={true}
                       name="color"
+                      value={
+                        [
+                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
+                        ]
+                      }
                       placeholder="Status seçin"
                       options={[
                         { value: "Aktiv", label: "Aktiv" },
@@ -400,26 +422,25 @@ function AddTeacherForm() {
 
                       ]}
                     />
-
-                  </div>
-                  <div className="col-6">
-                    <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                    <input
-                      type="date"
-                      name="registration_day"
-                      id="registration_day"
-                      value={formData.registration_day}
-                      onChange={handleChange}
-                    />
-
                   </div>
                 </div>
-
               </div>
               <div className="image-upload col-4 ">
-                <img src={imageBase64} className="image-preview" />
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <div
+                        className="image-preview d-flex align-items-center justify-content-center"
+                        style={{ background: "#bbbbbb", border: "2px dashed #000" }}
+                      >Buraya şəkil sürüşdür</div> :
+                      <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
+
+                  }
+                </div>
                 <div className="row ms-4">
                   <div className="col-6">
+
                     <Button variant="outlined" component="label">
                       Şəkil yüklə
                       <input
@@ -462,9 +483,7 @@ function AddTeacherForm() {
                     </DialogActions>
                   </Dialog>
                 </div>
-
               </div>
-
               <div className="form-error">{error}</div>
               <Button type="submit" variant="contained" color="primary">
                 Əlavə et
