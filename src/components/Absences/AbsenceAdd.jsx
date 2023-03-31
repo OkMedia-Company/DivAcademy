@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import SelectComponent from '../tools/Select';
 import dayjs from 'dayjs';
-import DatePicker from '../tools/DatePicker';
+import DatePicker from '../tools/DatePickerComponent';
 const AddLessonDayAbsence = () => {
     const [selectedOption, setSelectedOption] = useState([]);
     const [students, setStudents] = useState([]);

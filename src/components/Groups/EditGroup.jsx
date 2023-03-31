@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import useDocumentTitle from "../tools/useDocumentTitle";
 import { AuthContext } from "../context/Contexts";
 import Select from "react-select";
-import DatePicker from "../tools/DatePicker";
+import DatePicker from "../tools/DatePickerComponent";
 function EditGroup() {
   let { groupId } = useParams();
   let navigate = useNavigate();

@@ -4,7 +4,7 @@ import { Alert, Button } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
 import Select from "react-select"
-import DatePicker from "../tools/DatePicker";
+import DatePicker from "../tools/DatePickerComponent";
 function EditEmployee() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");

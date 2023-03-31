@@ -27,6 +27,7 @@ import defaultAvatar from "../../imgs/defaultAvatar.png"
 import useDocumentTitle from "../tools/useDocumentTitle";
 import { useDropzone } from "react-dropzone";
 import SelectComponent from "../tools/Select";
+import DatePickerComponent from "../tools/DatePickerComponent";
 function EditForm() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -44,20 +45,15 @@ function EditForm() {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleDateChange = (date) => {
-    formData.birthday = dayjs(date).format("DD-MM-YYYY");
+
+  const handleDateChange = (fieldName) => (date, dateString) => {
+    setFormData({
+      ...formData,
+      [fieldName]: `${dayjs(date).format("YYYY.MM.DD")}`,
+    });
   };
-  const handleDateChanges = (newDate) => {
-    console.log(dayjs(newDate).format("DD-MM-YYYY"));
-    setDate(dayjs(newDate).format("DD-MM-YYYY"));
-  };
+
   const handleClose = () => {
-    setOpen(false);
-  };
-  const handleStudentOpen = () => {
-    setOpen(true);
-  };
-  const handleStudentClose = () => {
     setOpen(false);
   };
   const options = [
@@ -412,15 +408,10 @@ function EditForm() {
                 <div className=" col-6">
                   <label htmlFor="birthday"> Doğum tarixi </label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChange}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      value={dayjs(formData.birthday)}
+                      onChange={handleDateChange("birthday")}
+                    />
                   </div>
 
                 </div>
@@ -564,15 +555,10 @@ function EditForm() {
                 <div className=" col-6">
                   <label htmlFor="registration_day">Qeydiyyat günü:</label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      value={dayjs(formData.registration_day)}
+                      onChange={handleDateChange("registration_day")}
+                    />
                   </div>
                 </div>
                 <div className=" col-6">
@@ -727,20 +713,14 @@ function EditForm() {
                     value={formData.lesson_table}
                     onChange={handleChange}
                   />
-
                 </div>
                 <div className=" col-6">
                   <label htmlFor="graduation_day">Məzun günü:</label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      value={dayjs(formData.graduation_day)}
+                      onChange={handleDateChange("graduation_day")}
+                    />
                   </div>
                 </div>
               </div>
@@ -776,15 +756,10 @@ function EditForm() {
                 <div className=" col-6">
                   <label htmlFor="next_payment_date">Növbəti ödəniş günü</label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      value={dayjs(formData.next_payment_date)}
+                      onChange={handleDateChange("next_payment_date")}
+                    />
                   </div>
 
                 </div>
@@ -793,15 +768,10 @@ function EditForm() {
                     Karyera mərkəzinin işə düzəltmə tarixi
                   </label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      value={dayjs(formData.karyera_merkezi)}
+                      onChange={handleDateChange("karyera_merkezi")}
+                    />
                   </div>
                 </div>
               </div>
@@ -919,7 +889,23 @@ function EditForm() {
             <Alert severity="error" className="mt-2">
               {error}
             </Alert>
-            <button type="submit">Əlavə et</button>
+            <div className="row">
+              <div className="col-6">
+                <Button variant="contained" color="primary" type="submit">
+                  Yadda saxla
+                </Button>
+              </div>
+              <div className="col-6">
+                <Button
+                  className="delete-button"
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleDelete}
+                >
+                  Sil
+                </Button>
+              </div>
+            </div>
           </div>
         </form>
       </div>

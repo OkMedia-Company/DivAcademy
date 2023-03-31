@@ -10,10 +10,11 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import DatePicker from "../tools/DatePicker";
+import DatePickerComponent from "../tools/DatePickerComponent";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import defaultAvatar from "../../imgs/defaultAvatar.png"
+import dayjs from "dayjs";
 
 function AddTeacherForm() {
   const [imageFile, setImageFile] = useState(null);
@@ -96,7 +97,12 @@ function AddTeacherForm() {
   const handleFileChange = (event) => {
     setImageFile(event.target.files[0]);
   };
-
+  const handleDateChange = (fieldName) => (date, dateString) => {
+    setFormData({
+      ...formData,
+      [fieldName]: `${dayjs(date).format("DD-MM-YYYY")}`
+    });
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     const fileReader = new FileReader();
@@ -167,21 +173,71 @@ function AddTeacherForm() {
 
                   </div>
                   <div className=" col-6">
-                    <label htmlFor="id_number">
-                      Şəxsiyyət vəsiqəsi nömrəsi:
-                    </label>
-                    <input
-                      type="text"
-                      name="id_number"
-                      id="id_number"
-                      onKeyUp={handleVerication}
-                      value={formData.id_number}
-                      onChange={handleChange}
-                    />
+                    <label htmlFor="id_number">Şəxsiyyət vəsiqəsi nömrəsi:</label>
+                    <div className="id-number-main">
+                      <div className="id-number-type">
+                        <Select
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              borderColor: "none",
+                              outline: "none",
+                              boxShadow: "none",
+                              backgroundColor: "#f5f5f5 !important",
+                              color: "black",
+                              minHeight: "54px",
+                              width: "100px",
+                              "&:hover": {
+                                borderColor: "none",
+                                outline: "none",
+                                boxShadow: "none",
+                              },
+                            }),
+                          }}
+                          theme={(theme) => ({
+                            ...theme,
+                            borderRadius: 0,
+                            width: "2px !important",
+                            color: "black",
+                            colors: {
+                              ...theme.colors,
+                              primary25: "rgb(242, 242, 242)",
+                              primary: "rgb(242, 242, 242)",
+                            },
+                          })}
+                          classNamePrefix="select"
+                          isClearable={false}
+                          placeholder="AA"
+                          onChange={handleSelectChange}
+                          isSearchable={true}
+                          name="color"
+                          defaultValue={
+                            { value: "AA", label: "AA" }
+                          }
+                          options={
+                            [
+                              { value: "AA", label: "AA" },
+                              { value: "AZE", label: "AZE" },
+                            ]
+                          }
+                        />
+                      </div>
+                      <div className="id-number col-9">
+                        <input
+                          type="text"
+                          name="id_number"
+                          id="id_number"
+                          onKeyUp={handleVerication}
+                          value={formData.id_number}
+                          style={{ borderRadius: "0px 14px 14px 0" }}
+                          onChange={handleChange}
+                        />
+                      </div>
+
+                    </div>
                     {errors.id_number && (
                       <div className="error-input">{errors.id_number}</div>
                     )}
-
                   </div>
                 </div>
                 <div className="row">
@@ -203,29 +259,26 @@ function AddTeacherForm() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <DatePicker />
-
+                    <div className="datepicker">
+                      <DatePickerComponent
+                        onChange={handleDateChange("birthday")}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="row">
-                  <div className=" col-6">
-                    <label htmlFor="edu_email"> Edu email :</label>
+                  <div className="col-6">
+                    <label htmlFor="password">Hesabın Şifrəsi:</label>
                     <input
-                      type="edu_email"
-                      name="edu_email"
-                      id="edu_email"
-                      onKeyUp={handleVerication}
-                      value={formData.edu_email}
+                      type="text"
+                      name="password"
+                      id="password"
+                      value={formData.password}
                       onChange={handleChange}
                     />
-                    {
-                      <div className="error-input">
-                        {errors.edu_email && errors.edu_email}
-                      </div>
-                    }
                   </div>
                   <div className="col-6">
-                    <label htmlFor="phone">Telefon:</label>
+                    <label htmlFor="phone">Mobil nömrə::</label>
                     <InputMask
                       name="phone"
                       id="phone"
@@ -255,8 +308,28 @@ function AddTeacherForm() {
                       </div>
                     }
                   </div>
+
+                  <div className=" col-6">
+                    <label htmlFor="edu_email"> Edu email :</label>
+                    <input
+                      type="edu_email"
+                      name="edu_email"
+                      id="edu_email"
+                      onKeyUp={handleVerication}
+                      value={formData.edu_email}
+                      onChange={handleChange}
+                    />
+                    {
+                      <div className="error-input">
+                        {errors.edu_email && errors.edu_email}
+                      </div>
+                    }
+                  </div>
+
+                </div>
+                <div className="row">
                   <div className="col-6">
-                    <label htmlFor="password">Şifrə:</label>
+                    <label htmlFor="password">Edu email Şifrəsi:</label>
                     <input
                       type="password"
                       name="password"
@@ -264,7 +337,53 @@ function AddTeacherForm() {
                       value={formData.password}
                       onChange={handleChange}
                     />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="status">Status:</label>
+                    <Select
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                          color: "black",
+                          width: "100%",
+                          "&:hover": {
+                            borderColor: "none",
+                            outline: "none",
+                            boxShadow: "none",
+                          },
+                        }),
+                      }}
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        width: "100%",
+                        color: "black",
+                        colors: {
+                          ...theme.colors,
+                          primary25: "rgb(242, 242, 242)",
+                          primary: "rgb(242, 242, 242)",
+                        },
+                      })}
+                      classNamePrefix="select"
+                      isClearable={false}
+                      onChange={handleSelectChange}
+                      isSearchable={true}
+                      name="color"
+                      value={
+                        [
+                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
+                        ]
+                      }
+                      placeholder="Status seçin"
+                      options={[
+                        { value: "Aktiv", label: "Aktiv" },
+                        { value: "Passiv", label: "Passiv" }
 
+                      ]}
+                    />
                   </div>
                 </div>
                 <div className="row">
@@ -372,57 +491,15 @@ function AddTeacherForm() {
                   </div>
 
 
-                  <div className="col-6">
+                  <div className="col-12">
                     <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                    <DatePicker />
+                    <div className="datepicker">
+                      <DatePickerComponent
+                        onChange={handleDateChange("registration_day")}
+                      />
+                    </div>
                   </div>
-                  <div className="col-6">
-                    <label htmlFor="status">Status:</label>
-                    <Select
-                      styles={{
-                        control: (baseStyles, state) => ({
-                          ...baseStyles,
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                          color: "black",
-                          width: "100%",
-                          "&:hover": {
-                            borderColor: "none",
-                            outline: "none",
-                            boxShadow: "none",
-                          },
-                        }),
-                      }}
-                      theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        width: "100%",
-                        color: "black",
-                        colors: {
-                          ...theme.colors,
-                          primary25: "rgb(242, 242, 242)",
-                          primary: "rgb(242, 242, 242)",
-                        },
-                      })}
-                      classNamePrefix="select"
-                      isClearable={false}
-                      onChange={handleSelectChange}
-                      isSearchable={true}
-                      name="color"
-                      value={
-                        [
-                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
-                        ]
-                      }
-                      placeholder="Status seçin"
-                      options={[
-                        { value: "Aktiv", label: "Aktiv" },
-                        { value: "Passiv", label: "Passiv" }
 
-                      ]}
-                    />
-                  </div>
                 </div>
               </div>
               <div className="image-upload col-4 ">

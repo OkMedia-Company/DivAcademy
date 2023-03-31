@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "./Groups.css";
 import Select from "react-select";
 import useDocumentTitle from "../tools/useDocumentTitle";
-import DatePicker from "../tools/DatePicker";
+import DatePicker from "../tools/DatePickerComponent";
 function AddGroup() {
   const [courses, setCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");

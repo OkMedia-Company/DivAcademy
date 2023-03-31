@@ -23,3 +23,55 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.ant-picker  {
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+    color: rgba(0, 0, 0, 0.88);
+    font-size: 14px;
+    line-height: 1;
+    list-style: none;
+    width: 100%;
+    font-family: 'Futura';
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    border: none;
+    border-radius: 0 ;
+    transition: border 0.2s,box-shadow 0.2s;
+}
+.ant-picker-input {
+    border: 1px solid #f5f5f5 ;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 100%;
+    color: #000;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #f5f5f5;
+    border-radius: 14px;
+}
+.ant-picker-input input {
+    font-weight: 500 !important;
+
+}
+
+.ant-picker-suffix {
+    font-size: 25px;
+    padding-right: 14px;
+    padding-left: 5px;
+}
+
+ .ant-picker-focused {
+    border: none !important;
+    box-shadow: none;
+ }
+
+ .ant-picker-clear {
+    font-size: 13px;
+    padding-right: 2px;
+ }

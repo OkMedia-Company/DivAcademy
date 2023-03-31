@@ -11,7 +11,12 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import validationSchema from "../tools/Validation";
-import DatePicker from "../tools/DatePicker";
+import DatePicker from "../tools/DatePickerComponent";
+import { useCallback } from "react";
+import defaultAvatar from "../../imgs/defaultAvatar.png"
+
+import { useDropzone } from "react-dropzone";
+import DatePickerComponent from "../tools/DatePickerComponent";
 function TeacherEditPage() {
   const { userId } = useParams();
   const [formData, setFormData] = useState("");
@@ -79,6 +84,19 @@ function TeacherEditPage() {
       });
   }, [userId, token]);
 
+
+  const onDrop = useCallback(acceptedFiles => {
+    acceptedFiles.forEach(file => {
+      const reader = new FileReader()
+      reader.onload = () => {
+        setImageBase64(reader.result);
+        formData.image = imageBase64;
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
 
   const handleChange = (event) => {
@@ -173,7 +191,6 @@ function TeacherEditPage() {
                       value={formData.name}
                       onChange={handleChange}
                     />
-
                   </div>
                   <div className="col-6">
                     <label htmlFor="last_name">Soyad:</label>
@@ -236,28 +253,27 @@ function TeacherEditPage() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <DatePicker />
+                    <DatePickerComponent />
+
                   </div>
                 </div>
                 <div className="row">
-                  <div className=" col-6">
-                    <label htmlFor="edu_email"> Edu email :</label>
+                  <div className="col-6">
+                    <label htmlFor="password">Hesabın Şifrəsi:</label>
                     <input
-                      type="edu_email"
-                      name="edu_email"
-                      id="edu_email"
-                      onKeyUp={handleVerication}
-                      value={formData.edu_email}
+                      type="password"
+                      name="password"
+                      id="password"
+                      value={formData.password}
                       onChange={handleChange}
                     />
-                    {
-                      <div className="error-input">
-                        {errors.edu_email && errors.edu_email}
-                      </div>
-                    }
                   </div>
+
+
+
+
                   <div className="col-6">
-                    <label htmlFor="phone">Telefon:</label>
+                    <label htmlFor="phone">Mobil nömrə::</label>
                     <InputMask
                       name="phone"
                       id="phone"
@@ -287,8 +303,28 @@ function TeacherEditPage() {
                       </div>
                     }
                   </div>
+
+                  <div className=" col-6">
+                    <label htmlFor="edu_email"> Edu email :</label>
+                    <input
+                      type="edu_email"
+                      name="edu_email"
+                      id="edu_email"
+                      onKeyUp={handleVerication}
+                      value={formData.edu_email}
+                      onChange={handleChange}
+                    />
+                    {
+                      <div className="error-input">
+                        {errors.edu_email && errors.edu_email}
+                      </div>
+                    }
+                  </div>
+
+                </div>
+                <div className="row">
                   <div className="col-6">
-                    <label htmlFor="password">Şifrə:</label>
+                    <label htmlFor="password">Edu email Şifrəsi:</label>
                     <input
                       type="password"
                       name="password"
@@ -296,7 +332,53 @@ function TeacherEditPage() {
                       value={formData.password}
                       onChange={handleChange}
                     />
+                  </div>
+                  <div className="col-6">
+                    <label htmlFor="status">Status:</label>
+                    <Select
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                          color: "black",
+                          width: "100%",
+                          "&:hover": {
+                            borderColor: "none",
+                            outline: "none",
+                            boxShadow: "none",
+                          },
+                        }),
+                      }}
+                      theme={(theme) => ({
+                        ...theme,
+                        borderRadius: 0,
+                        width: "100%",
+                        color: "black",
+                        colors: {
+                          ...theme.colors,
+                          primary25: "rgb(242, 242, 242)",
+                          primary: "rgb(242, 242, 242)",
+                        },
+                      })}
+                      classNamePrefix="select"
+                      isClearable={false}
+                      onChange={handleSelectChange}
+                      isSearchable={true}
+                      name="color"
+                      value={
+                        [
+                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
+                        ]
+                      }
+                      placeholder="Status seçin"
+                      options={[
+                        { value: "Aktiv", label: "Aktiv" },
+                        { value: "Passiv", label: "Passiv" }
 
+                      ]}
+                    />
                   </div>
                 </div>
                 <div className="row">
@@ -399,63 +481,27 @@ function TeacherEditPage() {
                         };
                       })}
                     />
-
                   </div>
-                  <div className="col-6">
+                  <div className="col-12">
                     <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                    <DatePicker />
+                    <DatePickerComponent />
                   </div>
-                  <div className="col-6">
-                    <label htmlFor="status">Status:</label>
-                    <Select
-                      styles={{
-                        control: (baseStyles, state) => ({
-                          ...baseStyles,
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                          color: "black",
-                          width: "100%",
-                          "&:hover": {
-                            borderColor: "none",
-                            outline: "none",
-                            boxShadow: "none",
-                          },
-                        }),
-                      }}
-                      theme={(theme) => ({
-                        ...theme,
-                        borderRadius: 0,
-                        width: "100%",
-                        color: "black",
-                        colors: {
-                          ...theme.colors,
-                          primary25: "rgb(242, 242, 242)",
-                          primary: "rgb(242, 242, 242)",
-                        },
-                      })}
-                      classNamePrefix="select"
-                      isClearable={false}
-                      onChange={handleSelectChange}
-                      isSearchable={true}
-                      name="color"
-                      value={
-                        [
-                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
-                        ]
-                      }
-                      placeholder="Status seçin"
-                      options={[
-                        { value: "Aktiv", label: "Aktiv" },
-                        { value: "Passiv", label: "Passiv" }
 
-                      ]}
-                    />
-                  </div>
                 </div>
               </div>
               <div className="image-upload col-4 ">
-                <img src={imageBase64} className="image-preview" />
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  {
+                    isDragActive ?
+                      <div
+                        className="image-preview d-flex align-items-center justify-content-center"
+                        style={{ background: "#bbbbbb", border: "2px dashed #000" }}
+                      >Buraya şəkil sürüşdür</div> :
+                      <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
+
+                  }
+                </div>
                 <div className="row ms-4">
                   <div className="col-6">
                     <Button variant="outlined" component="label">
@@ -489,7 +535,7 @@ function TeacherEditPage() {
                     aria-describedby="alert-dialog-description"
                   >
                     <DialogTitle id="alert-dialog-title">
-                      {"Silinsin?"}
+                      {"Şəkil silinsin?"}
                     </DialogTitle>
                     <DialogContent></DialogContent>
                     <DialogActions>
@@ -500,40 +546,23 @@ function TeacherEditPage() {
                     </DialogActions>
                   </Dialog>
                 </div>
-
               </div>
-
-              {<Alert severity="error" className="mt-3"> {error}</Alert>}
-
-              <div className="row mt-2">
+              <div className="form-error">{error}</div>
+              <div className="row">
                 <div className="col-6">
-                  <button type="submit">Təsdiq et</button>
+                  <Button variant="contained" color="primary" type="submit">
+                    Yadda saxla
+                  </Button>
                 </div>
                 <div className="col-6">
-                  <button
-                    type="button"
+                  <Button
                     className="delete-button"
-                    onClick={handleStudentOpen}
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleDelete}
                   >
                     Sil
-                  </button>
-                  <Dialog
-                    open={open}
-                    onClose={handleStudentClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                  >
-                    <DialogTitle id="alert-dialog-title">
-                      {"Tələbə silinsin?"}
-                    </DialogTitle>
-                    <DialogContent></DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleStudentClose}>Ləğv et</Button>
-                      <Button onClick={handleDelete} autoFocus>
-                        Razı
-                      </Button>
-                    </DialogActions>
-                  </Dialog>
+                  </Button>
                 </div>
               </div>
             </div>

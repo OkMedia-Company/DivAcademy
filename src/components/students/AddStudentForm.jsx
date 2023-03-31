@@ -8,22 +8,14 @@ import SelectComponent from "../tools/Select";
 import validationSchema from "../tools/Validation";
 import Select from "react-select";
 import InputMask from "react-input-mask";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from "dayjs";
 import defaultAvatar from "../../imgs/defaultAvatar.png"
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 import { options } from "./options"
-import { handleVerication } from "../tools/handleVerifaction";
+
 import { useDropzone } from 'react-dropzone';
 import { useCallback } from "react";
-
+import DatePickerComponent from "../tools/DatePickerComponent";
+import DialogBarComponent from "../tools/DialogBarComponent";
 const Form = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -33,7 +25,6 @@ const Form = () => {
   const [groups, setGroups] = useState([]);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
-
   const onDrop = useCallback(acceptedFiles => {
     acceptedFiles.forEach(file => {
       const reader = new FileReader()
@@ -44,19 +35,27 @@ const Form = () => {
       reader.readAsDataURL(file)
     })
   }, [])
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-
-  let navigate = useNavigate();
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
+  const handleVerication = async (event) => {
+    const { name, value } = event.target;
+    try {
+      await validationSchema.validateAt(name, formData);
+      setErrors({ ...errors, [name]: "" });
+    } catch (error) {
+      setErrors({ ...errors, [name]: error.message });
+    }
   };
-  const handleDateChanges = (newDate) => {
-    setDate(dayjs(newDate).format("DD-MM-YYYY"));
+  const handleDateChange = (fieldName) => (date, dateString) => {
+    setFormData({
+      ...formData,
+      [fieldName]: `${dayjs(date).format("DD-MM-YYYY")}`
+    });
   };
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  let navigate = useNavigate();
+
   useEffect(() => {
     if (!imageFile) return;
 
@@ -100,32 +99,39 @@ const Form = () => {
         console.error(error);
       });
   }, []);
-
+  const handleFileDelete = (event) => {
+    event.preventDefault();
+    setOpen(!open);
+    setImageFile("");
+    setImageBase64("");
+    imageRef.current.value = "";
+  };
   const [formData, setFormData] = useState({
     image: "",
-    name: "Ilqar",
-    last_name: "Mammadov",
-    father_name: "xelil",
+    name: "",
+    last_name: "",
+    father_name: "",
     birthday: "",
     phone: "",
-    email: "xelil1@gmail.com",
-    password: 12262222,
+    email: "",
+    password: 0,
     status: "Aktiv",
-    id_number: "1234567",
-    university: "BDU",
-    university_add_score: "444",
+    id_number: "",
+    university: "",
+    university_add_score: "",
     registration_day: "",
-    reference: "con",
+    reference: "",
     course: "",
-    group: "k45",
+    group: "",
     lesson_table: "",
     student_status: "1",
-    workplace: "baki",
-    is_diploma: "1",
-    diploma_sn: "123456",
+    workplace: "",
+    is_diploma: "",
+    diploma_sn: "",
     graduation_day: "",
-    next_payment_date: "2022-01-01",
+    next_payment_date: "",
   });
+
   const token = localStorage.getItem("token");
   const handleChange = async (event) => {
     if (event.target.name === "fin") {
@@ -137,6 +143,7 @@ const Form = () => {
 
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -171,25 +178,9 @@ const Form = () => {
         setError(error.response.data.message);
       });
   };
-  const handleFileDelete = (event) => {
-    setOpen(false);
-
-    event.preventDefault();
-    console.log(imageBase64);
-    setImageFile("");
-    setImageBase64("");
-    // imageRef.current.value = "";
-  };
-
-
   const handleCourseChange = (selectedOption) => {
     formData.course = selectedOption.value;
   };
-  const handleDateChange = (date) => {
-    formData.birthday = dayjs(date).format("DD-MM-YYYY");
-  };
-
-
   const [selectedOption, setSelectedOption] = useState("");
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption.value);
@@ -201,7 +192,6 @@ const Form = () => {
       }
     });
   };
-
 
   const handleDiplomaChange = (selectedOption) => {
     formData.is_diploma = selectedOption.value;
@@ -289,6 +279,9 @@ const Form = () => {
                         onChange={handleSelectChange}
                         isSearchable={true}
                         name="color"
+                        defaultValue={
+                          { value: "AA", label: "AA" }
+                        }
                         options={
                           [
                             { value: "AA", label: "AA" },
@@ -308,10 +301,11 @@ const Form = () => {
                         onChange={handleChange}
                       />
                     </div>
-                    {errors.id_number && (
-                      <div className="error-input">{errors.id_number}</div>
-                    )}
+
                   </div>
+                  {errors.id_number && (
+                    <div className="error-input">{errors.id_number}</div>
+                  )}
                 </div>
               </div>
               <div className="row">
@@ -334,15 +328,9 @@ const Form = () => {
                 <div className=" col-6">
                   <label htmlFor="birthday"> Doğum tarixi </label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChange}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      onChange={handleDateChange('birthday')}
+                    />
                   </div>
 
                 </div>
@@ -372,7 +360,6 @@ const Form = () => {
                   />
 
                 </div>
-
               </div>
               <div className=" row">
                 <div className=" col-6">
@@ -486,15 +473,12 @@ const Form = () => {
                 <div className=" col-6">
                   <label htmlFor="registration_day">Qeydiyyat günü:</label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      onChange={handleDateChange('registration_day')}
+                    />
+
+                  </div>
+                  <div>
                   </div>
                 </div>
                 <div className=" col-6">
@@ -686,15 +670,10 @@ const Form = () => {
                 <div className=" col-6">
                   <label htmlFor="graduation_day">Məzun günü:</label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      onChange={handleDateChange("graduation_day")}
+                    />
+
                   </div>
                 </div>
               </div>
@@ -752,23 +731,16 @@ const Form = () => {
                     value={formData.diploma_sn}
                     onChange={handleChange}
                   />
-
                 </div>
               </div>
-
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="next_payment_date">Növbəti ödəniş günü</label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      onChange={handleDateChange("next_payment_date")}
+                    />
+
                   </div>
 
                 </div>
@@ -777,15 +749,10 @@ const Form = () => {
                     Karyera mərkəzinin işə düzəltmə tarixi
                   </label>
                   <div className="datepicker">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <Stack spacing={3}>
-                        <MobileDatePicker
-                          inputFormat="DD/MM/YYYY"
-                          onChange={handleDateChanges}
-                          renderInput={(params) => <TextField {...params} />}
-                        />
-                      </Stack>
-                    </LocalizationProvider>
+                    <DatePickerComponent
+                      onChange={handleDateChange("karyera_merkezi")}
+                    />
+
                   </div>
                 </div>
               </div>
@@ -817,13 +784,11 @@ const Form = () => {
                       style={{ background: "#bbbbbb", border: "2px dashed #000" }}
                     >Buraya şəkil sürüşdür</div> :
                     <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
-
                 }
               </div>
               <div className="row ms-4">
                 <div className="col-6">
-
-                  <Button variant="outlined" component="label">
+                  <Button variant="outlined" component="label" className="image-upload-btn">
                     Şəkil yüklə
                     <input
                       hidden
@@ -847,29 +812,19 @@ const Form = () => {
                     Şəkli sil
                   </Button>
                 </div>
-                <Dialog
+                <DialogBarComponent
                   open={open}
-                  onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Şəkil silinsin?"}
-                  </DialogTitle>
-                  <DialogContent></DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Ləğv et</Button>
-                    <Button onClick={handleFileDelete} autoFocus>
-                      Razı
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                  setOpen={setOpen}
+                  handleFileDelete={handleFileDelete}
+                  fileName={"fileName"}
+                />
               </div>
-
             </div>
-            <Alert severity="error" className="mt-2">
-              {error}
-            </Alert>
+            {error &&
+              <Alert severity="error" className="mt-2">
+                {error}
+              </Alert>
+            }
             <button type="submit">Əlavə et</button>
           </div>
         </form>

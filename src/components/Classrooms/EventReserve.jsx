@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
 import useDocumentTitle from "../tools/useDocumentTitle";
 import Select from "react-select";
+import DatePicker from "../tools/DatePickerComponent";
 function EventReserve() {
     const handleSelectChange = (e) => {
         setFormData({ ...formData, room: e.value });
@@ -77,11 +77,10 @@ function EventReserve() {
                                             onChange={handleSelectChange}
                                             isSearchable={true}
                                             name="color"
-
                                             placeholder="Otağı seçin"
                                             options={options}
                                         />
-                                        <br />
+
                                     </div>
                                     <div className="col-6">
                                         <label htmlFor="event_name">Tədbirin adı:</label>
@@ -92,7 +91,7 @@ function EventReserve() {
                                             value={formData.event_name}
                                             onChange={handleChange}
                                         />
-                                        <br />
+
                                     </div>
                                 </div>
                                 <div className="row">
@@ -100,15 +99,8 @@ function EventReserve() {
                                         <label htmlFor="start_date">
                                             Tədbirin başlama günü
                                         </label>
-                                        <input
-                                            type="date"
-                                            name="start_date"
-                                            id="start_date"
-                                            value={formData.start_date}
-                                            onChange={handleChange}
-                                        />
+                                        <DatePicker />
 
-                                        <br />
                                     </div>
                                     <div className=" col-6">
                                         <label htmlFor="fin">Tədbirin başlama saatı:</label>
@@ -216,7 +208,7 @@ function EventReserve() {
                                     </div>
                                 </div>
                             </div>
-                            <br />
+
                             {/* <div className="form-error">{error}</div> */}
                             <Button type="submit" variant="contained" color="primary">
                                 Əlavə et
