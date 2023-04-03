@@ -11,7 +11,6 @@ import InputMask from "react-input-mask";
 import dayjs from "dayjs";
 import defaultAvatar from "../../imgs/defaultAvatar.png"
 import { options } from "./options"
-
 import { useDropzone } from 'react-dropzone';
 import { useCallback } from "react";
 import DatePickerComponent from "../tools/DatePickerComponent";
@@ -25,12 +24,15 @@ const Form = () => {
   const [groups, setGroups] = useState([]);
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState("");
+  const [idSerialNumber, setIdSerialNumber] = useState("");
+  const [idSerial, setIdSerial] = useState("AA");
   const onDrop = useCallback(acceptedFiles => {
     acceptedFiles.forEach(file => {
       const reader = new FileReader()
-      reader.onload = () => {
-        setImageBase64(reader.result);
-        formData.image = imageBase64;
+      reader.onload = (reader) => {
+        console.log()
+        setImageBase64(reader.currentTarget.result);
+        formData.image = reader.currentTarget.result;
       }
       reader.readAsDataURL(file)
     })
@@ -47,10 +49,12 @@ const Form = () => {
       setErrors({ ...errors, [name]: error.message });
     }
   };
+
   const handleDateChange = (fieldName) => (date, dateString) => {
+
     setFormData({
       ...formData,
-      [fieldName]: `${dayjs(date).format("DD-MM-YYYY")}`
+      [fieldName]: `${dayjs(date).format("MM-DD-YYYY")}`
     });
   };
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
@@ -114,7 +118,7 @@ const Form = () => {
     birthday: "",
     phone: "",
     email: "",
-    password: 0,
+    password: "",
     status: "Aktiv",
     id_number: "",
     university: "",
@@ -137,19 +141,52 @@ const Form = () => {
     if (event.target.name === "fin") {
       event.target.value = event.target.value.toUpperCase();
     }
+    if (event.target.name === "id_number") {
+      setIdSerialNumber(event.target.value);
+    }
+    console.log(formData.id_number)
     if (event.target.name === "reference_addition") {
       formData.reference = `${selectedOption} | ${event.target.value}`;
     }
-
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const handleSubmit = (event) => {
+
+  const [selectedOption, setSelectedOption] = useState("");
+  const handleSelectChange = (select) => (selectedOption) => {
+    if (select == "course") {
+      const selectedCourses = selectedOption.map((option) => option.value).join(", ");
+      formData.course = selectedCourses;
+    }
+    if (select == "group") {
+      formData.group = selectedOption.value;
+      const filteredGroup = groups.filter((group) => group.group_code === selectedOption.value);
+      formData.lesson_table = filteredGroup.map((group) => group.lessons.map((lesson) => lesson.week_day)).join(", ") + " " + filteredGroup.map((group) => group.lessons[0].time).join(", ");
+      groups?.map((group) => {
+        if (selectedOption.value === group.group_code) {
+          formData.graduation_day = dayjs(group.end_date).format("MM.DD.YYYY");
+        }
+      });
+    }
+    if (select == "reference") {
+      setSelectedOption(selectedOption.value);
+      formData.reference = selectedOption.value;
+    }
+    if (select == "is_diploma") {
+      formData.is_diploma = selectedOption.value;
+    } if (select == "id_number") {
+      setIdSerial(selectedOption.value);
+    }
+  };
+
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    formData.id_number = `${idSerial}${idSerialNumber}`;
     if (selectedOption === null) {
       formData.reference = `${event.target.value}`;
     }
+    console.log(formData);
     const phoneAsNumber = parseInt(formData.phone, 10);
     formData.phone = phoneAsNumber;
     if (imageFile != null) {
@@ -177,24 +214,6 @@ const Form = () => {
         console.error(error);
         setError(error.response.data.message);
       });
-  };
-  const handleCourseChange = (selectedOption) => {
-    formData.course = selectedOption.value;
-  };
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleSelectChange = (selectedOption) => {
-    setSelectedOption(selectedOption.value);
-    const filteredGroup = groups.filter((group) => group.group_code === selectedOption.value);
-    formData.lesson_table = filteredGroup.map((group) => group.lessons.map((lesson) => lesson.week_day)).join(", ") + " " + filteredGroup.map((group) => group.lessons[0].time).join(", ");
-    groups?.map((group) => {
-      if (selectedOption.value === group.group_code) {
-        formData.graduation_day = group.end_date;
-      }
-    });
-  };
-
-  const handleDiplomaChange = (selectedOption) => {
-    formData.is_diploma = selectedOption.value;
   };
   useDocumentTitle("Tələbə əlavə etmək");
   return (
@@ -276,7 +295,7 @@ const Form = () => {
                         classNamePrefix="select"
                         isClearable={false}
                         placeholder="AA"
-                        onChange={handleSelectChange}
+                        onChange={handleSelectChange("id_number")}
                         isSearchable={true}
                         name="color"
                         defaultValue={
@@ -403,7 +422,7 @@ const Form = () => {
                     type="text"
                     name="email_password"
                     id="email_password"
-                    value={formData.email_password}
+                    // value={formData.email_password}
                     onChange={handleChange}
                   />
                 </div>
@@ -513,7 +532,7 @@ const Form = () => {
                     classNamePrefix="select"
                     defaultValue={options[0]}
                     isClearable={false}
-                    onChange={handleSelectChange}
+                    onChange={handleSelectChange("reference")}
                     isSearchable={true}
                     name="color"
                     placeholder="Referans seçin"
@@ -566,45 +585,17 @@ const Form = () => {
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="course">Kurs:</label>
-                  <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        color: "black",
-                        width: "100%",
-                        "&:hover": {
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                        },
-                      }),
-                    }}
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 0,
-                      width: "100%",
-                      color: "black",
-                      colors: {
-                        ...theme.colors,
-                        primary25: "rgb(242, 242, 242)",
-                        primary: "rgb(242, 242, 242)",
-                      },
-                    })}
-                    classNamePrefix="select"
+                  <SelectComponent
                     isClearable={true}
                     isMulti={true}
                     placeholder="Kurs seçin..."
-                    onChange={handleCourseChange}
+                    onChange={handleSelectChange("course")}
                     isSearchable={true}
                     name="color"
                     options={courses?.map((course) => {
                       return { value: course.name, label: course.name };
                     })}
                   />
-
                 </div>
                 <div className=" col-6">
                   <label htmlFor="group">Qrup:</label>
@@ -637,7 +628,7 @@ const Form = () => {
                     })}
                     classNamePrefix="select"
                     isClearable={false}
-                    onChange={handleSelectChange}
+                    onChange={handleSelectChange("group")}
                     isSearchable={true}
                     name="color"
                     placeholder="Qrup seçin"
@@ -672,8 +663,8 @@ const Form = () => {
                   <div className="datepicker">
                     <DatePickerComponent
                       onChange={handleDateChange("graduation_day")}
+                      value={formData.graduation_day ? dayjs(formData?.graduation_day) : null}
                     />
-
                   </div>
                 </div>
               </div>
@@ -681,49 +672,22 @@ const Form = () => {
               <div className=" row">
                 <div className=" col-6">
                   <label htmlFor="is_diploma">Sertifikat Vəziyyəti:</label>
-                  <Select
-                    styles={{
-                      control: (baseStyles, state) => ({
-                        ...baseStyles,
-                        borderColor: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        color: "black",
-                        width: "100%",
-                        "&:hover": {
-                          borderColor: "none",
-                          outline: "none",
-                          boxShadow: "none",
-                        },
-                      }),
-                    }}
-                    theme={(theme) => ({
-                      ...theme,
-                      borderRadius: 0,
-                      width: "100%",
-                      color: "black",
-                      colors: {
-                        ...theme.colors,
-                        primary25: "rgb(242, 242, 242)",
-                        primary: "rgb(242, 242, 242)",
-                      },
-                    })}
+                  <SelectComponent
                     classNamePrefix="select"
                     isClearable={false}
-                    onChange={handleDiplomaChange}
+                    onChange={handleSelectChange("is_diploma")}
                     isSearchable={true}
                     name="color"
                     placeholder="Sertifikat Vəziyyəti"
                     options={[
-                      { value: "1", label: "Sertifakat aldı" },
-                      { value: "0", label: "Sertifakat verilməyib" },
+                      { value: "1", label: "Sertifikat aldı" },
+                      { value: "0", label: "Sertifikat verilməyib" },
                     ]}
                   />
 
-
                 </div>
                 <div className=" col-6">
-                  <label htmlFor="diploma_sn">Sertifikat seriyası:</label>
+                  <label htmlFor="diploma_sn">Sertifikat  seriyası:</label>
                   <input
                     type="text"
                     name="diploma_sn"
@@ -765,7 +729,7 @@ const Form = () => {
                       { value: "1", label: "Aktiv" },
                       { value: "0", label: "Passiv" },
                     ]}
-                    onChange={handleChange}
+                    onChange={handleSelectChange("status")}
                     value={
                       { value: "1", label: "Aktiv" }
                     }

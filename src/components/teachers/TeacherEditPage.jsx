@@ -214,7 +214,6 @@ function TeacherEditPage() {
                       value={formData.father_name}
                       onChange={handleChange}
                     />
-
                   </div>
                   <div className=" col-6">
                     <label htmlFor="id_number">
@@ -231,7 +230,6 @@ function TeacherEditPage() {
                     {errors.id_number && (
                       <div className="error-input">{errors.id_number}</div>
                     )}
-
                   </div>
                 </div>
                 <div className="row">
@@ -253,7 +251,10 @@ function TeacherEditPage() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <DatePickerComponent />
+                    <div className="datepicker">
+
+                      <DatePickerComponent />
+                    </div>
 
                   </div>
                 </div>
@@ -268,9 +269,6 @@ function TeacherEditPage() {
                       onChange={handleChange}
                     />
                   </div>
-
-
-
 
                   <div className="col-6">
                     <label htmlFor="phone">Mobil nömrə::</label>
@@ -484,7 +482,10 @@ function TeacherEditPage() {
                   </div>
                   <div className="col-12">
                     <label htmlFor="registration_day">İşə başlama tarixi :</label>
-                    <DatePickerComponent />
+                    <div className="datepicker">
+
+                      <DatePickerComponent />
+                    </div>
                   </div>
 
                 </div>
@@ -499,7 +500,6 @@ function TeacherEditPage() {
                         style={{ background: "#bbbbbb", border: "2px dashed #000" }}
                       >Buraya şəkil sürüşdür</div> :
                       <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
-
                   }
                 </div>
                 <div className="row ms-4">

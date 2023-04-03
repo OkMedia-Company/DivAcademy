@@ -76,11 +76,7 @@ function AddTeacherForm() {
   };
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption.value);
-    groups.groups.groups?.map((group) => {
-      if (selectedOption.value === group.group_code) {
-        return formData.graduation_day = group.end_date;
-      }
-    });
+
   };
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -233,7 +229,6 @@ function AddTeacherForm() {
                           onChange={handleChange}
                         />
                       </div>
-
                     </div>
                     {errors.id_number && (
                       <div className="error-input">{errors.id_number}</div>
@@ -496,6 +491,7 @@ function AddTeacherForm() {
                     <div className="datepicker">
                       <DatePickerComponent
                         onChange={handleDateChange("registration_day")}
+                        value={formData.registration_day}
                       />
                     </div>
                   </div>

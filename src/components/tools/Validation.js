@@ -2,10 +2,8 @@ import * as yup from "yup";
 const validationSchema = yup.object().shape({
   id_number: yup
     .string()
-    .matches(
-      /^[a-zA-Z0-9]{7}$/,
-      "Şəxsiyyət vəsiqəsi nömrəsi 7 rəqəmli yalnız hərflərdən və rəqəmlərdən ibarət olmalıdır"
-    )
+    .min(7, "Şəxsiyyət V.N  minumum 7 rəqəmdən ibarət olmalıdır")
+    .max(8, "Şəxsiyyət V.N maximum 8 rəqəmdən ibarət olmalıdır")
     .required("ID Number is required"),
   email: yup.string().email("Düzgün email daxil edin"),
   edu_email: yup.string().email("Düzgün email daxil edin"),
@@ -19,7 +17,7 @@ const validationSchema = yup.object().shape({
   fin: yup
     .string("FIN yalniz herfden")
     .min(7, "FIN yalnız 7 rəqəmdən ibarət olmalıdır")
-    .max(7, "FIN yalnız 7 rəqəmdən ibarət olmalıdır"),
+    .max(8, "FIN yalnız 7 rəqəmdən ibarət olmalıdır"),
 });
 
 export default validationSchema;

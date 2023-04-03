@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -7,8 +7,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import DialogBarComponent from "../tools/DialogBarComponent";
 import Select from "react-select";
 import DatePicker from "../tools/DatePickerComponent";
+import { useDropzone } from 'react-dropzone';
+import defaultAvatar from "../../imgs/defaultAvatar.png"
+import DatePickerComponent from "../tools/DatePickerComponent";
 function AddEmployee() {
   const [formData, setFormData] = useState({
     image: "",
@@ -25,6 +29,18 @@ function AddEmployee() {
     position: "",
     salary: "",
   });
+  const onDrop = useCallback(acceptedFiles => {
+    acceptedFiles.forEach(file => {
+      const reader = new FileReader()
+      reader.onload = (reader) => {
+        console.log()
+        setImageBase64(reader.currentTarget.result);
+        formData.image = reader.currentTarget.result;
+      }
+      reader.readAsDataURL(file)
+    })
+  }, [])
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
   const [imageFile, setImageFile] = useState("");
   const [imageBase64, setImageBase64] = useState("");
   const [error, setError] = useState("");
@@ -32,6 +48,7 @@ function AddEmployee() {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -128,8 +145,9 @@ function AddEmployee() {
                 </div>
                 <div className=" col-6 ">
                   <label htmlFor="birthday">Doğum tarixi:</label>
-                  <DatePicker />
-
+                  <div className="datepicker">
+                    <DatePickerComponent />
+                  </div>
                 </div>
               </div>
 
@@ -186,7 +204,9 @@ function AddEmployee() {
                 </div>
                 <div className="form-group col-6">
                   <label htmlFor="registration_day">Qeydiyyat tarixi:</label>
-                  <DatePicker />
+                  <div className="datepicker">
+                    <DatePicker />
+                  </div>
                 </div>
                 <div className="form-group col">
                   <label htmlFor="status">Status:</label>
@@ -234,10 +254,20 @@ function AddEmployee() {
             </div>
 
             <div className="image-upload col-4 ">
-              <img src={imageBase64} className="image-preview" />
+              <div {...getRootProps()}>
+                <input {...getInputProps()} />
+                {
+                  isDragActive ?
+                    <div
+                      className="image-preview d-flex align-items-center justify-content-center"
+                      style={{ background: "#bbbbbb", border: "2px dashed #000" }}
+                    >Buraya şəkil sürüşdür</div> :
+                    <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
+                }
+              </div>
               <div className="row ms-4">
                 <div className="col-6">
-                  <Button variant="outlined" component="label">
+                  <Button variant="outlined" component="label" className="image-upload-btn">
                     Şəkil yüklə
                     <input
                       hidden
@@ -261,29 +291,17 @@ function AddEmployee() {
                     Şəkli sil
                   </Button>
                 </div>
-                <Dialog
+                <DialogBarComponent
                   open={open}
-                  onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
-                >
-                  <DialogTitle id="alert-dialog-title">
-                    {"Şəkil silinsin?"}
-                  </DialogTitle>
-                  <DialogContent></DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Ləğv et</Button>
-                    <Button onClick={handleFileDelete} autoFocus>
-                      Razı
-                    </Button>
-                  </DialogActions>
-                </Dialog>
+                  setOpen={setOpen}
+                  handleFileDelete={handleFileDelete}
+                />
               </div>
-              <br />
             </div>
+
             <div className="form-group col-12">
               {error && <p className="error">{error}</p>}
-              <Button type="submit">Save</Button>
+              <Button type="submit">Əlavə et</Button>
             </div>
           </div>
         </form>

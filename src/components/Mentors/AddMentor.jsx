@@ -11,6 +11,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import DatePickerComponent from "../tools/DatePickerComponent";
+
 function AddMentorForm() {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -186,7 +187,14 @@ function AddMentorForm() {
                   </div>
                   <div className="col-6">
                     <label htmlFor="birthday">Doğum tarixi:</label>
-                    <DatePicker />
+                    <div className="datepicker">
+                      <DatePickerComponent
+                        name="birthday"
+                        id="birthday"
+                        value={formData.birthday}
+                      />
+                    </div>
+
                     <br />
                   </div>
                 </div>
@@ -395,8 +403,11 @@ function AddMentorForm() {
                     <label htmlFor="registration_day">
                       İşə başlama tarixi :
                     </label>
+                    <div className="datepicker">
+                      <DatePickerComponent
+                      />
+                    </div>
 
-                    <DatePicker />
                     <br />
                   </div>
                 </div>

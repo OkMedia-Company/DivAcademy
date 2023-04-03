@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./Groups.css";
 import Select from "react-select";
 import useDocumentTitle from "../tools/useDocumentTitle";
-import DatePicker from "../tools/DatePickerComponent";
+
+import DatePickerComponent from "../tools/DatePickerComponent";
 function AddGroup() {
   const [courses, setCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
@@ -287,11 +288,15 @@ function AddGroup() {
           <div className="row pt-3">
             <div className="col-6">
               <label>Başlama tarixi:</label>
-              <DatePicker />
+              <div className="datepicker">
+                <DatePickerComponent />
+              </div>
             </div>
             <div className="col-6">
               <label>Bitmə tarixi:</label>
-              <DatePicker />
+              <div className="datepicker">
+                <DatePickerComponent />
+              </div>
             </div>
           </div>
           <div className="  pt-3 col-12">
