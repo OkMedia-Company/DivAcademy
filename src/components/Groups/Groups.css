@@ -9,4 +9,7 @@
     color: #000;
     outline: none;
 }
- 
+
+.courses-content {
+    z-index: 9999;
+}

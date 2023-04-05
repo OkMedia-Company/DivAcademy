@@ -6,6 +6,7 @@ import Select from "react-select";
 import useDocumentTitle from "../tools/useDocumentTitle";
 
 import DatePickerComponent from "../tools/DatePickerComponent";
+import SelectComponent from "../tools/Select";
 function AddGroup() {
   const [courses, setCourses] = useState([]);
   const [selectedCourseId, setSelectedCourseId] = useState("");
@@ -33,14 +34,16 @@ function AddGroup() {
   };
 
   const handleLessonChange = (event, index) => {
-    const lessons = [...groupData.lessons];
-    lessons[index][event.target.name] = event.target.value;
+    if (event.target.name === "week_day") {
+      const lessons = [...groupData.lessons];
+      lessons[index][event.target.name] = event.target.value;
+      lessons[index][event.target.name] = parseInt(event.target.value);
+    }
     setGroupData({
       ...groupData,
       lessons,
     });
   };
-
   const handleLessonAdd = () => {
     setGroupData({
       ...groupData,
@@ -56,6 +59,12 @@ function AddGroup() {
       lessons,
     });
   };
+  const handleSelectChange = (name) => (value) => {
+    console.log(name)
+  };
+
+
+  console.log(groupData);
   const token = localStorage.getItem("token");
   useEffect(() => {
     async function fetchCourses() {
@@ -119,6 +128,37 @@ function AddGroup() {
         setError(error.response.data.message);
       });
   };
+
+  const days = [
+    { value: "1", label: "Bazar ertəsi" },
+    { value: "2", label: "Çərşənbə axşamı" },
+    { value: "3", label: "Çərşənbə" },
+    { value: "4", label: "Cümə axşamı" },
+    { value: "5", label: "Cümə" },
+    { value: "6", label: "Şənbə" },
+    { value: "7", label: "Bazar" },
+  ];
+  const time = [
+    { value: "09:00", label: "09:00" },
+    { value: "10:00", label: "10:00" },
+    { value: "11:00", label: "11:00" },
+    { value: "12:00", label: "12:00" },
+    { value: "13:00", label: "13:00" },
+    { value: "14:00", label: "14:00" },
+    { value: "15:00", label: "15:00" },
+    { value: "16:00", label: "16:00" },
+    { value: "17:00", label: "17:00" },
+    { value: "18:00", label: "18:00" },
+    { value: "19:00", label: "19:00" },
+    { value: "20:00", label: "20:00" },
+    { value: "21:00", label: "21:00" },
+  ];
+  const classrooms = [
+    { value: "1", label: "Kofeşop" },
+    { value: "1", label: "904" },
+    { value: "1", label: "1-ci otaq" },
+    { value: "1", label: "2-ci otaq" },
+  ];
   useDocumentTitle("Qrup Əlavə Et");
   return (
     <div className="main-add-form">
@@ -127,35 +167,7 @@ function AddGroup() {
           <div className="row">
             <div className="col-md-6">
               <label>Kurs:</label>
-              <Select
-                className="basic-single w-100"
-                styles={{
-                  control: (baseStyles, state) => ({
-                    ...baseStyles,
-                    borderColor: "none",
-                    width: "100%",
-                    outline: "none",
-                    boxShadow: "none",
-                    color: "black",
-
-                    "&:hover": {
-                      borderColor: "none",
-                      outline: "none",
-                      boxShadow: "none",
-                    },
-                  }),
-                }}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  color: "black",
-                  colors: {
-                    ...theme.colors,
-                    primary25: "rgb(242, 242, 242)",
-                    primary: "rgb(242, 242, 242)",
-                  },
-                })}
-                classNamePrefix="select"
+              <SelectComponent
                 defaultValue={courses.map((group) => {
                   return {
                     value: group.id,
@@ -172,40 +184,12 @@ function AddGroup() {
                   };
                 })}
                 placeholder="Kurs seçin"
-                onChange={(e) => setSelectedGroupId(e)}
+                onChange={handleSelectChange("selectedCourseId")}
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-3">
               <label>Müəllim:</label>
-              <Select
-                className="basic-single w-100"
-                styles={{
-                  control: (baseStyles, state) => ({
-                    ...baseStyles,
-                    borderColor: "none",
-                    width: "100%",
-                    outline: "none",
-                    boxShadow: "none",
-                    color: "black",
-
-                    "&:hover": {
-                      borderColor: "none",
-                      outline: "none",
-                      boxShadow: "none",
-                    },
-                  }),
-                }}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  color: "black",
-                  colors: {
-                    ...theme.colors,
-                    primary25: "rgb(242, 242, 242)",
-                    primary: "rgb(242, 242, 242)",
-                  },
-                })}
-                classNamePrefix="select"
+              <SelectComponent
                 defaultValue={teachers.map((group) => {
                   return {
                     value: group.id,
@@ -225,6 +209,29 @@ function AddGroup() {
                 onChange={(e) => setSelectedGroupId(e)}
               />
             </div>
+            <div className="col-md-3">
+              <label>Mentor:</label>
+              <SelectComponent
+                classNamePrefix="select"
+                defaultValue={teachers.map((group) => {
+                  return {
+                    value: group.id,
+                    label: group.name,
+                  };
+                })}
+                isClearable={true}
+                isSearchable={true}
+                name="color"
+                options={teachers.map((group) => {
+                  return {
+                    value: group.id,
+                    label: group.name,
+                  };
+                })}
+                placeholder="Mentoru seçin"
+                onChange={(e) => setSelectedGroupId(e)}
+              />
+            </div>
           </div>
           <div className="row">
             <div className="col-6">
@@ -237,7 +244,7 @@ function AddGroup() {
               />
             </div>
             <div className="col-6">
-              <label>Dərs saatı:</label>
+              <label>Dərs müddəti:</label>
               <input
                 type="text"
                 name="lesson_minute"
@@ -250,23 +257,32 @@ function AddGroup() {
             {groupData.lessons.map((lesson, index) => (
               <div key={index} className="p-3">
                 <div className="row">
-                  <h2>{index + 1}'</h2>
-                  <div className="col-6">
+                  <h2>{index + 1}. dərs</h2>
+                  <div className="col-4">
                     <label>Həftənin hünü:</label>
-                    <input
-                      type="text"
-                      name="week_day"
-                      value={lesson.week_day}
-                      onChange={(event) => handleLessonChange(event, index)}
+                    <SelectComponent
+                      options={days}
+                      value={lesson.day}
+                      onChange={(event) => handleSelectChange("day", event, index)}
                     />
                   </div>
-                  <div className="col-6">
-                    <label>Vaxt:</label>
-                    <input
-                      type="text"
-                      name="time"
+                  <div className="col-4">
+                    <label>Dərs saatı:</label>
+                    <SelectComponent
+                      options={time}
                       value={lesson.time}
-                      onChange={(event) => handleLessonChange(event, index)}
+                      onChange={(event) => handleSelectChange("time", event, index)}
+                    />
+                  </div>
+                  <div className="col-4">
+                    <label>Dərs otaqı:</label>
+                    <SelectComponent
+                      options={classrooms}
+                      value={lesson.classroom}
+                      onChange={(event) =>
+                        handleSelectChange("classroom", event, index)
+                      }
+
                     />
                   </div>
                 </div>
@@ -282,81 +298,24 @@ function AddGroup() {
           </div>
           <div className="row">
             <button type="button" onClick={handleLessonAdd}>
-              Dərs əlavə et
+              Dərs günü əlavə et
             </button>
           </div>
           <div className="row pt-3">
             <div className="col-6">
-              <label>Başlama tarixi:</label>
+              <label>Qrupun Başlama tarixi:</label>
               <div className="datepicker">
                 <DatePickerComponent />
               </div>
             </div>
             <div className="col-6">
-              <label>Bitmə tarixi:</label>
+              <label>Qrupun Bitmə tarixi:</label>
               <div className="datepicker">
                 <DatePickerComponent />
               </div>
             </div>
           </div>
-          <div className="  pt-3 col-12">
-            <label>Dərs otağı:</label>
-            <Select
-              className=""
-              styles={{
-                control: (baseStyles, state) => ({
-                  ...baseStyles,
-                  borderColor: "none",
-                  width: "100% !important",
-                  outline: "none",
-                  boxShadow: "none",
-                  color: "black",
 
-                  "&:hover": {
-                    borderColor: "none",
-                    outline: "none",
-                    boxShadow: "none",
-                  },
-                }),
-              }}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                color: "black",
-                colors: {
-                  ...theme.colors,
-                  primary25: "rgb(242, 242, 242)",
-                  primary: "rgb(242, 242, 242)",
-                },
-              })}
-              classNamePrefix="select"
-              defaultValue={[
-                {
-                  value: "905 yaşıl otaq",
-                  label: "905 yaşıl otaq",
-                },
-              ]}
-              isClearable={true}
-              isSearchable={true}
-              name="color"
-              options={[
-                {
-                  value: "905 yaşıl otaq",
-                  label: "905 yaşıl otaq",
-                },
-                {
-                  value: "905 mavi otaq",
-                  label: "905 mavi otaq",
-                },
-                {
-                  value: "908 kofeşop otağı",
-                  label: "908 kofeşop otağı",
-                },
-              ]}
-              placeholder="Müəllimi seçin"
-              onChange={(e) => setSelectedGroupId(e)}
-            />
-          </div>
           <button type="submit">Qrup əlavə et</button>
           {status && <p>{status}</p>}
           {error && <p>{error}</p>}

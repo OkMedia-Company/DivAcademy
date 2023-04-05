@@ -16,7 +16,6 @@ const schema = Yup.object().shape({
     .required("Parol daxil etməniz mütləqdir.")
     .min(8, "Parol minumum 8 karakterdən ibarət ola bilər"),
 });
-
 function Login() {
   const currentUser = useContext(AuthContext);
   console.log(currentUser)
@@ -119,5 +118,4 @@ function Login() {
     </div>
   );
 }
-
 export default Login;

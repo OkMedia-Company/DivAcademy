@@ -17,9 +17,12 @@ import { Link } from "react-router-dom";
 const Absence = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [students, setStudents] = useState([]);
+  // const [students, setStudents] = useState([]);
+  const [lessonDays, setLessonDays] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState("");
+  const [groupStudents, setGroupStudents] = useState([]);
   const [loading, setLoading] = useState(true);
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -28,7 +31,7 @@ const Absence = () => {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  const dates = [...new Set(students.map((lesson_day) => lesson_day.date))];
+  const dates = [...new Set(lessonDays.map((lesson_day) => lesson_day.date))];
   const token = localStorage.getItem("token");
   useEffect(() => {
     let data = "";
@@ -45,19 +48,46 @@ const Absence = () => {
     axios(config)
       .then(function (response) {
         setLoading(false);
-        setStudents(response.data.lesson_days);
+        setLessonDays(response.data.lesson_days);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, [token]);
 
-  const options = [
-    { value: "1", label: "FD3F2321" },
-    { value: "2", label: "FE23A232" },
-    { value: "3", label: "BE032223" },
-  ];
+
   const studentsAll = useContext(AuthContext)?.students.students
+
+  useEffect(() => {
+    axios.get(`https://div.globalsoft.az/api/group_students`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        setGroupStudents(response.data.groupstudents);
+      }).catch(error => {
+        setError(error.response.data.message);
+      });
+  }, []);
+
+
+  const groups = useContext(AuthContext)?.groups.groups
+  const options = groups.map((group) => ({
+    value: group.id,
+    label: group.group_code,
+  }));
+  const handleSelectChange = (name) => (value) => {
+    if (name === "groups") {
+      // const groupStudents 
+      console.log(groupStudents)
+      // setStudents(groupStudents);
+    }
+  };
+
+
   useDocumentTitle("Davamiyyət");
   return (
     <>
@@ -99,6 +129,7 @@ const Absence = () => {
             defaultValue={options[0]}
             isClearable={true}
             isSearchable={true}
+            onChange={handleSelectChange("groups")}
             name="color"
             options={options}
           />
@@ -121,63 +152,21 @@ const Absence = () => {
             overflow: "auto",
             boxShadow: "none",
             background: "white",
-            padding: 1,
+            padding: 0,
           }}
         >
-          <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap" }}>
+          <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap", padding: "0" }}>
             <Table stickyHeader aria-label="sticky table" sx={{ padding: "0" }}>
               <TableHead>
                 <TableRow>
                   <TableCell align="left">Ad Soyad</TableCell>
-
-
-                  {/* {
+                  {
                     dates.map((dates) => (
                       <TableCell align="center">
                         <span className="date-absences">{dates}</span>
                       </TableCell>
                     ))
-                  } */}
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span className="date-absences">12.05.2021</span>
-                  </TableCell>
-
+                  }
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -210,7 +199,7 @@ const Absence = () => {
                       </TableCell>
                     </TableRow>
                   ))
-                  : students
+                  : lessonDays
                     .slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage
@@ -218,73 +207,27 @@ const Absence = () => {
                     .map((students) => (
                       <TableRow key={students.id} hover>
                         <TableCell align="left">
-                          {students.name} {students.last_name}{" "}Elcan
+                          {
+                            studentsAll.find((student) => student.id === students.student_id)?.name
+                          }
                         </TableCell>
-                        <TableCell>
-                          <div className="absence-status-good">
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-good">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-good">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-good">
-
-                          </div>
-                        </TableCell>
-
-                        <TableCell>
-                          <div className="absence-status-bad">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-normal">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-normal">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-normal">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-normal">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-normal">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-bad">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-bad">
-
-                          </div>
-                        </TableCell>
-                        <TableCell>
-                          <div className="absence-status-bad">
-
-                          </div>
-                        </TableCell>
+                        {
+                          students.type === "10" ? (
+                            <TableCell align="center">
+                              <div className="absence-status-good">
+                              </div>
+                            </TableCell>
+                          ) : students.type === "2" ? (
+                            <TableCell align="center">
+                              <div className="absence-status-bad"></div>
+                            </TableCell>
+                          )
+                            : students.type === "3" ? (
+                              <TableCell align="center">
+                                <div className="absence-status-normal"></div>
+                              </TableCell>
+                            ) : ""
+                        }
                         {
                           students.type === "10" ?
                             <TableCell align="center">
@@ -316,7 +259,7 @@ const Absence = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={students.length}
+            count={lessonDays.length}
             rowsPerPage={rowsPerPage}
             labelRowsPerPage={<span>Səhifə üzrə sıra sayı:</span>}
             page={page}
@@ -326,8 +269,7 @@ const Absence = () => {
           />
         </Paper>
       </div>
-
-    </ >
+    </>
   );
 };
 

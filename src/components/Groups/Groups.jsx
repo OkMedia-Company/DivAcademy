@@ -28,6 +28,7 @@ function Groups() {
   const searchForm = (searchTerm) => {
     console.log(searchTerm);
   };
+  const teachers = useContext(AuthContext)?.teachers?.teachers;
   useDocumentTitle("Qruplar");
   return (
     <>
@@ -122,7 +123,11 @@ function Groups() {
                           23
                         </TableCell>
                         <TableCell align="left" colSpan={3}>
-                          {item.teacher_name}
+                          {
+                            teachers.filter(
+                              (teacher) => teacher.id === item.teacher_id
+                            )[0]?.name
+                          }
                         </TableCell>
                         <TableCell align="left" colSpan={3}>
                           Ümid

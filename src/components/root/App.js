@@ -78,7 +78,10 @@ function App() {
         setGroups(groups);
         setStudents(students);
         setTeachers(teachers);
-
+        localStorage.setItem("courses", JSON.stringify(courses));
+        localStorage.setItem("groups", JSON.stringify(groups));
+        localStorage.setItem("students", JSON.stringify(students));
+        localStorage.setItem("teachers", JSON.stringify(teachers));
         setTransactionCategories(transactionCategories);
         setLoading(false);
       })
