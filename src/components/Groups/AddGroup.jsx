@@ -50,7 +50,6 @@ function AddGroup() {
       lessons: [...groupData.lessons, { week_day: "", time: "" }],
     });
   };
-
   const handleLessonRemove = (index) => {
     const lessons = [...groupData.lessons];
     lessons.splice(index, 1);
@@ -62,7 +61,6 @@ function AddGroup() {
   const handleSelectChange = (name) => (value) => {
     console.log(name)
   };
-
 
   console.log(groupData);
   const token = localStorage.getItem("token");

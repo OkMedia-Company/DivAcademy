@@ -15,7 +15,6 @@ import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import defaultAvatar from "../../imgs/defaultAvatar.png"
 import dayjs from "dayjs";
-
 function AddTeacherForm() {
   const [imageFile, setImageFile] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
@@ -24,7 +23,6 @@ function AddTeacherForm() {
   const [selectedOption, setSelectedOption] = useState(null);
   const groups = useContext(AuthContext);
   const [open, setOpen] = useState(false);
-
   const onDrop = useCallback(acceptedFiles => {
     acceptedFiles.forEach(file => {
       const reader = new FileReader()
@@ -35,9 +33,7 @@ function AddTeacherForm() {
       reader.readAsDataURL(file)
     })
   }, [])
-
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-
   const [formData, setFormData] = useState({
     image: "",
     name: "",
@@ -76,7 +72,6 @@ function AddTeacherForm() {
   };
   const handleSelectChange = (selectedOption) => {
     setSelectedOption(selectedOption.value);
-
   };
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -89,7 +84,6 @@ function AddTeacherForm() {
       setImageBase64(fileReader.result);
     };
   }, [imageFile]);
-
   const handleFileChange = (event) => {
     setImageFile(event.target.files[0]);
   };
@@ -369,7 +363,7 @@ function AddTeacherForm() {
                       name="color"
                       value={
                         [
-                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
+                          { value: formData.status, label: formData.status ? "Aktiv" : "Passiv" }
                         ]
                       }
                       placeholder="Status seçin"
@@ -413,7 +407,6 @@ function AddTeacherForm() {
                       value={formData.university_add_score}
                       onChange={handleChange}
                     />
-
                   </div>
                   <div className=" col-6">
                     <label htmlFor="working_place">İş yeri:</label>
@@ -437,9 +430,7 @@ function AddTeacherForm() {
                       value={formData.vezife}
                       onChange={handleChange}
                     />
-
                   </div>
-
                   <div className="col-6">
                     <label htmlFor="current_groups">Cari qrupları:</label>
                     <Select
@@ -508,7 +499,6 @@ function AddTeacherForm() {
                         style={{ background: "#bbbbbb", border: "2px dashed #000" }}
                       >Buraya şəkil sürüşdür</div> :
                       <img src={imageBase64 === "" ? defaultAvatar : imageBase64} className="image-preview" />
-
                   }
                 </div>
                 <div className="row ms-4">

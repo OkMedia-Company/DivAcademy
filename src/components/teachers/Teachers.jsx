@@ -31,7 +31,6 @@ function Teachers() {
   };
   const token = localStorage.getItem("token");
   const teachersAll = JSON.parse(localStorage.getItem("teachers"));
-
   useEffect(() => {
     if (teachersAll.teachers === null) {
       axios

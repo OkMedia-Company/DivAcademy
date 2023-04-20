@@ -1624,6 +1624,7 @@ const EditForm = () => {
                     onChange={handleSelectChange("is_diploma")}
                     isSearchable={true}
                     name="color"
+                    value={{ value: "0", label: "Sertifikat verilməyib" }}
                     placeholder="Sertifikat Vəziyyəti"
                     options={[
                       { value: "1", label: "Sertifikat aldı" },

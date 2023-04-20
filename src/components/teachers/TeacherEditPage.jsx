@@ -281,7 +281,6 @@ function TeacherEditPage() {
                       onChange={handleChange}
                       value={formData.phone}
                     />
-
                   </div>
                 </div>
                 <div className="row">
@@ -301,7 +300,6 @@ function TeacherEditPage() {
                       </div>
                     }
                   </div>
-
                   <div className=" col-6">
                     <label htmlFor="edu_email"> Edu email :</label>
                     <input
@@ -367,7 +365,7 @@ function TeacherEditPage() {
                       name="color"
                       value={
                         [
-                          { value: formData.status, label: formData.status ? "Aktif" : "Passiv" }
+                          { value: formData.status, label: formData.status ? "Aktiv" : "Passiv" }
                         ]
                       }
                       placeholder="Status seçin"
@@ -400,7 +398,6 @@ function TeacherEditPage() {
                       value={formData.ixtisas}
                       onChange={handleChange}
                     />
-
                   </div>
                   <div className=" col-6">
                     <label htmlFor="university_add_score">Qəbul balı:</label>
@@ -411,7 +408,6 @@ function TeacherEditPage() {
                       value={formData.university_add_score}
                       onChange={handleChange}
                     />
-
                   </div>
                   <div className=" col-6">
                     <label htmlFor="working_place">İş yeri:</label>
@@ -422,7 +418,6 @@ function TeacherEditPage() {
                       value={formData.working_place}
                       onChange={handleChange}
                     />
-
                   </div>
                 </div>
                 <div className="row">
@@ -483,11 +478,9 @@ function TeacherEditPage() {
                   <div className="col-12">
                     <label htmlFor="registration_day">İşə başlama tarixi :</label>
                     <div className="datepicker">
-
                       <DatePickerComponent />
                     </div>
                   </div>
-
                 </div>
               </div>
               <div className="image-upload col-4 ">

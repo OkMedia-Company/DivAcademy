@@ -8,6 +8,7 @@ const DatePickerComponent = (props) => {
                 placeholder='Tarix seçin'
                 format={'DD.MM.YYYY'}
                 value={props.value}
+
             />
         </>
     )

@@ -18,7 +18,7 @@ const Absence = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   // const [students, setStudents] = useState([]);
-  const [lessonDays, setLessonDays] = useState([]);
+  // const [lessonDays, setLessonDays] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState("");
@@ -28,9 +28,18 @@ const Absence = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+
+  const handleSelectChange = (name) => (value) => {
+    setGroupStudents(value);
   };
+  const allStudents = JSON.parse(localStorage.getItem("students"));
+
+  const groups = JSON.parse(localStorage.getItem("groups"))
+  const options = groups.groups.map((group) => ({
+    value: group.id,
+    label: group.group_code,
+  }));
+  const [lessonDays, setLessonDays] = useState([]);
   const dates = [...new Set(lessonDays.map((lesson_day) => lesson_day.date))];
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -44,7 +53,6 @@ const Absence = () => {
       },
       data: data,
     };
-
     axios(config)
       .then(function (response) {
         setLoading(false);
@@ -54,41 +62,46 @@ const Absence = () => {
         console.log(error);
       });
   }, [token]);
-
-
-  const studentsAll = useContext(AuthContext)?.students.students
-
-  useEffect(() => {
-    axios.get(`https://div.globalsoft.az/api/group_students`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then(response => {
-        setGroupStudents(response.data.groupstudents);
-      }).catch(error => {
-        setError(error.response.data.message);
-      });
-  }, []);
-
-
-  const groups = useContext(AuthContext)?.groups.groups
-  const options = groups.map((group) => ({
-    value: group.id,
-    label: group.group_code,
-  }));
-  const handleSelectChange = (name) => (value) => {
-    if (name === "groups") {
-      // const groupStudents 
-      console.log(groupStudents)
-      // setStudents(groupStudents);
-    }
+  const getDateData = (date) => {
+    return lessonDays.filter((day) => day.date === date);
+  };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
   };
 
-
+  const filteredData = [];
+  for (const date of dates) {
+    const filteredLessons = lessonDays.filter(lesson => lesson.date === date);
+    const data = {
+      date: date,
+      lessons: filteredLessons
+    };
+    filteredData.push(data);
+  }
   useDocumentTitle("Davamiyyət");
+  function groupData(data) {
+    const result = {};
+    data.forEach((item) => {
+      if (!result[`student_id_${item.student_id}`]) {
+        result[`student_id_${item.student_id}`] = {};
+      }
+      const dateKey = item.date;
+      if (!result[`student_id_${item.student_id}`][dateKey]) {
+        result[`student_id_${item.student_id}`][dateKey] = [];
+      }
+      result[`student_id_${item.student_id}`][dateKey].push({
+        student_id: item.student_id,
+        lesson_id: item.lesson_id,
+        date: item.date,
+        mark_lesson: item.mark_lesson,
+        note_lesson: item.note_lesson,
+        type: item.type,
+        reason: item.reason,
+      });
+    });
+    return result;
+  }
+  const lessonDaysBystudent = groupData(lessonDays);
   return (
     <>
       <div className="section-title">
@@ -133,7 +146,6 @@ const Absence = () => {
             name="color"
             options={options}
           />
-
         </div>
         <div className="filter-add-main">
           <Link to="/absenceadd">
@@ -157,103 +169,71 @@ const Absence = () => {
         >
           <TableContainer sx={{ maxHeight: 500, whiteSpace: "nowrap", padding: "0" }}>
             <Table stickyHeader aria-label="sticky table" sx={{ padding: "0" }}>
-              <TableHead>
-                <TableRow>
-                  <TableCell align="left">Ad Soyad</TableCell>
-                  {
-                    dates.map((dates) => (
-                      <TableCell align="center">
-                        <span className="date-absences">{dates}</span>
-                      </TableCell>
-                    ))
-                  }
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {loading
-                  ? Array.from({ length: rowsPerPage }, (_, i) => (
-                    <TableRow key={i}>
-                      <TableCell>
-                        <Skeleton variant="rounded" width={40} height={40} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                      <TableCell>
-                        <Skeleton variant="text" width={150} />
-                      </TableCell>
-                    </TableRow>
-                  ))
-                  : lessonDays
-                    .slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                    .map((students) => (
-                      <TableRow key={students.id} hover>
-                        <TableCell align="left">
-                          {
-                            studentsAll.find((student) => student.id === students.student_id)?.name
-                          }
-                        </TableCell>
-                        {
-                          students.type === "10" ? (
-                            <TableCell align="center">
-                              <div className="absence-status-good">
-                              </div>
-                            </TableCell>
-                          ) : students.type === "2" ? (
-                            <TableCell align="center">
-                              <div className="absence-status-bad"></div>
-                            </TableCell>
-                          )
-                            : students.type === "3" ? (
-                              <TableCell align="center">
-                                <div className="absence-status-normal"></div>
-                              </TableCell>
-                            ) : ""
-                        }
-                        {
-                          students.type === "10" ?
-                            <TableCell align="center">
-                              {dates.map((date) => {
-                                const lesson_day = studentsAll.find(
-                                  (ld) => ld.date === date && ld.student_id === students.id
-                                );
-                                return <TableCell key={`${students.id}-${date}`}>
-                                  {
-                                    lesson_day?.type === "10" ? (
-                                      <span className="absence-status absence-status-1">
-                                        <i className="fas fa-check"></i>
-                                      </span>
-                                    ) : (
-                                      <span className="absence-status absence-status-2">
-                                        <i className="fas fa-times"></i>
-                                      </span>
-                                    )
-                                  }
-                                </TableCell>;
-                              })}
-                            </TableCell> : ""
-                        }
-                      </TableRow>
+
+              <table className="table-auto border border-collapse">
+                <thead>
+                  <tr>
+                    <th className="border border-collapse p-2"></th>
+                    {dates.map((date) => (
+                      <th key={date} className="border border-collapse p-2">
+                        {date}
+                      </th>
                     ))}
-              </TableBody>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    Object.keys(lessonDaysBystudent).map((key) => {
+                      const student = lessonDaysBystudent[key];
+                      return (
+                        <tr key={key}>
+                          <td className="border border-collapse p-2">
+                            {
+                              dates.map((date) => {
+                                if (student[date]) {
+                                  const matchingStudent = allStudents.students.find((studentData) => studentData.id == student[date][0].student_id);
+                                  if (matchingStudent) {
+                                    return matchingStudent.name + ' ' + matchingStudent.last_name;
+                                  }
+                                }
+                                return ''; // If there's no match or if there's no property with that date key in student
+                              })
+                            }
+                          </td>
+                          {dates.map((date) => (
+                            <td
+                              key={`${student.student_id}-${date}`}
+                              className={`border border-collapse p-2`}
+                            >
+                              {student[date] && student[date].map((day) => {
+                                if (day.type == 1) {
+                                  return (
+                                    <div className="absence-status-bad">
+
+                                    </div>
+                                  );
+                                } else if (day.type == 2) {
+                                  return (
+                                    <div className="absence-status-good">
+                                    </div>
+                                  );
+                                } else if (day.type == 3) {
+                                  return (
+                                    <div className="absence-status-normal">
+                                    </div>
+                                  );
+                                }
+                              })
+                              }
+                            </td>
+                          ))}
+                        </tr>
+                      );
+                    })
+                  }
+                </tbody>
+              </table>
+
             </Table>
           </TableContainer>
           <TablePagination
@@ -268,9 +248,85 @@ const Absence = () => {
             sx={{ padding: 0, margin: 0 }}
           />
         </Paper>
-      </div>
+      </div >
     </>
   );
 };
-
 export default Absence;
+
+
+
+
+
+
+// import axios from "axios";
+// import "./Absence.css";
+// import React, { useEffect, useState } from "react";
+// function LessonDaysTable() {
+//   const [lessonDays, setLessonDays] = useState([]);
+//   const [loading, setLoading] = useState(true);
+//   const dates = [...new Set(lessonDays.map((lesson_day) => lesson_day.date))];
+//   const token = localStorage.getItem("token");
+//   useEffect(() => {
+//     let data = "";
+//     let config = {
+//       method: "get",
+//       url: "https://div.globalsoft.az/api/lesson_days",
+//       headers: {
+//         Accept: "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//       data: data,
+//     };
+//     axios(config)
+//       .then(function (response) {
+//         setLoading(false);
+//         setLessonDays(response.data.lesson_days);
+//       })
+//       .catch(function (error) {
+//         console.log(error);
+//       });
+//   }, [token]);
+//   const getDateData = (date) => {
+//     return lessonDays.filter((day) => day.date === date);
+//   };
+
+//   return (
+//     <div className="flex justify-center">
+//       <table className="table-auto border border-collapse">
+//         <thead>
+//           <tr>
+//             <th className="border border-collapse p-2"></th>
+//             {dates.map((date) => (
+//               <th key={date} className="border border-collapse p-2">
+//                 {date}
+//               </th>
+//             ))}
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {console.log(lessonDays)}
+//           {lessonDays.map((lessonDay) => (
+//             <tr key={lessonDay.id}>
+//               <td className="border border-collapse p-2">{`Name ${lessonDay.student_id}`}</td>
+//               {dates.map((date) => (
+//                 <td
+//                   key={`${lessonDay.id}-${date}`}
+//                   className={`border border-collapse p-2 ${getDateMarkColor(
+//                     lessonDay.type
+//                   )}`}
+//                 >
+//                   {getDateData(date)
+//                     .filter((day) => day.student_id === lessonDay.student_id)
+//                     .map((day) => `${day.type}`)
+//                     .join(", ")}
+//                 </td>
+//               ))}
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// }
+// export default LessonDaysTable;

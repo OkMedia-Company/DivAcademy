@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import SelectComponent from '../tools/Select';
 import dayjs from 'dayjs';
+import { colourOptions } from './data';
+import chroma from 'chroma-js';
 import DatePickerComponent from '../tools/DatePickerComponent';
 const AddLessonDayAbsence = () => {
     const [selectedOption, setSelectedOption] = useState([]);
@@ -11,37 +13,87 @@ const AddLessonDayAbsence = () => {
     const [error, setError] = useState("xeta");
     const [lessons, setLessons] = useState([]);
     const [groupStudents, setGroupStudents] = useState([]);
+    const [groupCode, setGroupCode] = useState("");
+    const [lessonSelectOption, setLessonSelectOption] = useState([
+        {
+            value: 1,
+            label: "Dərs"
+        }
+    ]);
+
+
+    const dot = (color = 'transparent') => ({
+        alignItems: 'center',
+        display: 'flex',
+
+        ':before': {
+            backgroundColor: color,
+            borderRadius: 10,
+            content: '" "',
+            display: 'block',
+            marginRight: 8,
+            height: 10,
+            width: 10,
+        },
+    });
+
+    const colourStyles = {
+        control: (styles) => ({ ...styles, backgroundColor: 'white', border: '1px solid #ccc' }),
+        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+            const color = chroma(data.color);
+            return {
+                ...styles,
+                backgroundColor: isDisabled
+                    ? undefined
+                    : isSelected
+                        ? data.color
+                        : isFocused
+                            ? color.alpha(0.1).css()
+                            : undefined,
+                color: isDisabled
+                    ? '#ccc'
+                    : isSelected
+                        ? chroma.contrast(color, 'white') > 2
+                            ? 'white'
+                            : 'black'
+                        : data.color,
+                cursor: isDisabled ? 'not-allowed' : 'default',
+
+                ':active': {
+                    ...styles[':active'],
+                    backgroundColor: !isDisabled
+                        ? isSelected
+                            ? data.color
+                            : color.alpha(0.3).css()
+                        : undefined,
+                },
+            };
+        },
+        input: (styles) => ({ ...styles, ...dot() }),
+        placeholder: (styles) => ({ ...styles, ...dot('#ccc') }),
+        singleValue: (styles, { data }) => ({ ...styles, ...dot(data.color) }),
+    };
+
     const [formData, setFormData] = useState({
         student_id: '',
         lesson_id: '',
-        date: '',
+        date: `${dayjs(new Date()).format('YYYY-MM-DD')}`,
         mark_lesson: '',
         note_lesson: '',
         type: '',
         reason: ''
     });
-
-
     const handleChange = (event) => {
         setFormData({
             ...formData,
             [event.target.name]: event.target.value
         });
     };
-    const handleSelectChange = (select) => {
-        setSelectedOption(select);
-    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('https://div.globalsoft.az/api/lesson_days', formData)
-            .then(response => {
-                console.log(response);
-            }).catch(error => {
-                setError(error.response.data.message);
-            });
-    };
-    useEffect(() => {
-        axios.get(`https://div.globalsoft.az/api/students`, {
+        console.log(formData);
+        axios.post(`https://div.globalsoft.az/api/lesson_days`, formData, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                 Accept: "application/json",
@@ -49,11 +101,27 @@ const AddLessonDayAbsence = () => {
             },
         })
             .then(response => {
+                console.log(response.data);
+            }
+            ).catch(error => {
+                setError(error.response.data.message);
+            }
+            );
+    };
+    useEffect(() => {
+        axios
+            .get(`https://div.globalsoft.az/api/students`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(response => {
                 setStudents(response.data.students);
             }).catch(error => {
                 setError(error.response.data.message);
             });
-
     }, []);
     useEffect(() => {
         axios.get(`https://div.globalsoft.az/api/group_students`, {
@@ -64,13 +132,46 @@ const AddLessonDayAbsence = () => {
             },
         })
             .then(response => {
-                setGroupStudents(response.data.group_students);
+                setGroupStudents(response.data.groupstudents);
             }).catch(error => {
                 setError(error.response.data.message);
             });
-
     }, []);
-    console.log(groupStudents);
+
+    const groups = JSON.parse(localStorage.getItem('groups'));
+    const handleSelectChange = (name) => (select) => {
+        if (name === "student_id") {
+            const studentGroupId = groupStudents.find((groupStudent) => groupStudent.student_id == select.value).group_id;
+            const studentGroupCode = groups.groups.find((group) => group.id === studentGroupId).group_code;
+            setGroupCode(studentGroupCode);
+            const groupLessons = groups.groups.find((group) => group.id === studentGroupId).lessons;
+            // const groupLessonIds = groupLessons.map((lesson) => lesson.id);
+            setLessonSelectOption(
+                groupLessons.map((lesson) => {
+                    return {
+                        value: lesson.id,
+                        label: lesson.week_day
+                    }
+                })
+            );
+            setFormData({
+                ...formData,
+                [name]: select.value
+            });
+        }
+        if (name === "lesson_id") {
+            setFormData({
+                ...formData,
+                [name]: select.value
+            });
+        }
+        if (name === "type") {
+            setFormData({
+                ...formData,
+                [name]: select.value
+            });
+        }
+    }
 
     return (
         <>
@@ -83,33 +184,34 @@ const AddLessonDayAbsence = () => {
                                 <div className="row">
                                     <div className="col-6">
                                         <label htmlFor="name">Tələbə:</label>
+
                                         <SelectComponent
                                             name="student_id"
                                             id="student_id"
-                                            onChange={handleSelectChange}
+                                            onChange={handleSelectChange("student_id")}
                                             options={
                                                 students.map((student) => {
                                                     return {
                                                         value: student.id,
-                                                        label: student.name + " " + student.last_name
+                                                        label: student.name
                                                     }
                                                 })
+
+
                                             }
                                         />
                                     </div>
                                     <div className="col-6">
-                                        <label htmlFor="lesson_id">Dərs:</label>
+                                        {
+                                            <label htmlFor="group_code">{groupCode} Qrupun dərs günləri:</label>
+                                        }
+
                                         <SelectComponent
                                             name="lesson_id"
                                             id="lesson_id"
-                                            onChange={handleSelectChange}
+                                            onChange={handleSelectChange("lesson_id")}
                                             options={
-                                                lessons.map((lesson) => {
-                                                    return {
-                                                        value: lesson.id,
-                                                        label: lesson.name
-                                                    }
-                                                })
+                                                lessonSelectOption
                                             }
                                         />
                                     </div>
@@ -118,19 +220,21 @@ const AddLessonDayAbsence = () => {
                                     <div className="col-6">
                                         <label htmlFor="father_name">Tarix:</label>
                                         <div className='datepicker'>
-                                            <DatePickerComponent />
+                                            {/* Select todays date as default value */}
+                                            <DatePickerComponent
+                                            />
                                         </div>
-                                    </div>  <div className="col-6">
-                                        <label htmlFor="type">Tələbə iştirak vəziyyəti:</label>
-                                        <input
-                                            type="text"
-                                            name="type"
-                                            id="type"
-                                            value={formData.type}
-                                            onChange={handleChange}
-                                        />
                                     </div>
 
+                                    <div className="col-6">
+                                        <label htmlFor="type">Tələbə iştirak vəziyyəti:</label>
+                                        <Select
+                                            defaultValue={colourOptions[2]}
+                                            options={colourOptions}
+                                            styles={colourStyles}
+                                            onChange={handleSelectChange("type")}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-6">
@@ -186,5 +290,4 @@ const AddLessonDayAbsence = () => {
         </ >
     );
 };
-
 export default AddLessonDayAbsence;

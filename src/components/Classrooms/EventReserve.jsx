@@ -11,7 +11,6 @@ function EventReserve() {
         { value: "905 Mavi otaq", label: "905 Mavi otaq" },
         { value: "905 Qara otaq", label: "905 Qara otaq" },
     ];
-
     const formDataValue = {
         room: "",
         event_name: "",
@@ -99,8 +98,9 @@ function EventReserve() {
                                         <label htmlFor="start_date">
                                             Tədbirin başlama günü
                                         </label>
-                                        <DatePicker />
-
+                                        <div className="datepicker">
+                                            <DatePicker />
+                                        </div>
                                     </div>
                                     <div className=" col-6">
                                         <label htmlFor="fin">Tədbirin başlama saatı:</label>

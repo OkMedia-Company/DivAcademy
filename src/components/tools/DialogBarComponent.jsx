@@ -12,7 +12,6 @@ function DialogBarComponent(props) {
     const handleClickOpen = () => {
         props.setOpen(true);
     };
-
     return (
         <>
             <Dialog

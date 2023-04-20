@@ -130,7 +130,7 @@ const Form = () => {
     lesson_table: "",
     student_status: "1",
     workplace: "",
-    is_diploma: "",
+    is_diploma: "0",
     diploma_sn: "",
     graduation_day: "",
     next_payment_date: "",
@@ -678,6 +678,7 @@ const Form = () => {
                     onChange={handleSelectChange("is_diploma")}
                     isSearchable={true}
                     name="color"
+                    value={{ value: "0", label: "Sertifikat verilməyib" }}
                     placeholder="Sertifikat Vəziyyəti"
                     options={[
                       { value: "1", label: "Sertifikat aldı" },
