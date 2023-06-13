@@ -1119,7 +1119,7 @@ const EditForm = () => {
       };
     }
     axios
-      .post("https://div.globalsoft.az/api/students", formData, {
+      .put(`https://div.globalsoft.az/api/students/${userId}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",

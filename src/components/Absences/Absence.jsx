@@ -65,6 +65,7 @@ const Absence = () => {
   const getDateData = (date) => {
     return lessonDays.filter((day) => day.date === date);
   };
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };

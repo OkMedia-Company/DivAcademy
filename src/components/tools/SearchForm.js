@@ -13,7 +13,7 @@ const SearchForm = ({ onSearch, placeHolder }) => {
     onSearch(searchQuery);
   };
   return (
-    < >
+    <>
       <form className="searchForm">
         <input
           name="name"
@@ -30,9 +30,7 @@ const SearchForm = ({ onSearch, placeHolder }) => {
   );
 };
 
-
 SearchForm.propTypes = {
   onSearch: PropTypes.func.isRequired,
 };
-
 export default SearchForm;

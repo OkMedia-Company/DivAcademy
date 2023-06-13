@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import useDocumentTitle from "../tools/useDocumentTitle";
+import SelectComponent from "../tools/Select";
 function AddTransactionForm() {
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -46,13 +47,13 @@ function AddTransactionForm() {
               <div className="main-add-form-input-names col me-5">
                 <div className="row">
                   <div className="col-6">
-                    <label htmlFor="name">Maliyyə kateqoriyası adı :</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="name"
-                      value={formData.name}
-                      onChange={handleChange}
+                    <label htmlFor="name">Maliyyə kateqoriyası tipi :</label>
+                    <SelectComponent
+                      options={[
+                        { value: "income", label: "Gəlir" },
+                        { value: "outcome", label: "Xərc" },
+                      ]}
+                      name="type"
                     />
                     <br />
                   </div>

@@ -14,11 +14,10 @@ const schema = Yup.object().shape({
     .email("düzgün email formatı deyil."),
   password: Yup.string()
     .required("Parol daxil etməniz mütləqdir.")
-    .min(8, "Parol minumum 8 karakterdən ibarət ola bilər"),
+    .min(5, "Parol minumum 8 karakterdən ibarət ola bilər"),
 });
 function Login() {
   const currentUser = useContext(AuthContext);
-  console.log(currentUser)
   const navigate = useNavigate();
   const [error, setError] = React.useState("")
   const login = async (data) => {
@@ -40,11 +39,10 @@ function Login() {
       localStorage.setItem("token", res.data.token);
       navigate("/students");
     } catch (error) {
-      setError(error.response.data.message)
+
       console.log(error);
     }
   };
-
   useDocumentTitle("Login")
   return (
     <div className="login-main">

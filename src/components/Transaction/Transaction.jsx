@@ -71,13 +71,7 @@ function Transaction() {
               <TableHead>
                 <TableRow>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Maliyyə kateqoriyası adı
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    İstifadəçi
-                  </TableCell>
-                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Tipi
+                    Tarix
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
                     Məbləğ
@@ -86,8 +80,14 @@ function Transaction() {
                     Açıqlama
                   </TableCell>
                   <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
-                    Ay
+                    Maliyyə kateqoriyası adı
                   </TableCell>
+                  {/* <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    İstifadəçi
+                  </TableCell>
+                  <TableCell align="left" colSpan={3} sx={{ py: 1, px: 2 }}>
+                    Tipi
+                  </TableCell> */}
                   <TableCell
                     align="left"
                     colSpan={3}
@@ -98,102 +98,106 @@ function Transaction() {
               <TableBody>
                 {loading
                   ? Array.from({ length: rowsPerPage }, (_, i) => (
-                      <TableRow key={i}>
-                        <TableCell>
-                          <Skeleton variant="rounded" width={40} height={40} />
+                    <TableRow key={i}>
+                      <TableCell>
+                        <Skeleton variant="rounded" width={40} height={40} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                      <TableCell>
+                        <Skeleton variant="text" width={150} />
+                      </TableCell>
+                    </TableRow>
+                  ))
+                  : transactions
+                    .slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    .map((transaction) => (
+                      <TableRow key={transaction.id} hover>
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {/* {transaction.month} */} 2022.21.21
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {transaction.amount}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {transaction.description}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+
+                          {transactionCategories &&
+                            transactionCategories.find(
+                              (transactionCategory) =>
+                                transactionCategory.id ===
+                                transaction.transaction_category_id
+                            ).name}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        {/* <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {transaction.user_id}
                         </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
-                        </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
-                        </TableCell>
-                        <TableCell>
-                          <Skeleton variant="text" width={150} />
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          {transaction.type}
+                        </TableCell> */}
+
+
+
+                        <TableCell
+                          align="left"
+                          colSpan={3}
+                          sx={{ py: 1, px: 2 }}
+                        >
+                          <div className="table-btn-edit">
+                            <button>
+                              <NavLink to={`/transactions/${transaction.id}`}>
+                                <CiEdit /> Edit
+                              </NavLink>
+                            </button>
+                          </div>
                         </TableCell>
                       </TableRow>
-                    ))
-                  : transactions
-                      .slice(
-                        page * rowsPerPage,
-                        page * rowsPerPage + rowsPerPage
-                      )
-                      .map((transaction) => (
-                        <TableRow key={transaction.id} hover>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {transactionCategories &&
-                              transactionCategories.find(
-                                (transactionCategory) =>
-                                  transactionCategory.id ===
-                                  transaction.transaction_category_id
-                              ).name}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {transaction.user_id}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {transaction.type}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {transaction.amount}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {transaction.description}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            {transaction.month}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            colSpan={3}
-                            sx={{ py: 1, px: 2 }}
-                          >
-                            <div className="table-btn-edit">
-                              <button>
-                                <NavLink to={`/transactions/${transaction.id}`}>
-                                  <CiEdit /> Edit
-                                </NavLink>
-                              </button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>

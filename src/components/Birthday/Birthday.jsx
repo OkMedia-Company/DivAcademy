@@ -58,6 +58,8 @@ function Birthdays() {
     }
     fetchData();
   }, []);
+
+
   function birthDayAgeCalculate(birthDay) {
     const today = new Date();
     const birthDate = new Date(birthDay);
@@ -197,9 +199,6 @@ function Birthdays() {
           </Paper>
         </div>
       </div>
-
-      <br />
-
       <div>
         <div className="section-title">
           <h2>Bu ay ad günü olanlar</h2>
