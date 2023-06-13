@@ -30,28 +30,23 @@ function Teachers() {
     setPage(newPage);
   };
   const token = localStorage.getItem("token");
-  const teachersAll = JSON.parse(localStorage.getItem("teachers"));
+
   useEffect(() => {
-    if (teachersAll.teachers === null) {
-      axios
-        .get(`https://div.globalsoft.az/api/teachers`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          setTeachers(response.data.teachers);
-          setLoading(false); // <-- set loading to false here
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      setTeachers(teachersAll.teachers);
-      setLoading(false); // <-- set loading to false here
-    }
+    axios
+      .get(`https://div.globalsoft.az/api/teachers`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        setTeachers(response.data.teachers);
+        setLoading(false); // <-- set loading to false here
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -137,11 +132,10 @@ function Teachers() {
                       </TableCell>
                     </TableRow>
                   ))
-                  : teachersAll.teachers
-                    .slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
+                  : teachers?.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage
+                  )
                     .map((teacher) => (
                       <TableRow key={teacher.id} hover>
                         <TableCell sx={{ py: 1, px: 2 }}>
